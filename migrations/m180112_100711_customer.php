@@ -19,6 +19,8 @@ class m180112_100711_customer extends Migration
                 'sex'=> Schema::TYPE_SMALLINT.'(4)',
                 'birthday'=> Schema::TYPE_DATETIME.'',
                 'phone'=> Schema::TYPE_STRING.'(255)',
+                'address'=> Schema::TYPE_STRING.'(255)',
+                'email'=> Schema::TYPE_STRING.'(100)',
                 'customer_type'=> Schema::TYPE_INTEGER.'(11)',
                 'debt'=> Schema::TYPE_DECIMAL.'(10)',
                 'note'=> Schema::TYPE_TEXT.'',
