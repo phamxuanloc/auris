@@ -113,3 +113,84 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.indigo-900{
+    background-color: #fff;
+    border-right: 1px solid #707070;
+}
+.navbar-brand img, .navbar-brand svg{
+    padding-top: 20px;
+    max-height: 100%;
+}
+.navside .nav li.active {
+    background-color: #fff;
+    border-right: 2px solid #CA27FB;
+}
+.table > thead:first-child > tr:first-child > th{
+    border: none;
+    color: #A7AFBF;
+    font-weight: 400;
+    font-size: 12px;
+}
+.table > thead > tr > th{
+    padding: 15px 16px;
+}
+.table-bordered{
+    border: none;
+}
+.table-striped > tbody > tr:nth-child(odd){
+    background-color: #fff;
+    background-clip: unset;
+}
+.table > tbody > tr > td{
+    padding: 18px 8px;
+    color: #434343;
+    border: none;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+.table-striped > tbody > tr{
+    background-color: #fff;
+    border: none;
+}
+.customer-index p, .order-index p{
+    text-align: right;
+}
+.btn{
+    font-size: 13px;
+}
+.app-header{
+    height: 80px;
+}
+.form-inline .input-group>.form-control{
+    width: 400px;
+    border: none;
+    box-shadow: none;
+    margin-left: 22px;
+}
+.form-inline .input-group{
+    position: relative;
+}
+.form-inline .input-group i{
+    position: absolute;
+    left: 10px;
+    z-index: 99;
+    top: 10px;
+    color: #A7AFBF;
+}
+.form-horizontal .control-label{
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+.box-header h6{
+    font-weight: 400;
+    font-size: 1rem;
+}
+select.form-control:not([size]):not([multiple]) {
+    height: 2.1rem;
+}
+.navside .nav li > a, .navside .nav li.active > a{
+    color: #CA27FB;
+}

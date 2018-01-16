@@ -1,0 +1,16 @@
+.icon{
+    display:block;
+    text-indent:-9999px;
+    background: url('../images/auris.png') no-repeat;
+}
+.icon-strikethrough{
+    background-position: 0 -12px;
+    background-size: 123px 50px;
+    width: 9px;
+    height: 6px;
+}
+.nav-icon i svg, .nav-icon i img{
+    display: block;
+    width: auto;
+    height: auto;
+}
