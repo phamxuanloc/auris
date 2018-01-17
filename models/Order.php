@@ -43,12 +43,25 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'customer_code', 'customer_name', 'service_id', 'product_id', 'price', 'quantiy', 'total_price', 'type', 'total_payment'], 'required'],
+            [['customer_code', 'customer_name', 'service_id', 'product_id', 'price', 'quantiy', 'total_price', 'total_payment'], 'required'],
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
             [['price', 'total_price', 'total_payment', 'debt'], 'number'],
             [['note'], 'string'],
             [['customer_code', 'customer_name', 'customer_phone'], 'string', 'max' => 255],
         ];
+    }
+
+    public function getService()
+    {
+        return $this->hasOne(Service::className(), ['id' => 'service_id']);
+    }
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+    public function getColor()
+    {
+        return $this->hasOne(Color::className(), ['id' => 'color_id']);
     }
 
     /**
@@ -78,8 +91,28 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getEkip()
+    public function getListEkip()
     {
-        return ArrayHelper::map(CustomerStatus::find()->all(), 'id', 'name');
+        return ArrayHelper::map(Ekip::find()->all(), 'id', 'ekip_name');
+    }
+
+    public function getListDirectSale()
+    {
+        return ArrayHelper::map(User::find()->all(), 'id', 'username');
+    }
+
+    public function getListService()
+    {
+        return ArrayHelper::map(Service::find()->where('status = 1')->all(), 'id', 'name');
+    }
+
+    public function getListProduct()
+    {
+        return ArrayHelper::map(Product::find()->where('status = 1')->all(), 'id', 'name');
+    }
+
+    public function getListColor()
+    {
+        return ArrayHelper::map(Color::find()->where('status = 1')->all(), 'id', 'name');
     }
 }

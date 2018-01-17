@@ -24,13 +24,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'customer_id',
+            ['class' => 'yii\grid\CheckboxColumn'],
             'customer_code',
             'customer_name',
             'customer_phone',
+            [
+                'attribute' => 'service_id',
+                'value' => 'service.name',
+            ],
+            [
+                'attribute' => 'product_id',
+                'value' => 'product.name',
+            ],
+            [
+                'attribute' => 'color_id',
+                'value' => 'color.name',
+            ],
+            'quantiy',
+            'note',
             //'ekip_id',
             //'sale_id',
             //'service_id',
@@ -44,8 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'total_payment',
             //'debt',
             //'note:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

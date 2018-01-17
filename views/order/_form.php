@@ -26,32 +26,24 @@ use yii\bootstrap\ActiveForm;
 
                 <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'service_id')->textInput() ?>
-
-                <?= $form->field($model, 'product_id')->textInput() ?>
-
-                <?= $form->field($model, 'color_id')->textInput() ?>
-
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'quantiy')->textInput() ?>
 
                 <?= $form->field($model, 'total_price')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'status')->textInput() ?>
-
-                <?= $form->field($model, 'type')->textInput() ?>
-
                 <?= $form->field($model, 'total_payment')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'debt')->textInput(['maxlength' => true]) ?>
-
-                <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'ekip_id')->textInput() ?>
+                <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip()) ?>
 
-                <?= $form->field($model, 'sale_id')->textInput() ?>
+                <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale()) ?>
+
+                <?= $form->field($model, 'service_id')->dropDownList($model->getListService()) ?>
+
+                <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct()) ?>
+
+                <?= $form->field($model, 'color_id')->dropDownList($model->getListColor()) ?>
             </div>
         </div>
 

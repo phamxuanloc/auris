@@ -66,8 +66,12 @@ class OrderController extends Controller
     {
         $model = new Order();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()) {
+                return $this->redirect(['index']);
+            }else{
+                print_r($model->getErrors());exit;
+            }
         }
 
         return $this->render('create', [
