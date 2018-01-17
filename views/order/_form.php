@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="box">
     <div class="box-header b-b">
-        <h3>Thêm đơn hàng</h3>
+        <h3><?= $title?></h3>
     </div>
 
     <div class="box-body">

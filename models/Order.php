@@ -47,10 +47,18 @@ class Order extends \yii\db\ActiveRecord
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
             [['price', 'total_price', 'total_payment', 'debt'], 'number'],
             [['note'], 'string'],
-            [['customer_code', 'customer_name', 'customer_phone'], 'string', 'max' => 255],
+            [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
         ];
     }
 
+    public function getEkip()
+    {
+        return $this->hasOne(Ekip::className(), ['id' => 'ekip_id']);
+    }
+    public function getSale()
+    {
+        return $this->hasOne(User::className(), ['id' => 'sale_id']);
+    }
     public function getService()
     {
         return $this->hasOne(Service::className(), ['id' => 'service_id']);
@@ -62,6 +70,10 @@ class Order extends \yii\db\ActiveRecord
     public function getColor()
     {
         return $this->hasOne(Color::className(), ['id' => 'color_id']);
+    }
+    public function getTreatmentHistory()
+    {
+        return $this->hasMany(TreatmentHistory::className(), ['order_id' => 'id']);
     }
 
     /**
@@ -84,10 +96,11 @@ class Order extends \yii\db\ActiveRecord
             'quantiy' => 'Số lượng',
             'total_price' => 'Thành tiền',
             'status' => 'Trạng thái',
-            'type' => 'Type',
+            'type' => 'Tình trạng',
             'total_payment' => 'Total Payment',
             'debt' => 'Còn nợ',
             'note' => 'Ghi chú',
+            'order_code' => 'Mã đơn hàng',
         ];
     }
 
@@ -114,5 +127,36 @@ class Order extends \yii\db\ActiveRecord
     public function getListColor()
     {
         return ArrayHelper::map(Color::find()->where('status = 1')->all(), 'id', 'name');
+    }
+    public function getQuantity()
+    {
+        return [
+            '1' => '1',
+            '2' => '2',
+            '3' => '3',
+            '4' => '4',
+            '5' => '5',
+            '6' => '6',
+            '7' => '7',
+            '8' => '8',
+            '9' => '9',
+            '10' => '10',
+            '11' => '11',
+            '12' => '12',
+            '13' => '13',
+            '14' => '14',
+            '15' => '15',
+            '16' => '16',
+            '17' => '17',
+            '18' => '18',
+            '19' => '19',
+            '20' => '20',
+            '21' => '21',
+            '22' => '22',
+            '23' => '23',
+            '24' => '24',
+            '25' => '25',
+            '26' => '26',
+        ];
     }
 }

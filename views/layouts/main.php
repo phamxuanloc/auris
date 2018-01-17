@@ -32,7 +32,7 @@ AppAsset::register($this);
     <!-- ############ LAYOUT START-->
 
     <!-- aside -->
-    <div class="app-aside modal fade folded md nav-expand">
+    <div class="app-aside modal fade folded md nav-dropdown">
         <!-- fluid app aside -->
         <div class="left navside dark dk indigo-900" layout="column">
             <div class="navbar no-radius">
@@ -87,7 +87,7 @@ AppAsset::register($this);
                     <li class="nav-item dropdown">
                         <a class="nav-link clear" href data-toggle="dropdown">
                             <span class="avatar w-32">
-                                <img src="../assets/images/a0.jpg" alt="...">
+                                <img src="<?= Yii::$app->request->baseUrl?>/images/default-avatar.jpg" alt="...">
                                 <i class="on b-white bottom"></i>
                             </span>
                         </a>

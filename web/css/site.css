@@ -194,3 +194,13 @@ select.form-control:not([size]):not([multiple]) {
 .navside .nav li > a, .navside .nav li.active > a{
     color: #CA27FB;
 }
+.order-index .grid-view{
+    overflow-x: scroll;
+}
+.order-index .grid-view table{
+    width: 2000px;
+    overflow: scroll;
+}
+.submenu{
+    width: 200px;
+}

@@ -2,18 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\TreatmentHistory;
 use Yii;
-use app\models\Order;
-use app\models\OrderSearch;
+use app\models\TreatmentSchedule;
+use app\models\TreatmentScheduleSeacrh;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OrderController implements the CRUD actions for Order model.
+ * TreatmentScheduleController implements the CRUD actions for TreatmentSchedule model.
  */
-class OrderController extends Controller
+class TreatmentScheduleController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class OrderController extends Controller
     }
 
     /**
-     * Lists all Order models.
+     * Lists all TreatmentSchedule models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
+        $searchModel = new TreatmentScheduleSeacrh();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Displays a single Order model.
+     * Displays a single TreatmentSchedule model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,21 +58,16 @@ class OrderController extends Controller
     }
 
     /**
-     * Creates a new Order model.
+     * Creates a new TreatmentSchedule model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = new TreatmentSchedule();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            } else {
-                print_r($model->getErrors());
-                exit;
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -82,7 +76,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Updates an existing Order model.
+     * Updates an existing TreatmentSchedule model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,36 +95,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function actionCreateSchedule()
-    {
-        $model = new TreatmentHistory();
-
-        return $this->render('create-schedule', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionGetInfo()
-    {
-        $value = $_POST['value'];
-        $order = Order::find()->where("order_code like '%$value%'")->one();
-        if ($order) {
-            $result = [
-                'status' => 1,
-                'data' => [
-                    'customer_code' => $order->customer_code,
-                    'customer_name' => $order->customer_name,
-                    'customer_phone' => $order->customer_phone,
-                ]
-            ];
-            return json_encode($result);
-        } else {
-            return "abc";
-        }
-    }
-
     /**
-     * Deletes an existing Order model.
+     * Deletes an existing TreatmentSchedule model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,15 +110,15 @@ class OrderController extends Controller
     }
 
     /**
-     * Finds the Order model based on its primary key value.
+     * Finds the TreatmentSchedule model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Order the loaded model
+     * @return TreatmentSchedule the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Order::findOne($id)) !== null) {
+        if (($model = TreatmentSchedule::findOne($id)) !== null) {
             return $model;
         }
 
