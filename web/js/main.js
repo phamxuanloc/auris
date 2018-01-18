@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var timeout = null;
-    $("#treatmentschedule-order_code").keyup(function () {
-        var value = $('#treatmentschedule-order_code').val();
+    $("#treatmenthistory-order_code").keyup(function () {
+        var value = $('#treatmenthistory-order_code').val();
         var url = $('#url').val();
         clearTimeout(timeout);
 
@@ -14,9 +14,11 @@ $(document).ready(function () {
                 success: function (resultData) {
                     if(resultData.status == 1) {
                         console.log(resultData.data.customer_code);
-                        $('#treatmentschedule-customer_code').val(resultData.data.customer_code);
-                        $('#treatmentschedule-customer_name').val(resultData.data.customer_name);
-                        $('#treatmentschedule-customer_phone').val(resultData.data.customer_phone);
+                        $('#treatmenthistory-order_id').val(resultData.data.order_id);
+                        $('#treatmenthistory-customer_id').val(resultData.data.customer_id);
+                        $('#treatmenthistory-customer_code').val(resultData.data.customer_code);
+                        $('#treatmenthistory-customer_name').val(resultData.data.customer_name);
+                        $('#treatmenthistory-customer_phone').val(resultData.data.customer_phone);
                     }
                 }
             });

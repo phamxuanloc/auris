@@ -39,7 +39,8 @@ class TreatmentHistory extends \yii\db\ActiveRecord
             [['order_id', 'customer_id'], 'required'],
             [['order_id', 'customer_id', 'att_point', 'spect_point', 'ae_point'], 'integer'],
             [['ap_date', 'real_start', 'real_end'], 'safe'],
-            [['customer_code', 'customer_name', 'customer_phone'], 'string', 'max' => 255],
+            [['note'], 'string'],
+            [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,17 +51,19 @@ class TreatmentHistory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_id' => 'Order ID',
+            'order_id' => 'Mã Đơn Hàng',
             'customer_id' => 'Customer ID',
-            'customer_code' => 'Customer Code',
-            'customer_name' => 'Customer Name',
-            'customer_phone' => 'Customer Phone',
-            'ap_date' => 'Ap Date',
+            'customer_code' => 'Mã Khách Hàng',
+            'customer_name' => 'Họ và tên',
+            'customer_phone' => 'Số Điện Thoại',
+            'ap_date' => 'Thời Gian Điều Trị',
             'real_start' => 'Real Start',
             'real_end' => 'Real End',
             'att_point' => 'Att Point',
             'spect_point' => 'Spect Point',
             'ae_point' => 'Ae Point',
+            'order_code' => 'Mã đơn hàng',
+            'note' => 'Ghi chú'
         ];
     }
 }

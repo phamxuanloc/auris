@@ -118,6 +118,8 @@ class OrderController extends Controller
             $result = [
                 'status' => 1,
                 'data' => [
+                    'order_id' => $order->id,
+                    'customer_id' => $order->customer_id,
                     'customer_code' => $order->customer_code,
                     'customer_name' => $order->customer_name,
                     'customer_phone' => $order->customer_phone,

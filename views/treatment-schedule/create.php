@@ -24,6 +24,8 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
         <div class="row">
             <div class="col-md-9">
                 <input id="url" value="<?= $url?>" type="hidden">
+                <input id="treatmenthistory-order_id" name="TreatmentHistory[order_id]" type="hidden">
+                <input id="treatmenthistory-customer_id" name="TreatmentHistory[customer_id]" type="hidden">
 
                 <?= $form->field($model, 'order_code')->textInput(['maxlength' => true, ]) ?>
 
@@ -33,8 +35,8 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
 
                 <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'treatment_time')->widget(DateTimePicker::className(),[
-                    'name' => 'treatment_time',
+                <?= $form->field($model, 'ap_date')->widget(DateTimePicker::className(),[
+                    'name' => 'ap_date',
                     'type' => DateTimePicker::TYPE_INPUT,
                     'removeButton' => true,
                     'size' => 'lg',

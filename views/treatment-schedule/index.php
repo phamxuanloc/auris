@@ -12,16 +12,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="treatment-schedule-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="help-block"></div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a('Create Treatment Schedule', ['create'], ['class' => 'btn btn-success']) ?>
+        <button class="btn">Sắp xếp <i class="fa fa-indent" aria-hidden="true"></i></button>
+        <button class="btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+        <button class="btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+        <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm đơn hàng', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-calendar-o" aria-hidden="true"></i> Tạo lịch hẹn', ['treatment-schedule/create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
