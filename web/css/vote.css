@@ -1,0 +1,68 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    background-color: #fff;
+}
+.vote-index{
+    position: relative;
+}
+.vote-index .header{
+    background-color: #AB97F8;
+    min-height: 240px;
+}
+.vote-index .content{
+    box-shadow: 1px 0px 2px 1px #ccc;
+    height: 650px;
+    width: 100%;
+    position: absolute;
+    top: -184px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+.vote-index .content .content-header{
+    border-bottom: 1px solid #EAEAEA;
+    display: flex;
+    padding: 45px 65px;
+}
+.vote-index .content .content-header .right{
+    text-align: right;
+}
+.vote-index .content .content-header .right p{
+    font-size: 18px;
+}
+.vote-index .content .content-header .right h3{
+    font-size: 36px;
+    color: #CA27FB;
+}
+.vote-index .content .content-content{
+    padding: 20px 0;
+    text-align: center;
+}
+.vote-index .content .content-content p{
+    color: #989898;
+    font-size: 15px;
+}
+.vote-index .content .content-content h2{
+    color: #AB97F8;
+    font-size: 42px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.vote-index .content .content-content .embarrassed{
+    text-align: center;
+    border: 1px solid #EAEAEA;
+    border-radius: 8px;
+    margin: 0 30px;
+    padding: 20px 0;
+}
+.vote-index .content .content-content .embarrassed p{
+    padding-top: 15px;
+    font-size: 18px;
+    padding-bottom: 20px;
+}
+.vote-index .content .content-content .embarrassed span{
+    color: #CA27FB;
+    font-size: 18px;
+}

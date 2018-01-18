@@ -205,3 +205,6 @@ select.form-control:not([size]):not([multiple]) {
 .submenu{
     width: 200px;
 }
+.vote-index{
+    background-color: #fff;
+}
