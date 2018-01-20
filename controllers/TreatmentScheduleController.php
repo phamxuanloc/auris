@@ -2,10 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Customer;
-use app\models\Order;
-use app\models\TreatmentHistory;
-use app\models\TreatmentHistorySearch;
 use Yii;
 use app\models\TreatmentSchedule;
 use app\models\TreatmentScheduleSeacrh;
@@ -39,7 +35,7 @@ class TreatmentScheduleController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TreatmentHistorySearch();
+        $searchModel = new TreatmentScheduleSeacrh();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,18 +44,24 @@ class TreatmentScheduleController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single TreatmentSchedule model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+	public function actionVote() {
+		$this->layout = 'vote';
+		return $this->render('vote');
+	}
+
+	/**
+	 * Displays a single TreatmentSchedule model.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	public function actionView($id) {
+		return $this->render('view', [
+			'model' => $this->findModel($id),
+		]);
+	}
 
     /**
      * Creates a new TreatmentSchedule model.
