@@ -93,6 +93,28 @@ class TreatmentScheduleController extends Controller
         ]);
     }
 
+    public function actionStart()
+    {
+        $id = $_POST['id'];
+        $treatmentHistory = TreatmentHistory::findOne($id);
+        if ($treatmentHistory) {
+            $treatmentHistory->real_start = date('Y-m-d H:i:s');
+            $treatmentHistory->save();
+            return true;
+        }
+    }
+
+    public function actionEnd()
+    {
+        $id = $_POST['id'];
+        $treatmentHistory = TreatmentHistory::findOne($id);
+        if ($treatmentHistory) {
+            $treatmentHistory->real_end = date('Y-m-d H:i:s');
+            $treatmentHistory->save();
+            return true;
+        }
+    }
+
     /**
      * Updates an existing TreatmentSchedule model.
      * If update is successful, the browser will be redirected to the 'view' page.

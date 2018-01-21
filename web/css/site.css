@@ -198,8 +198,12 @@ select.form-control:not([size]):not([multiple]) {
 .order-index .grid-view{
     overflow-x: scroll;
 }
-.order-index .grid-view table, .treatment-schedule-index .grid-view table{
-    width: 2000px;
+.order-index .grid-view table{
+    width: 2200px;
+    overflow: scroll;
+}
+.treatment-schedule-index .grid-view table{
+    width: 2600px;
     overflow: scroll;
 }
 .submenu{
@@ -210,4 +214,10 @@ select.form-control:not([size]):not([multiple]) {
 }
 .treatment-schedule-index .grid-view {
     overflow-x: scroll;
+}
+.treatment-schedule-index .table-responsive{
+    width: 2600px;
+}
+.popover{
+    display: none;
 }

@@ -25,3 +25,29 @@ $(document).ready(function () {
         }, 2000);
     });
 });
+
+function start(id) {
+    var url = "index.php?r=treatment-schedule/start";
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {id: id},
+        dataType: "json",
+        success: function (data) {
+            $.pjax.reload({container:'#w0'});
+        }
+    });
+}
+
+function end(id) {
+    var url = "index.php?r=treatment-schedule/end";
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {id: id},
+        dataType: "json",
+        success: function (data) {
+            $.pjax.reload({container:'#refresh-grid'});
+        }
+    });
+}

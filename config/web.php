@@ -75,6 +75,9 @@ $config = [
 				'navatech\role\controllers',
 			],
 		],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ]
 	],
 	'params'     => $params,
 ];

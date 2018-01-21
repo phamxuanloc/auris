@@ -61,6 +61,7 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 					'att_point',
 					'spect_point',
 					'ae_point',
+                    'is_finish',
 				],
 				'integer',
 			],
@@ -108,6 +109,7 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 			'ae_point'       => 'Ae Point',
 			'order_code'     => 'Mã đơn hàng',
 			'note'           => 'Ghi chú',
+			'is_finish'           => 'Đợt Điều Trị Cuối Cùng (Khi bạn chọn ô này, Khách Hàng có thể đánh giá Chuyên Môn, Tính Thẩm Mỹ)',
 		];
 	}
 

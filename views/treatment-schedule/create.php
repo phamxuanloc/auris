@@ -47,6 +47,7 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
                 ]) ?>
 
                 <?= $form->field($model, 'note')->textarea(['rows' => '5']) ?>
+                <?= $form->field($model, 'is_finish')->checkbox() ?>
             </div>
         </div>
 
