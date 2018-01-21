@@ -198,7 +198,7 @@ select.form-control:not([size]):not([multiple]) {
 .order-index .grid-view{
     overflow-x: scroll;
 }
-.order-index .grid-view table{
+.order-index .grid-view table, .treatment-schedule-index .grid-view table{
     width: 2000px;
     overflow: scroll;
 }
@@ -207,4 +207,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .vote-index{
     background-color: #fff;
+}
+.treatment-schedule-index .grid-view {
+    overflow-x: scroll;
 }

@@ -31,8 +31,60 @@ $this->params['breadcrumbs'][] = $this->title;
             'customer_code',
             'customer_name',
             'customer_phone',
+            [
+                'header' => 'Ekip',
+                'value' => 'order.ekip.ekip_name',
+            ],
+            [
+                'header' => 'Direct Sale',
+                'value' => 'order.sale.username'
+            ],
+            [
+                'header' => 'Loại dịch vụ',
+                'value' => 'order.service.name'
+            ],
+            [
+                'header' => 'Sản phẩm',
+                'value' => 'order.product.name'
+            ],
+            [
+                'header' => 'Màu sắc',
+                'value' => 'order.color.name'
+            ],
+            [
+                'header' => 'Số lượng',
+                'value' => 'order.quantiy'
+            ],
+            [
+                'header' => 'Lịch điều trị',
+                'value' => 'ap_date'
+            ],
+            [
+                'header' => 'Ghi chú',
+                'value' => 'note'
+            ],
+            [
+                'header' => 'Bắt đầu',
+                'value' => 'real_start'
+            ],
+            [
+                'header' => 'Kết thúc',
+                'value' => 'real_end'
+            ],
+            [
+                'header' => 'Thái độ',
+                'value' => 'att_point'
+            ],
+            [
+                'header' => 'Chuyên môn',
+                'value' => 'spect_point'
+            ],
+            [
+                'header' => 'Thẩm mỹ',
+                'value' => 'ae_point'
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+//            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

@@ -77,6 +77,10 @@ class TreatmentScheduleController extends Controller
         $model = new TreatmentHistory();
 
         if ($model->load(Yii::$app->request->post())) {
+            $order = Order::find()->where("order_code like '%$model->order_code%'")->one();
+            if($order){
+                $model->order_code = $order->order_code;
+            }
             if($model->save()) {
                 return $this->redirect(['index']);
             }else{

@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
+            'order_code',
             [
                 'attribute' => 'customer_code',
                 'contentOptions' => [
