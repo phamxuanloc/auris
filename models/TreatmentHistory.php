@@ -114,4 +114,8 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 	public function getCustomer() {
 		return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
 	}
+
+	public function getOrder(){
+	    return $this->hasOne(Order::className(), ['id' => 'order_id']);
+    }
 }

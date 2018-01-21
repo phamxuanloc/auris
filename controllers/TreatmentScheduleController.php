@@ -2,6 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Customer;
+use app\models\Order;
+use app\models\TreatmentHistory;
+use app\models\TreatmentHistorySearch;
 use Yii;
 use app\models\TreatmentSchedule;
 use app\models\TreatmentScheduleSeacrh;
@@ -35,7 +39,7 @@ class TreatmentScheduleController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TreatmentScheduleSeacrh();
+        $searchModel = new TreatmentHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

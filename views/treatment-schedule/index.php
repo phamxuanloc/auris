@@ -27,16 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'order_id',
             'order_code',
-            'customer_id',
+            'customer_code',
             'customer_name',
-            //'customer_phone',
-            //'treatment_time',
-            //'note:ntext',
-            //'is_finish',
+            'customer_phone',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
