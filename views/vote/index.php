@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title                   = 'Orders';
+$this->title                   = 'Vote';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-index">
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<div class="col-md-9">
 							<div class="right">
 								<p>VIỆN CÔNG NGHỆ NHA KHOA AURIS XIN CẢM ƠN QUÝ KHÁCH HÀNG!</p>
-								<h3 id="customer-name">Lê Thị B</h3>
+								<h3 id="customer-name"></h3>
 							</div>
 						</div>
 					</div>
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<p>Rất mong Quý khách dánh ít thời gian để đánh giá quá trình phục vụ của dịch vụ của nha khoa
 							Auris!</p>
 						<h2 id="vote-title" style="text-transform: uppercase">Xin cảm ơn</h2>
-						<div class="row">
+						<div class="row vote-icon">
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-bad" point="-3">
 									<img src="<?= Yii::$app->request->baseUrl ?>/images/embarrassed.png"/>
@@ -62,33 +63,45 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <script>
-	var sse  = new EventSource("<?=\yii\helpers\Url::to(['realtime'])?>");
+	var sse  = new EventSource("<?=Url::to(['realtime'])?>");
 	var id   = null;
 	var type = null;
 	sse.addEventListener('message', function(e) {
-		console.log('a');
 		const data = $.parseJSON(e.data);
 		$('#customer-name').html(data.name);
 		$('#vote-title').html(data.title);
 		id   = data.id;
 		type = data.type;
+		if(id !== null) {
+			$('.vote-icon').show();
+		}
+
 	}, false);
+	if(id === null) {
+		$('.vote-icon').hide();
+	} else {
+		$('.vote-icon').show();
+	}
 	$('.embarrassed').click(function() {
-		var point = 1;
-		point     = parseInt($(this).attr('point'));
+		var point;
+		point = parseInt($(this).attr('point'));
 		$.ajax({
 			type    : 'POST',
 			url     : "<?=\yii\helpers\Url::to([
 				'vote',
 			])?>",
+			async   : true,
 			data    : {
 				id   : id,
 				type : type,
 				point: point
-			},
+			}
+			,
 			dataType: 'json',
 			success : function(data) {
-				console.log(data);
+				if(data === 0) {
+					window.location.href = "<?=Url::to(['thanks'])?>"
+				}
 			}
 		});
 	})

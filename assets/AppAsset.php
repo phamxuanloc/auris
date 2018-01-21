@@ -31,10 +31,10 @@ class AppAsset extends AssetBundle
         'css/icon.css'
     ];
     public $js = [
-        'auris/libs/jquery/tether/dist/js/tether.min.js',
-        'auris/libs/jquery/underscore/underscore-min.js',
-        'auris/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js',
-        'auris/libs/jquery/PACE/pace.min.js',
+//        'auris/libs/jquery/tether/dist/js/tether.min.js',
+//        'auris/libs/jquery/underscore/underscore-min.js',
+//        'auris/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js',
+//        'auris/libs/jquery/PACE/pace.min.js',
         'auris/scripts/palette.js',
         'auris/scripts/ui-load.js',
 //        'auris/scripts/ui-jp.js',
@@ -55,7 +55,7 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
-    public $jsOptions = [
-        'position' => \yii\web\View::POS_HEAD
-    ];
+//    public $jsOptions = [
+//        'position' => \yii\web\View::POS_HEAD
+//    ];
 }
