@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -14,7 +15,7 @@ use Yii;
  * @property string  $price
  * @property Service $service
  */
-class Product extends \yii\db\ActiveRecord {
+class Product extends Model {
 
 	/**
 	 * @inheritdoc

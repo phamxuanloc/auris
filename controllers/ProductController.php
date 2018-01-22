@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Model;
 use app\models\Service;
 use Yii;
 use app\models\Product;
@@ -36,9 +37,9 @@ class ProductController extends Controller {
 	public function actionIndex() {
 		$searchModel   = new ProductSearch();
 		$dataProvider  = $searchModel->search(Yii::$app->request->queryParams);
-		$service       = Service::find()->all();
+		$service       = $searchModel->getListService();
 		$model         = new Product();
-		$model->status = 1;
+		$model->status = Model::STATUS_ACTIVE;
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect([
 				'index',
@@ -116,7 +117,7 @@ class ProductController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	public function actionDelete($id) {
-		$this->findModel($id)->delete();
+		$this->findModel($id)->updateAttributes(['status' => Model::STATUS_DELETE]);
 		return $this->redirect(['index']);
 	}
 

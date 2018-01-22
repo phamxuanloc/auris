@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Model;
 use Yii;
 use app\models\Service;
 use app\models\ServiceSearch;
@@ -36,7 +37,7 @@ class ServiceController extends Controller {
 		$model         = new Service();
 		$searchModel   = new ServiceSearch();
 		$dataProvider  = $searchModel->search(Yii::$app->request->queryParams);
-		$model->status = 1;
+		$model->status = Model::STATUS_ACTIVE;
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}
@@ -111,7 +112,7 @@ class ServiceController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	public function actionDelete($id) {
-		$this->findModel($id)->delete();
+		$this->findModel($id)->updateAttributes(['status' => Model::STATUS_DELETE]);
 		return $this->redirect(['index']);
 	}
 

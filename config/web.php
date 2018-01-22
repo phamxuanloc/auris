@@ -2,15 +2,15 @@
 $params = require __DIR__ . '/params.php';
 $db     = require __DIR__ . '/db.php';
 $config = [
-	'id'         => 'basic',
-	'basePath'   => dirname(__DIR__),
-	'bootstrap'  => ['log'],
-    'defaultRoute' => 'customer/index',
-	'aliases'    => [
+	'id'           => 'basic',
+	'basePath'     => dirname(__DIR__),
+	'bootstrap'    => ['log'],
+	'defaultRoute' => 'customer/index',
+	'aliases'      => [
 		'@bower' => '@vendor/bower-asset',
 		'@npm'   => '@vendor/npm-asset',
 	],
-	'components' => [
+	'components'   => [
 		'formatter'    => [
 			'class'       => 'yii\i18n\Formatter',
 			'nullDisplay' => '',
@@ -61,26 +61,28 @@ $config = [
 		],
 		*/
 	],
-	'modules'    => [
-		'user'  => [
-			'class'              => 'dektrium\user\Module',
-			'modelMap'           => [
-				'User'      => 'navatech\role\models\User',//IMPORTANT & REQUIRED, change to your User model if overridden
-				'LoginForm' => 'navatech\role\models\LoginForm',//IMPORTANT & REQUIRED
+	'modules'      => [
+		'user'     => [
+			'class'    => 'dektrium\user\Module',
+			'modelMap' => [
+				'User'      => 'app\models\User',
+				//IMPORTANT & REQUIRED, change to your User model if overridden
+				'LoginForm' => 'navatech\role\models\LoginForm',
+				//IMPORTANT & REQUIRED
 			],
 		],
-		'role'  => [
-			'class'               => 'navatech\role\Module',
-			'controllers'         => [ //namespaces of controllers
+		'role'     => [
+			'class'       => 'navatech\role\Module',
+			'controllers' => [ //namespaces of controllers
 				'app\controllers',
 				'navatech\role\controllers',
 			],
 		],
-        'gridview' =>  [
-            'class' => '\kartik\grid\Module'
-        ]
+		'gridview' => [
+			'class' => '\kartik\grid\Module',
+		],
 	],
-	'params'     => $params,
+	'params'       => $params,
 ];
 if(YII_ENV_DEV) {
 	// configuration adjustments for 'dev' environment

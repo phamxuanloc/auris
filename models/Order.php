@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -27,7 +28,7 @@ use yii\helpers\ArrayHelper;
  * @property string $debt
  * @property string $note
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends Model
 {
     /**
      * @inheritdoc
@@ -104,30 +105,6 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getListEkip()
-    {
-        return ArrayHelper::map(Ekip::find()->all(), 'id', 'ekip_name');
-    }
-
-    public function getListDirectSale()
-    {
-        return ArrayHelper::map(User::find()->all(), 'id', 'username');
-    }
-
-    public function getListService()
-    {
-        return ArrayHelper::map(Service::find()->where('status = 1')->all(), 'id', 'name');
-    }
-
-    public function getListProduct()
-    {
-        return ArrayHelper::map(Product::find()->where('status = 1')->all(), 'id', 'name');
-    }
-
-    public function getListColor()
-    {
-        return ArrayHelper::map(Color::find()->where('status = 1')->all(), 'id', 'name');
-    }
     public function getQuantity()
     {
         return [
