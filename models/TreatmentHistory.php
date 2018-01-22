@@ -49,8 +49,9 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 		return [
 			[
 				[
-					'order_id',
-					'customer_id',
+				    'order_code',
+//					'order_id',
+//					'customer_id',
 				],
 				'required',
 			],
