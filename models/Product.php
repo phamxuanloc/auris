@@ -7,11 +7,12 @@ use Yii;
 /**
  * This is the model class for table "product".
  *
- * @property int    $id
- * @property int    $service_id
- * @property string $name
- * @property int    $status
- * @property string $price
+ * @property int     $id
+ * @property int     $service_id
+ * @property string  $name
+ * @property int     $status
+ * @property string  $price
+ * @property Service $service
  */
 class Product extends \yii\db\ActiveRecord {
 

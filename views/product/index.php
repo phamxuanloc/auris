@@ -1,4 +1,5 @@
 <?php
+use app\models\Product;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -47,7 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				'header' => 'Id',
 			],
 			'name',
-			'service_id',
+			[
+				'attribute' => 'service_id',
+				'value'     => function (Product $data) {
+					return $data->service->name;
+				},
+			],
 			'price',
 			[
 				'class'    => 'yii\grid\ActionColumn',
