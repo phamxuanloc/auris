@@ -34,6 +34,8 @@ class ProductController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
+		echo "test";
+		die;
 		$searchModel   = new ProductSearch();
 		$dataProvider  = $searchModel->search(Yii::$app->request->queryParams);
 		$service       = Service::find()->all();
