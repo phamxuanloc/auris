@@ -97,7 +97,7 @@ class Order extends \yii\db\ActiveRecord
             'total_price' => 'Thành tiền',
             'status' => 'Trạng thái',
             'type' => 'Tình trạng',
-            'total_payment' => 'Total Payment',
+            'total_payment' => 'Tổng thanh toán',
             'debt' => 'Còn nợ',
             'note' => 'Ghi chú',
             'order_code' => 'Mã đơn hàng',
