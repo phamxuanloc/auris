@@ -7,46 +7,62 @@ use Yii;
 /**
  * This is the model class for table "product".
  *
- * @property int $id
- * @property int $service_id
+ * @property int    $id
+ * @property int    $service_id
  * @property string $name
- * @property int $status
+ * @property int    $status
  * @property string $price
  */
-class Product extends \yii\db\ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'product';
-    }
+class Product extends \yii\db\ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['service_id', 'name'], 'required'],
-            [['service_id', 'status'], 'integer'],
-            [['price'], 'number'],
-            [['name'], 'string', 'max' => 255],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName() {
+		return 'product';
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'service_id' => 'Service ID',
-            'name' => 'Name',
-            'status' => 'Status',
-            'price' => 'Price',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function rules() {
+		return [
+			[
+				[
+					'service_id',
+					'name',
+				],
+				'required',
+			],
+			[
+				[
+					'service_id',
+					'status',
+				],
+				'integer',
+			],
+			[
+				['price'],
+				'number',
+			],
+			[
+				['name'],
+				'string',
+				'max' => 255,
+			],
+		];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels() {
+		return [
+			'id'         => 'ID',
+			'service_id' => 'Dịch vụ',
+			'name'       => 'Tên sản phẩm',
+			'status'     => 'Trạng thái',
+			'price'      => 'Đơn giá',
+		];
+	}
 }
