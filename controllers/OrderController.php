@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Customer;
 use app\models\TreatmentHistory;
 use Yii;
 use app\models\Order;
@@ -66,8 +67,12 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-
         if ($model->load(Yii::$app->request->post())) {
+            $model->order_code = $this->genOrderCode();
+            $customer = Customer::find()->where("customer_code like '%$model->customer_code%'")->one();
+            if($customer){
+                $model->customer_id = $customer->id;
+            }
             if ($model->save()) {
                 return $this->redirect(['index']);
             } else {
@@ -99,6 +104,35 @@ class OrderController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function genOrderCode(){
+        $order = Order::find()->select('max(order_code) as order_code')->one();
+        if($order){
+            $orderCode = substr($order->order_code, 2, 5);
+            $value = $orderCode;
+            $length = 0;
+            while ($value != 0) {
+                $value = intval($value / 10);
+                $length++;
+//                echo $length;
+            }
+//            exit;
+            if (($length) == 1) {
+                $a = $orderCode + 1;
+                return "DH0000" . $a;
+            } else if (($length) == 2) {
+                $a = $orderCode + 1;
+                return "DH000" . $a;
+            } else if (($length) == 3) {
+                $a = $orderCode + 1;
+                return "DH00" . $a;
+            } else {
+                $a = $orderCode + 1;
+                return $a;
+            }
+        }
+//        print_r($orderCode);exit;
     }
 
     public function actionCreateSchedule()

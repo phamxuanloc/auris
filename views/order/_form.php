@@ -6,6 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Order */
 /* @var $form yii\widgets\ActiveForm */
+$url = Yii::$app->urlManager->createUrl(['customer/get-info']);
 ?>
 
 <div class="box">
@@ -20,6 +21,9 @@ use yii\bootstrap\ActiveForm;
 
         <div class="row">
             <div class="col-md-6">
+                <input id="url" value="<?= $url?>" type="hidden">
+                <input id="order-customer_id" name="Order[customer_id]" type="hidden">
+
                 <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>

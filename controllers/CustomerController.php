@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Order;
 use Yii;
 use app\models\Customer;
 use app\models\CustomerSearch;
@@ -119,6 +120,25 @@ class CustomerController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionGetInfo()
+    {
+        $value = $_POST['value'];
+        $order = Customer::find()->where("customer_code like '%$value%'")->one();
+        if ($order) {
+            $result = [
+                'status' => 1,
+                'data' => [
+                    'customer_id' => $order->id,
+                    'customer_name' => $order->name,
+                    'customer_phone' => $order->phone,
+                ]
+            ];
+            return json_encode($result);
+        } else {
+            return "abc";
+        }
     }
 
     /**
