@@ -68,11 +68,13 @@ class CustomerController extends Controller
         $model = new Customer();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->customer_status_id = implode(',',$model->customer_status_id);
+            if($model->customer_status_id) {
+                $model->customer_status_id = implode(',', $model->customer_status_id);
+            }
             $model->customer_img = UploadedFile::getInstance($model, 'customer_img');
             $model->upload();
             if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }else{
                 print_r($model->getErrors());exit;
             }
@@ -95,10 +97,14 @@ class CustomerController extends Controller
         $model = $this->findModel($id);
         $modelOld = clone $model;
 
-        $model->customer_status_id = explode(',',$model->customer_status_id);
+        if($model->customer_status_id) {
+            $model->customer_status_id = explode(',', $model->customer_status_id);
+        }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->customer_status_id = implode(',',$model->customer_status_id);
+            if($model->customer_status_id) {
+                $model->customer_status_id = implode(',', $model->customer_status_id);
+            }
             if($model->customer_img) {
                 $model->customer_img = UploadedFile::getInstance($model, 'customer_img');
                 $model->upload();
@@ -106,7 +112,7 @@ class CustomerController extends Controller
                 $model->customer_img = $modelOld->customer_img;
             }
             if($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         }
 
