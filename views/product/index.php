@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
 				'attribute' => 'service_id',
 				'value'     => function (Product $data) {
-					return $data->service->name;
+//					return $data->service->name;
 				},
 			],
 			'price',

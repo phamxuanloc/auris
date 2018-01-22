@@ -14,8 +14,10 @@ use odannyc\Yii2SSE\SSEBase;
 class MessageEventHandler extends SSEBase {
 
 	public function check() {
-
 		$history = TreatmentHistory::find()->where(['is_finish' => 1])->andWhere([
+			'not',
+			['real_end' => null],
+		])->andWhere([
 			'or',
 			['att_point' => null],
 			['spect_point' => null],
@@ -26,6 +28,9 @@ class MessageEventHandler extends SSEBase {
 
 	public function update() {
 		$history = TreatmentHistory::find()->where(['is_finish' => 1])->andWhere([
+			'not',
+			['real_end' => null],
+		])->andWhere([
 			'or',
 			['att_point' => null],
 			['spect_point' => null],
