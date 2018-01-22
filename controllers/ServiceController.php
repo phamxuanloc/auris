@@ -33,9 +33,10 @@ class ServiceController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$model        = new Service();
-		$searchModel  = new ServiceSearch();
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$model         = new Service();
+		$searchModel   = new ServiceSearch();
+		$dataProvider  = $searchModel->search(Yii::$app->request->queryParams);
+		$model->status = 1;
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}

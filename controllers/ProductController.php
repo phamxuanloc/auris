@@ -34,10 +34,11 @@ class ProductController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$searchModel  = new ProductSearch();
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$service      = Service::find()->all();
-		$model        = new Product();
+		$searchModel   = new ProductSearch();
+		$dataProvider  = $searchModel->search(Yii::$app->request->queryParams);
+		$service       = Service::find()->all();
+		$model         = new Product();
+		$model->status = 1;
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect([
 				'index',

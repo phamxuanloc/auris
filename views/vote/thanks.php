@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -31,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="content-content">
 						<p>Rất mong Quý khách dánh ít thời gian để đánh giá quá trình phục vụ của dịch vụ của nha khoa
 							Auris!</p>
-						<h2 id="vote-title" style="text-transform: uppercase">Xin cảm ơn</h2>
+						<h2 id="vote-title" style="text-transform: uppercase">Xin cảm ơn và hẹn gặp lại</h2>
 					</div>
 				</div>
 			</div>
