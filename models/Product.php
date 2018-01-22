@@ -65,4 +65,8 @@ class Product extends \yii\db\ActiveRecord {
 			'price'      => 'Đơn giá',
 		];
 	}
+
+	public function getService() {
+		return $this->hasOne(Service::className(), ['id' => 'service_id']);
+	}
 }

@@ -49,7 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			'name',
 			'service_id',
 			'price',
-			['class' => 'yii\grid\ActionColumn'],
+			[
+				'class'    => 'yii\grid\ActionColumn',
+				'template' => '{update}{delete}',
+			],
 		],
 	]); ?>
 </div>
