@@ -23,7 +23,7 @@ echo Menu::widget([
             'items' => [
                 [
                     'label' => 'Lịch hẹn tư vấn mới',
-                    'url' => ['product/index']
+                    'url' => ['schedule-advisory/index']
                 ],
                 [
                     'label' => 'Danh sách khách hàng',

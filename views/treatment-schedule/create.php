@@ -51,7 +51,7 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
             </div>
         </div>
 
-        <div class="form-group row m-t-lg">
+        <div class="form-group row">
             <div class="col-sm-4 col-sm-offset-2">
                 <?= Html::submitButton('<i class="fa fa-floppy-o" aria-hidden="true"></i> Tạo lịch điều trị', ['class' => 'btn btn-success']) ?>
             </div>

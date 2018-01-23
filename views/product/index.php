@@ -12,10 +12,9 @@ $this->title                   = 'Quản lý sản phẩm';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
+    <div class="help-block"></div>
 
-	<h1><?= Html::encode($this->title) ?></h1>
 	<div class="product-form">
-
 		<?php $form = ActiveForm::begin(); ?>
 		<div class="col-sm-3">
 			<?= $form->field($model, 'name')->textInput([
@@ -33,15 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
 			])->label(false) ?>
 		</div>
 		<div class="form-group col-sm-3">
-			<?= Html::submitButton('Tạo sản phẩm', ['class' => 'btn btn-success']) ?>
+			<?= Html::submitButton('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Tạo sản phẩm', ['class' => 'btn btn-success']) ?>
 		</div>
 
 		<?php ActiveForm::end(); ?>
 
 	</div>
+
 	<?= GridView::widget([
 		'dataProvider' => $dataProvider,
-		//		'filterModel'  => $searchModel,
+        'layout' => "{items}\n{pager}",
 		'columns'      => [
 			[
 				'class'  => 'yii\grid\SerialColumn',
@@ -50,8 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			'name',
 			[
 				'attribute' => 'service_id',
-				'value'     => function (Product $data) {
-//					return $data->service->name;
+				'value'     => function ($data) {
+					return $data->service->name;
 				},
 			],
 			'price',

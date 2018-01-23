@@ -10,18 +10,15 @@ $this->title                   = 'Quản lý dịch vụ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-index">
-
-	<h1><?= Html::encode($this->title) ?></h1>
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <div class="help-block"></div>
 	<div class="service-form col-sm-12">
 
 		<?php $form = ActiveForm::begin(); ?>
 		<div class="col-sm-3">
-			<?= $form->field($model, 'name')->textInput(['maxlength' => true])->label(false) ?>
+			<?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Tên dịch vụ'])->label(false) ?>
 		</div>
 		<div class="form-group col-sm-3">
-			<?= Html::submitButton('Tạo dịch vụ', ['class' => 'btn btn-success']) ?>
+			<?= Html::submitButton('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Tạo dịch vụ', ['class' => 'btn btn-success']) ?>
 		</div>
 
 		<?php ActiveForm::end(); ?>
@@ -30,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="col-sm-6">
 		<?= GridView::widget([
 			'dataProvider' => $dataProvider,
-			//		'filterModel'  => $searchModel,
+            'layout' => "{items}\n{pager}",
 			'columns'      => [
 				[
 					'class'  => 'yii\grid\SerialColumn',

@@ -48,6 +48,7 @@ class Order extends Model
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
             [['price', 'total_price', 'total_payment', 'debt'], 'number'],
             [['note'], 'string'],
+            [['created_date'], 'safe'],
             [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
         ];
     }
@@ -102,6 +103,7 @@ class Order extends Model
             'debt' => 'Còn nợ',
             'note' => 'Ghi chú',
             'order_code' => 'Mã đơn hàng',
+            'created_date' => 'Ngày tạo',
         ];
     }
 

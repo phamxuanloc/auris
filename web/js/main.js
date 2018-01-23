@@ -24,6 +24,28 @@ $(document).ready(function () {
             });
         }, 2000);
     });
+    $("#order-customer_code").keyup(function () {
+        var value = $('#order-customer_code').val();
+        var url = $('#url').val();
+        clearTimeout(timeout);
+
+        timeout = setTimeout(function () {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {value: value},
+                dataType: "json",
+                success: function (resultData) {
+                    if(resultData.status == 1) {
+                        console.log(resultData.data);
+                        $('#order-customer_id').val(resultData.data.order_id);
+                        $('#order-customer_name').val(resultData.data.customer_name);
+                        $('#order-customer_phone').val(resultData.data.customer_phone);
+                    }
+                }
+            });
+        }, 2000);
+    });
 });
 
 function start(id) {
