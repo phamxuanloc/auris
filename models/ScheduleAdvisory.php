@@ -43,6 +43,11 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getSale()
+    {
+        return $this->hasOne(User::className(), ['id' => 'sale_id']);
+    }
+
     /**
      * @inheritdoc
      */

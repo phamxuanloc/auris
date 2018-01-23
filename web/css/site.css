@@ -221,3 +221,9 @@ select.form-control:not([size]):not([multiple]) {
 .popover{
     display: none;
 }
+.table > colgroup + thead > tr:first-child > th {
+    border: none;
+    color: #A7AFBF;
+    font-weight: 400;
+    font-size: 12px;
+}

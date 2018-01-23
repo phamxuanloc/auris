@@ -25,15 +25,70 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'customer_code',
             'full_name',
-            'sex',
+            [
+                'attribute' => 'sex',
+                'value' => function ($data) {
+                    if ($data->sex == 1) {
+                        return 'Nam';
+                    } else {
+                        return 'Nữ';
+                    }
+                }
+            ],
             'birthday',
             'phone',
             'ap_date',
-            'sale_id',
-            'status',
-            'note:ntext',
+            [
+                'attribute' => 'ap_date',
+                'format' => ['date', 'php:g, d/m/Y'],
+            ],
+            [
+                'class' => \yii2mod\editable\EditableColumn::class,
+                'url' => ['change-sale'],
+                'type' => 'select',
+                'editableOptions' => function ($model) {
+                    return [
+                        'mode' => 'inline',
+                        'source' => $model->getListDirectSale(),
+                        'value' => $model->sale_id,
+                    ];
+                },
+                'attribute' => 'sale_id',
+                'value' => 'sale.username',
+            ],
+            [
+                'class' => \yii2mod\editable\EditableColumn::class,
+                'attribute' => 'status',
+                'url' => ['change-status'],
+                'type' => 'select',
+                'editableOptions' => function ($model) {
+                    return [
+                        'mode' => 'inline',
+                        'source' => [3 => 'Chưa đến', 1 => 'Thành công', 2 => 'Không làm'],
+                        'value' => $model->status,
+                    ];
+                },
+                'value' => function ($data) {
+                    if ($data->status == 1) {
+                        return '<span class="label label-warning">Thành công</span>';
+                    } else if ($data->status == 2) {
+                        return '<span class="label label-danger">Không làm</span>';
+                    } else {
+                        return '<span class="label label-default">Chưa đến</span>';
+                    }
+                }
+            ],
+            [
+                'class' => \yii2mod\editable\EditableColumn::class,
+                'url' => ['change-note'],
+                'editableOptions' => [
+                    'mode' => 'inline',
+                ],
+                'attribute' => 'note',
+                'value' => 'note',
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+//            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

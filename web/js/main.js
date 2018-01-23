@@ -46,6 +46,30 @@ $(document).ready(function () {
             });
         }, 2000);
     });
+    $("#scheduleadvisory-customer_code").keyup(function () {
+        var value = $('#scheduleadvisory-customer_code').val();
+        var url = $('#url').val();
+        clearTimeout(timeout);
+
+        timeout = setTimeout(function () {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {value: value},
+                dataType: "json",
+                success: function (resultData) {
+                    if(resultData.status == 1) {
+                        console.log(resultData.data);
+                        // $('#order-customer_id').val(resultData.data.order_id);
+                        $('#scheduleadvisory-full_name').val(resultData.data.customer_name);
+                        $('#scheduleadvisory-sex').val(resultData.data.customer_sex);
+                        $('#scheduleadvisory-birthday').val(resultData.data.customer_birthday);
+                        $('#scheduleadvisory-phone').val(resultData.data.customer_phone);
+                    }
+                }
+            });
+        }, 1000);
+    });
 });
 
 function start(id) {

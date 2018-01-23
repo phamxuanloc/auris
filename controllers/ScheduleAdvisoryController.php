@@ -8,6 +8,7 @@ use app\models\ScheduleAdvisorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii2mod\editable\EditableAction;
 
 /**
  * ScheduleAdvisoryController implements the CRUD actions for ScheduleAdvisory model.
@@ -25,6 +26,24 @@ class ScheduleAdvisoryController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'change-sale' => [
+                'class' => EditableAction::class,
+                'modelClass' => ScheduleAdvisory::class,
+            ],
+            'change-note' => [
+                'class' => EditableAction::class,
+                'modelClass' => ScheduleAdvisory::class,
+            ],
+            'change-status' => [
+                'class' => EditableAction::class,
+                'modelClass' => ScheduleAdvisory::class,
             ],
         ];
     }
@@ -67,7 +86,7 @@ class ScheduleAdvisoryController extends Controller
         $model = new ScheduleAdvisory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -87,7 +106,7 @@ class ScheduleAdvisoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

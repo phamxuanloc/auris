@@ -6,6 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\ScheduleAdvisory */
 /* @var $form yii\widgets\ActiveForm */
+$url = Yii::$app->urlManager->createUrl(['customer/get-info']);
 ?>
 
 <div class="box">
@@ -21,23 +22,37 @@ use yii\bootstrap\ActiveForm;
 
         <div class="row">
             <div class="col-md-6">
+                <input id="url" value="<?= $url?>" type="hidden">
+                <input id="scheduleadvisory-customer_id" name="ScheduleAdvisory[customer_id]" type="hidden">
                 <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'sex')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'sex')->dropDownList(['1' => 'Nam', '2' => 'Nữ']) ?>
 
-                <?= $form->field($model, 'birthday')->textInput() ?>
+                <?= $form->field($model, 'birthday')->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy/mm/dd'
+                    ]
+                ]) ?>
 
                 <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
             </div>
 
             <div class="col-md-6">
-                <?= $form->field($model, 'ap_date')->textInput() ?>
+                <?= $form->field($model, 'ap_date')->widget(\kartik\datetime\DateTimePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy/mm/dd H:i:s'
+                    ]
+                ]) ?>
 
                 <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale()) ?>
 
-                <?= $form->field($model, 'status')->dropDownList(['0' => 'Chưa đến', '1' => 'Thành công', '2' => 'Không làm']) ?>
+                <?= $form->field($model, 'status')->dropDownList(['3' => 'Chưa đến', '1' => 'Thành công', '2' => 'Không làm']) ?>
 
                 <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
             </div>

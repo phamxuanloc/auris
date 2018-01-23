@@ -6,7 +6,7 @@ $config = [
 	'basePath'     => dirname(__DIR__),
 	'bootstrap'    => ['log'],
 	'defaultRoute' => 'customer/index',
-	'aliases'      => [
+    'aliases'      => [
 		'@bower' => '@vendor/bower-asset',
 		'@npm'   => '@vendor/npm-asset',
 	],

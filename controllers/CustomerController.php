@@ -125,7 +125,7 @@ class CustomerController extends Controller
     public function actionGetInfo()
     {
         $value = $_POST['value'];
-        $order = Customer::find()->where("customer_code like '%$value%'")->one();
+        $order = Customer::find()->where("customer_code = '$value'")->one();
         if ($order) {
             $result = [
                 'status' => 1,
@@ -133,6 +133,8 @@ class CustomerController extends Controller
                     'customer_id' => $order->id,
                     'customer_name' => $order->name,
                     'customer_phone' => $order->phone,
+                    'customer_sex' => $order->sex,
+                    'customer_birthday' => $order->birthday,
                 ]
             ];
             return json_encode($result);
