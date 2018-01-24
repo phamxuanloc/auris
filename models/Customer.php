@@ -172,4 +172,13 @@ class Customer extends \yii\db\ActiveRecord
                 break;
         }
     }
+
+    public function getPayment($id){
+        $totalPay = OrderCheckout::find()->select('sum(money) as money')->where("customer_id = $id")->one();
+        if($totalPay){
+            return $totalPay->money;
+        }else{
+            return 0;
+        }
+    }
 }

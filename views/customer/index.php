@@ -39,8 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
-            'birthday',
+            [
+                'attribute' => 'birthday',
+                'format' => ['date', 'php:d-m-Y'],
+            ],
             'phone',
+            [
+                'header' => 'Đã thanh toán',
+                'format' => ['decimal', '0'],
+                'value' => function($model){
+                    return $model->getPayment($model->id);
+                }
+            ],
             [
                 'attribute' => 'character_type',
                 'value' => function ($data) {
@@ -48,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'note',
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
 </div>

@@ -121,4 +121,12 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 	public function getOrder(){
 	    return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
+    public function getListOrder()
+    {
+        $data = Order::find()
+            ->select(['order_code as value'])
+            ->asArray()
+            ->all();
+        return $data;
+    }
 }

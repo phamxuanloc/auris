@@ -68,8 +68,16 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getListDirectSale()
+    public function getListCustomer()
     {
+        $data = Customer::find()
+            ->select(['customer_code as value'])
+            ->asArray()
+            ->all();
+        return $data;
+    }
+
+    public function getListDirectSale(){
         return ArrayHelper::map(User::find()->all(), 'id', 'username');
     }
 }

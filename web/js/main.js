@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var timeout = null;
-    $("#treatmenthistory-order_code").keyup(function () {
+    $("#treatmenthistory-order_code").change(function () {
         var value = $('#treatmenthistory-order_code').val();
         var url = $('#url').val();
         clearTimeout(timeout);
@@ -22,9 +22,9 @@ $(document).ready(function () {
                     }
                 }
             });
-        }, 2000);
+        }, 500);
     });
-    $("#order-customer_code").keyup(function () {
+    $("#order-customer_code").change(function () {
         var value = $('#order-customer_code').val();
         var url = $('#url').val();
         clearTimeout(timeout);
@@ -44,9 +44,9 @@ $(document).ready(function () {
                     }
                 }
             });
-        }, 2000);
+        }, 500);
     });
-    $("#scheduleadvisory-customer_code").keyup(function () {
+    $("#scheduleadvisory-customer_code").change(function () {
         var value = $('#scheduleadvisory-customer_code').val();
         var url = $('#url').val();
         clearTimeout(timeout);
@@ -68,8 +68,28 @@ $(document).ready(function () {
                     }
                 }
             });
-        }, 1000);
+        }, 500);
     });
+
+    $("#order-product_id").change(function () {
+        $.ajax({
+            type: 'POST',
+            url: "index.php?r=order/get-price",
+            data: {value: $("#order-product_id").val()},
+            dataType: "json",
+            success: function (resultData) {
+                if(resultData.status == 1) {
+                    $('#order-price').val(resultData.data.price);
+                }
+            }
+        });
+    });
+    $("#order-quantiy").change(function () {
+        $("#order-total_price").val($("#order-price").val() * $("#order-quantiy").val() - $("#order-discount").val());
+    });
+    $("#order-discount").change(function () {
+        $("#order-total_price").val($("#order-price").val() * $("#order-quantiy").val() - $("#order-discount").val());
+    })
 });
 
 function start(id) {

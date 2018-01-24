@@ -44,9 +44,9 @@ class Order extends Model
     public function rules()
     {
         return [
-            [['customer_code', 'customer_name', 'service_id', 'product_id', 'price', 'quantiy', 'total_price', 'total_payment'], 'required'],
+            [['customer_code', 'customer_name', 'service_id', 'product_id', 'price', 'quantiy', 'total_price'], 'required'],
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
-            [['price', 'total_price', 'total_payment', 'debt'], 'number'],
+            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
             [['created_date'], 'safe'],
             [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
@@ -77,6 +77,10 @@ class Order extends Model
     {
         return $this->hasMany(TreatmentHistory::className(), ['order_id' => 'id']);
     }
+    public function getOrderCheckout()
+    {
+        return $this->hasMany(OrderCheckout::className(), ['order_id' => 'id']);
+    }
 
     /**
      * @inheritdoc
@@ -104,6 +108,7 @@ class Order extends Model
             'note' => 'Ghi chú',
             'order_code' => 'Mã đơn hàng',
             'created_date' => 'Ngày tạo',
+            'discount' => 'Chiết khấu',
         ];
     }
 
@@ -136,6 +141,21 @@ class Order extends Model
             '24' => '24',
             '25' => '25',
             '26' => '26',
+            '27' => '27',
+            '28' => '28',
+            '29' => '29',
+            '30' => '30',
+            '31' => '31',
+            '32' => '32',
         ];
+    }
+
+    public function getListCustomer()
+    {
+        $data = Customer::find()
+            ->select(['customer_code as value'])
+            ->asArray()
+            ->all();
+        return $data;
     }
 }

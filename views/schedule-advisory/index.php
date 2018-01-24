@@ -35,9 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
-            'birthday',
+            [
+                'attribute' => 'birthday',
+                'format' => ['date', 'php:d-m-Y'],
+            ],
             'phone',
-            'ap_date',
             [
                 'attribute' => 'ap_date',
                 'format' => ['date', 'php:g, d/m/Y'],

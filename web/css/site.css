@@ -199,7 +199,7 @@ select.form-control:not([size]):not([multiple]) {
     overflow-x: scroll;
 }
 .order-index .grid-view table{
-    width: 2200px;
+    width: 2500px;
     overflow: scroll;
 }
 .treatment-schedule-index .grid-view table{
@@ -226,4 +226,13 @@ select.form-control:not([size]):not([multiple]) {
     color: #A7AFBF;
     font-weight: 400;
     font-size: 12px;
+}
+#dynamic-form .radio{
+    float: left;
+    margin-right: 10px;
+}
+#customer-customer_status_id .checkbox{
+    width: 50%;
+    float: left;
+    /*padding-right: 10px;*/
 }

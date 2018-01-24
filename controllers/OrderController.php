@@ -2,11 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\Models;
 use app\models\Customer;
+use app\models\OrderCheckout;
+use app\models\Product;
 use app\models\TreatmentHistory;
 use Yii;
 use app\models\Order;
 use app\models\OrderSearch;
+use yii\db\Exception;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,23 +71,24 @@ class OrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = new Order;
+        $modelCheckouts = [new OrderCheckout];
         if ($model->load(Yii::$app->request->post())) {
             $model->order_code = $this->genOrderCode();
-            $customer = Customer::find()->where("customer_code like '%$model->customer_code%'")->one();
-            if($customer){
+            $customer = Customer::find()->where("customer_code = '$model->customer_code'")->one();
+            if ($customer) {
                 $model->customer_id = $customer->id;
             }
             if ($model->save()) {
                 return $this->redirect(['index']);
-            } else {
-                print_r($model->getErrors());
-                exit;
+            }else{
+                print_r($model->getErrors());exit;
             }
         }
 
         return $this->render('create', [
             'model' => $model,
+            'modelCheckouts' => (empty($modelCheckouts)) ? [new OrderCheckout] : $modelCheckouts
         ]);
     }
 
@@ -96,20 +102,56 @@ class OrderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelsCheckouts = $model->orderCheckout;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            $oldIDs = ArrayHelper::map($modelsCheckouts, 'id', 'id');
+            $modelsCheckouts = Models::createMultiple(OrderCheckout::classname(), $modelsCheckouts);
+            Models::loadMultiple($modelsCheckouts, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsCheckouts, 'id', 'id')));
+
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                if ($flag = $model->save(false)) {
+                    if (!empty($deletedIDs)) {
+                        OrderCheckout::deleteAll(['id' => $deletedIDs]);
+                    }
+
+                    foreach ($modelsCheckouts as $modelCheckouts) {
+                        $modelCheckouts->customer_id = $model->customer_id;
+                        $modelCheckouts->order_id = $model->id;
+                        echo '<pre>';
+                        echo ($modelCheckouts->money);
+                        if(!$modelCheckouts->save()){
+                            print_r($modelCheckouts->getErrors());exit;
+                        }
+//                        if (!($flag = $modelCheckouts->save(false))) {
+//                            $transaction->rollBack();
+//                            break;
+//                        }
+                    }
+                    exit;
+                }
+                if ($flag) {
+                    $transaction->commit();
+                    return $this->redirect(['index']);
+                }
+            } catch (Exception $e) {
+                $transaction->rollBack();
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'modelsCheckouts' => (empty($modelsCheckouts)) ? [new OrderCheckout] : $modelsCheckouts
         ]);
     }
 
-    public function genOrderCode(){
+    public function genOrderCode()
+    {
         $order = Order::find()->select('max(order_code) as order_code')->one();
-        if($order){
-            $orderCode = substr($order->order_code, 2, 5);
+        if ($order) {
+            $orderCode = substr($order->order_code, 6, 7);
             $value = $orderCode;
             $length = 0;
             while ($value != 0) {
@@ -120,19 +162,48 @@ class OrderController extends Controller
 //            exit;
             if (($length) == 1) {
                 $a = $orderCode + 1;
-                return "DH0000" . $a;
+                return "AU1-HD000000" . $a;
             } else if (($length) == 2) {
                 $a = $orderCode + 1;
-                return "DH000" . $a;
+                return "AU1-HD00000" . $a;
             } else if (($length) == 3) {
                 $a = $orderCode + 1;
-                return "DH00" . $a;
-            } else {
+                return "AU1-HD0000" . $a;
+            } else if (($length) == 4) {
                 $a = $orderCode + 1;
-                return $a;
+                return "AU1-HD000" . $a;
+            } else if (($length) == 5) {
+                $a = $orderCode + 1;
+                return "AU1-HD00" . $a;
+            } else if (($length) == 6) {
+                $a = $orderCode + 1;
+                return "AU1-HD0" . $a;
+            } else if (($length) == 7) {
+                $a = $orderCode + 1;
+                return "AU1-HD" . $a;
             }
         }
 //        print_r($orderCode);exit;
+    }
+
+    public function actionGetPrice(){
+        $id = $_POST['value'];
+        $product = Product::findOne($id);
+        if($product){
+            $result = [
+                'status' => 1,
+                'data' => [
+                    'price' => $product->price,
+                ]
+            ];
+            return json_encode($result);
+        }else{
+            $result = [
+                'status' => 0,
+                'data' => []
+            ];
+            return json_encode($result);
+        }
     }
 
     public function actionCreateSchedule()
@@ -165,7 +236,8 @@ class OrderController extends Controller
         }
     }
 
-    public function actionReport(){
+    public function actionReport()
+    {
         $report = Order::find()->orderBy('created_date');
     }
 

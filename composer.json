@@ -24,7 +24,9 @@
         "kartik-v/yii2-grid": "@dev",
         "odannyc/yii2-sse": "dev-master",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "yii2mod/yii2-editable": "*"
+        "yii2mod/yii2-editable": "*",
+        "wbraganca/yii2-dynamicform": "dev-master",
+        "yiisoft/yii2-jui": "^2.0@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
