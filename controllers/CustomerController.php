@@ -59,6 +59,33 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function genCustomerCode(){
+        $customer = Customer::find()->select('max(customer_code) as customer_code')->one();
+        if($customer){
+            $customerCode = substr($customer->customer_code, 4, 5);
+            $value = $customerCode;
+            $length = 0;
+            while ($value != 0) {
+                $value = intval($value / 10);
+                $length++;
+            }
+            if (($length) == 1) {
+                $a = $customerCode + 1;
+                return "AU1-0000" . $a;
+            } else if (($length) == 2) {
+                $a = $customerCode + 1;
+                return "AU1-000" . $a;
+            } else if (($length) == 3) {
+                $a = $customerCode + 1;
+                return "AU1-00" . $a;
+            } else {
+                $a = "AU1-".$customerCode + 1;
+                return $a;
+            }
+        }
+//        print_r($orderCode);exit;
+    }
+
     /**
      * Creates a new Customer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -67,6 +94,7 @@ class CustomerController extends Controller
     public function actionCreate()
     {
         $model = new Customer();
+        $model->customer_code = $this->genCustomerCode();
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->customer_status_id) {
@@ -134,7 +162,7 @@ class CustomerController extends Controller
                     'customer_name' => $order->name,
                     'customer_phone' => $order->phone,
                     'customer_sex' => $order->sex,
-                    'customer_birthday' => $order->birthday,
+                    'customer_birthday' => date("Y-m-d", strtotime($order->birthday)),
                 ]
             ];
             return json_encode($result);

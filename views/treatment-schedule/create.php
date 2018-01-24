@@ -27,7 +27,12 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
                 <input id="treatmenthistory-order_id" name="TreatmentHistory[order_id]" type="hidden">
                 <input id="treatmenthistory-customer_id" name="TreatmentHistory[customer_id]" type="hidden">
 
-                <?= $form->field($model, 'order_code')->textInput(['maxlength' => true, ]) ?>
+                <?= $form->field($model, 'order_code')->widget(\yii\jui\AutoComplete::classname(), [
+                    'options' => ['class' => 'form-control'],
+                    'clientOptions' => [
+                        'source' => $model->getListOrder(),
+                    ],
+                ]) ?>
 
                 <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true]) ?>
 

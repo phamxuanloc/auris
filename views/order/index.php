@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'customer_code',
                 'contentOptions' => [
-                    'style' => 'width:50px'
+                    'style' => 'width:100px'
                 ]
             ],
             [

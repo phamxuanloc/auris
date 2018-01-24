@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="box">
     <div class="box-header b-b">
-        <h3>Thêm khách hàng</h3>
+        <h3><?= $title?></h3>
     </div>
 
     <div class="box-body">
@@ -29,7 +29,13 @@ use yii\bootstrap\ActiveForm;
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'birthday')->textInput() ?>
+                <?= $form->field($model, 'birthday')->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy/mm/dd'
+                    ]
+                ]) ?>
 
                 <?= $form->field($model, 'sex')->dropDownList(['1' => 'Nam', '2' => "Nữ"]) ?>
 

@@ -17,20 +17,36 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm KPI', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?= $this->render('_search',['model' => $searchModel])?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'kpi',
-            'created_date',
-            'month',
-            //'estimate_revenue',
-            //'real_revenue',
-            //'total_customer',
-            //'att_point',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'month',
+                'format' => ['date', 'php:m/Y'],
+            ],
+            [
+                'attribute' => 'kpi',
+                'format' => ['decimal', 0],
+            ],
+            [
+                'attribute' => 'estimate_revenue',
+                'format' => ['decimal', 0],
+            ],
+            [
+                'attribute' => 'real_revenue',
+                'format' => ['decimal', 0],
+            ],
+            [
+                'attribute' => 'total_customer',
+                'format' => ['decimal', 0],
+            ],
+            [
+                'attribute' => 'att_point',
+                'format' => ['decimal', 0],
+            ],
         ],
     ]); ?>
 </div>

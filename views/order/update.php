@@ -3,14 +3,23 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\DetailView;
+use wbraganca\dynamicform\DynamicFormWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Order */
-
 $this->title = 'Cập nhật đơn hàng : ' . $model->order_code;
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
+
+$js = '
+jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
+    jQuery(".dynamicform_wrapper .control-label").each(function(index) {
+        jQuery(this).html("Lần thanh toán: " + (index + 1))
+    });
+});';
+
+$this->registerJs($js);
 ?>
 <div class="order-update">
     <div class="help-block"></div>
@@ -23,6 +32,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <div class="box-body">
             <?php $form = ActiveForm::begin([
                 'layout' => 'horizontal',
+                'id' => 'dynamic-form',
             ]); ?>
 
             <div class="row">
@@ -57,24 +67,70 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
             <div style="padding-top: 40px;"></div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <?= $form->field($model, 'service_id')->dropDownList($model->getListService()) ?>
 
                     <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct()) ?>
 
                     <?= $form->field($model, 'color_id')->dropDownList($model->getListColor()) ?>
-                </div>
-                <div class="col-md-5">
+
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'quantiy')->dropDownList($model->getQuantity()) ?>
 
-                    <?= $form->field($model, 'total_price')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'discount')->textInput() ?>
+
+                    <?= $form->field($model, 'total_price')->textInput() ?>
+
                 </div>
+                <div class="clearfix"></div>
+                <div class="help-block"></div>
+                <?php DynamicFormWidget::begin([
+                    'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                    'widgetBody' => '.container-items', // required: css class selector
+                    'widgetItem' => '.item', // required: css class
+                    'limit' => 4, // the maximum times, an element can be cloned (default 999)
+                    'min' => 1, // 0 or 1 (default 1)
+                    'insertButton' => '.add-item', // css class
+                    'deleteButton' => '.remove-item', // css class
+                    'model' => $modelsCheckouts[0],
+                    'formId' => 'dynamic-form',
+                    'formFields' => [
+                        'money',
+                        'cash_type',
+                    ],
+                ]); ?>
+
+                <div class="container-items"><!-- widgetContainer -->
+                    <?php foreach ($modelsCheckouts as $index => $modelCheckout): ?>
+                        <div class="item clearfix"><!-- widgetBody -->
+                            <?php
+                            if (!$modelCheckout->isNewRecord) {
+                                echo Html::activeHiddenInput($modelCheckout, "[{$index}]id");
+                            }
+                            ?>
+                            <div class="col-md-6">
+                                <?= $form->field($modelCheckout, "[{$index}]money", ['template' => "{label}\n<div class=\"col-lg-6\">{input}</div>"])->textInput(['maxlength' => true])->label("Lần thanh toán " . ($index + 1)) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($modelCheckout, "[{$index}]cash_type", ['template' => "<div class=\"col-lg-12\">{input}</div>"])->radioList(['1' => 'Tiền mặt', '2' => 'Thẻ'])->label(false) ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-offset-6">
+                    <button type="button" class="add-item btn btn-success btn-xs"><i class="fa fa-plus"></i>
+                        Thêm
+                        thanh toán
+                    </button>
+                </div>
+                <?php DynamicFormWidget::end(); ?>
             </div>
 
+
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <?= $form->field($model, 'note')->textarea(['maxlength' => true]) ?>
                 </div>
             </div>
@@ -98,7 +154,11 @@ $this->params['breadcrumbs'][] = 'Update';
 
                         <tbody>
                         <?php foreach ($model->treatmentHistory as $history) { ?>
-                            <tr></tr>
+                            <tr>
+                                <td><?= $history->note ?></td>
+                                <td><?= $history->real_start ?></td>
+                                <td><?= $history->real_end ?></td>
+                            </tr>
                         <?php } ?>
                         </tbody>
                     </table>

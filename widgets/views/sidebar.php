@@ -53,7 +53,7 @@ echo Menu::widget([
                 ],
                 [
                     'label' => 'Quản lý màu sắc',
-                    'url' => ['color/create']
+                    'url' => ['color/index']
                 ],
             ]
         ],
