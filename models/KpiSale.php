@@ -35,9 +35,9 @@ class KpiSale extends \yii\db\ActiveRecord
     {
         return [
             [['sale_id', 'kpi'], 'required'],
-            [['sale_id', 'total_customer', 'att_point', 'month', 'year'], 'integer'],
+            [['sale_id', 'total_customer', 'att_point', 'year'], 'integer'],
             [['kpi', 'estimate_revenue', 'real_revenue'], 'number'],
-            [['created_date'], 'safe'],
+            [['created_date', 'month'], 'safe'],
         ];
     }
 
@@ -67,18 +67,18 @@ class KpiSale extends \yii\db\ActiveRecord
     public function getMonth()
     {
         return [
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4',
-            '5' => '5',
-            '6' => '6',
-            '7' => '7',
-            '8' => '8',
-            '9' => '9',
-            '10' => '10',
-            '11' => '11',
-            '12' => '12',
+            '2018/01/01' => '01',
+            '2018/02/01' => '02',
+            '2018/03/01' => '03',
+            '2018/04/01' => '04',
+            '2018/05/01' => '05',
+            '2018/06/01' => '06',
+            '2018/07/01' => '07',
+            '2018/08/01' => '08',
+            '2018/09/01' => '09',
+            '2018/10/01' => '10',
+            '2018/11/01' => '11',
+            '2018/12/01' => '12',
         ];
     }
 }

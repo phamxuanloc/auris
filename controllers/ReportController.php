@@ -39,8 +39,6 @@ class ReportController extends Controller
     public function actionIndex()
     {
         $model = Order::find()->select("date(created_date) as created_date, count(id) as id, sum(total_price) as total_price, sum(total_payment) as total_payment")->groupBy("date(created_date)")->all();
-        $searchModel = new OrderSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'model' => $model,

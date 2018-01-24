@@ -3,19 +3,19 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\KpiSale;
-use app\models\KpiSaleSearch;
+use app\models\Color;
+use app\models\ColorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * KpiSaleController implements the CRUD actions for KpiSale model.
+ * ColorController implements the CRUD actions for Color model.
  */
-class KpiSaleController extends Controller
+class ColorController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -30,12 +30,12 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Lists all KpiSale models.
+     * Lists all Color models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new KpiSaleSearch();
+        $searchModel = new ColorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Displays a single KpiSale model.
+     * Displays a single Color model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,19 +58,16 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Creates a new KpiSale model.
+     * Creates a new Color model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new KpiSale();
+        $model = new Color();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            if($model->save()) {
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -79,7 +76,7 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Updates an existing KpiSale model.
+     * Updates an existing Color model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,10 +86,8 @@ class KpiSaleController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -101,7 +96,7 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Deletes an existing KpiSale model.
+     * Deletes an existing Color model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,15 +110,15 @@ class KpiSaleController extends Controller
     }
 
     /**
-     * Finds the KpiSale model based on its primary key value.
+     * Finds the Color model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return KpiSale the loaded model
+     * @return Color the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = KpiSale::findOne($id)) !== null) {
+        if (($model = Color::findOne($id)) !== null) {
             return $model;
         }
 

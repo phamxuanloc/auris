@@ -89,7 +89,10 @@ $(document).ready(function () {
     });
     $("#order-discount").change(function () {
         $("#order-total_price").val($("#order-price").val() * $("#order-quantiy").val() - $("#order-discount").val());
-    })
+    });
+    $("#kpisalesearch-sale_id").change(function () {
+        $("#kpi-search-form").submit();
+    });
 });
 
 function start(id) {

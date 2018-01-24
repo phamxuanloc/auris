@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\KpiSale;
 use app\models\Models;
 use app\models\Customer;
 use app\models\OrderCheckout;
@@ -80,6 +81,12 @@ class OrderController extends Controller
                 $model->customer_id = $customer->id;
             }
             if ($model->save()) {
+                $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                if($kpiSale){
+                    $kpiSale->estimate_revenue = $model->total_price;
+                    $kpiSale->total_customer = $kpiSale->total_customer + 1;
+                    $kpiSale->save();
+                }
                 return $this->redirect(['index']);
             }else{
                 print_r($model->getErrors());exit;
@@ -117,20 +124,28 @@ class OrderController extends Controller
                         OrderCheckout::deleteAll(['id' => $deletedIDs]);
                     }
 
+                    $totalPayment = 0;
+                    $model->total_payment = 0;
                     foreach ($modelsCheckouts as $modelCheckouts) {
                         $modelCheckouts->customer_id = $model->customer_id;
                         $modelCheckouts->order_id = $model->id;
-                        echo '<pre>';
-                        echo ($modelCheckouts->money);
-                        if(!$modelCheckouts->save()){
-                            print_r($modelCheckouts->getErrors());exit;
-                        }
-//                        if (!($flag = $modelCheckouts->save(false))) {
-//                            $transaction->rollBack();
-//                            break;
+                        $totalPayment += $modelCheckouts->money;
+
+//                        if(!$modelCheckouts->save()){
+//                            print_r($modelCheckouts->getErrors());exit;
 //                        }
+                        if (!($flag = $modelCheckouts->save(false))) {
+                            $transaction->rollBack();
+                            break;
+                        }
                     }
-                    exit;
+                    $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                    if($kpiSale){
+                        $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
+                        $kpiSale->save();
+                    }
+                    $model->total_payment = $model->total_payment + $totalPayment;
+                    $model->update();
                 }
                 if ($flag) {
                     $transaction->commit();

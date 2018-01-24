@@ -5,27 +5,26 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\KpiSale;
+use app\models\Color;
 
 /**
- * KpiSaleSearch represents the model behind the search form of `app\models\KpiSale`.
+ * ColorSearch represents the model behind the search form of `app\models\Color`.
  */
-class KpiSaleSearch extends KpiSale
+class ColorSearch extends Color
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'sale_id', 'total_customer', 'att_point'], 'integer'],
-            [['kpi', 'estimate_revenue', 'real_revenue'], 'number'],
-            [['created_date', 'month'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -42,8 +41,7 @@ class KpiSaleSearch extends KpiSale
      */
     public function search($params)
     {
-        $query = KpiSale::find();
-        $query->select("month, sum(kpi) as kpi, sum(estimate_revenue) as estimate_revenue, sum(real_revenue) as real_revenue, sum(total_customer) as total_customer, sum(att_point) as att_point");
+        $query = Color::find();
 
         // add conditions that should always apply here
 
@@ -62,18 +60,10 @@ class KpiSaleSearch extends KpiSale
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'kpi' => $this->kpi,
-            'sale_id' => $this->sale_id,
-            'created_date' => $this->created_date,
-            'month' => $this->month,
-            'estimate_revenue' => $this->estimate_revenue,
-            'real_revenue' => $this->real_revenue,
-            'total_customer' => $this->total_customer,
-            'att_point' => $this->att_point,
+            'status' => $this->status,
         ]);
 
-
-        $query->groupBy("date(month)");
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
