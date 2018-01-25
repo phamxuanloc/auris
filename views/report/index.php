@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <?php
-                $totalCustomer = 0;
+                $totalCustomer = 1;
                 $totalPrice = 0;
                 $totalPayment = 0;
                 foreach ($model as $history) {
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td style="font-size: 20px;font-weight: 600"><?= number_format($totalCustomer, '0', ',', '.')?></td>
                     <td style="color:red;font-size: 20px;font-weight: 600"><?= number_format($totalPrice, '0', ',', '.')?></td>
                     <td style="color: green;font-size: 20px;font-weight: 600"><?= number_format($totalPayment, '0', ',', '.')?></td>
-                    <td style="color:red;font-size: 20px;font-weight: 600"><?= number_format($totalPrice / $totalCustomer, '0', ',', '.')?></td>
+                    <td style="color:red;font-size: 20px;font-weight: 600"><?= number_format( $totalPrice / $totalCustomer, '0', ',', '.')?></td>
                     <td style="color: green;font-size: 20px;font-weight: 600"><?= number_format($totalPayment / $totalCustomer, '0', ',', '.')?></td>
                 </tr>
                 <?php foreach ($model as $history) { ?>
