@@ -1,94 +1,100 @@
 <?php
-use app\assets\LoginAsset;
+/*
+ * This file is part of the Dektrium project.
+ *
+ * (c) Dektrium project <http://github.com/dektrium>
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+use dektrium\user\widgets\Connect;
+use dektrium\user\models\LoginForm;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-Yii::$app->layout = false;
-LoginAsset::register($this);
+/**
+ * @var yii\web\View                   $this
+ * @var dektrium\user\models\LoginForm $model
+ * @var dektrium\user\Module           $module
+ */
+$this->title                   = Yii::t('user', 'Sign in');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php $this->beginPage() ?>
-<?php
-$this->title                   = 'Đăng nhập';
-$this->params['breadcrumbs'][] = $this->title; ?>
-<!DOCTYPE html>
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-<head>
-	<meta charset="<?= Yii::$app->charset ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?= Html::csrfMetaTags() ?>
-	<title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
-</head>
-<!-- END HEAD -->
 
-<body class=" login">
-<?php $this->beginBody() ?>
-<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-<div class="menu-toggler sidebar-toggler">
-</div>
-<!-- END SIDEBAR TOGGLER BUTTON -->
-<!-- BEGIN LOGO -->
-<div class="logo">
-	<a href="index.html">
-		<img src="<?=Url::base()?>/logo.png" alt=""/>
-	</a>
-</div>
-<!-- END LOGO -->
-<!-- BEGIN LOGIN -->
-<div class="content">
-	<!-- BEGIN LOGIN FORM -->
-	<?php $form = ActiveForm::begin([
-		'id'                     => 'login-form',
-//		'enableAjaxValidation'   => true,
-//		'enableClientValidation' => false,
-//		'validateOnBlur'         => false,
-//		'validateOnType'         => false,
-//		'validateOnChange'       => false,
-	]) ?>
-		<h3 class="form-title">Sign In</h3>
-	<div class="form-group">
-		<?= $form->field($model, 'login', ['labelOptions' => ['class' => 'control-label visible-ie8 visible-ie9']])->textInput([
-			'autofocus'   => 'autofocus',
-			'class'       => 'form-control form-control-solid placeholder-no-fix',
-			'placeholder' => 'Tên đăng nhập',
+<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+			</div>
+			<div class="panel-body">
+				<?php $form = ActiveForm::begin([
+					'id'                     => 'login-form',
+					'enableAjaxValidation'   => true,
+					'enableClientValidation' => false,
+					'validateOnBlur'         => false,
+					'validateOnType'         => false,
+					'validateOnChange'       => false,
+				]) ?>
+
+				<?php if($module->debug): ?>
+					<?= $form->field($model, 'login', [
+						'inputOptions' => [
+							'autofocus' => 'autofocus',
+							'class'     => 'form-control',
+							'tabindex'  => '1',
+						],
+					])->dropDownList(LoginForm::loginList()); ?>
+
+				<?php else: ?>
+
+					<?= $form->field($model, 'login', [
+						'inputOptions' => [
+							'autofocus' => 'autofocus',
+							'class'     => 'form-control',
+							'tabindex'  => '1',
+						],
+					]); ?>
+
+				<?php endif ?>
+
+				<?php if($module->debug): ?>
+					<div class="alert alert-warning">
+						<?= Yii::t('user', 'Password is not necessary because the module is in DEBUG mode.'); ?>
+					</div>
+				<?php else: ?>
+					<?= $form->field($model, 'password', [
+						'inputOptions' => [
+							'class'    => 'form-control',
+							'tabindex' => '2',
+						],
+					])->passwordInput()->label(Yii::t('user', 'Password') . ($module->enablePasswordRecovery ? ' (' . Html::a(Yii::t('user', 'Forgot password?'), ['/user/recovery/request'], ['tabindex' => '5']) . ')' : '')) ?>
+				<?php endif ?>
+
+				<?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
+
+				<?= Html::submitButton(Yii::t('user', 'Sign in'), [
+					'class'    => 'btn btn-primary btn-block',
+					'tabindex' => '4',
+				]) ?>
+
+				<?php ActiveForm::end(); ?>
+			</div>
+		</div>
+		<?php if($module->enableConfirmation): ?>
+			<p class="text-center">
+				<?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
+			</p>
+		<?php endif ?>
+		<?php if($module->enableRegistration): ?>
+			<p class="text-center">
+				<?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+			</p>
+		<?php endif ?>
+		<?= Connect::widget([
+			'baseAuthUrl' => ['/user/security/auth'],
 		]) ?>
 	</div>
-	<div class="form-group">
-		<?= $form->field($model, 'password', ['labelOptions' => ['class' => 'control-label visible-ie8 visible-ie9']])->passwordInput([
-			'class'       => 'form-control form-control-solid placeholder-no-fix',
-			'placeholder' => 'Mật khẩu',
-		]) ?>
-	</div>
-	<div class="form-group">
-		<?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '4']) ?>
-	</div>
-	<div class="form-actions">
-		<?= Html::submitButton(Yii::t('user', 'Đăng nhập'), [
-			'class'    => 'btn green uppercase',
-			'tabindex' => '3',
-		]) ?>
-	</div>
-	<?php ActiveForm::end(); ?>
-
-
-	<!-- END FORGOT PASSWORD FORM -->
-	<!-- BEGIN REGISTRATION FORM -->
-	<!-- END REGISTRATION FORM -->
 </div>
-<div class="copyright">
-	2016 © Myphamlinhnham.vn. Admin Dashboard.
-</div>
-<?php $this->endBody() ?>
-</body>
-<script>
-//	jQuery(document).ready(function() {
-//		Metronic.init(); // init metronic core components
-//		Layout.init(); // init current layout
-//		Login.init();
-//		Demo.init();
-//	});
-</script>
-</html>
-<?php $this->endPage() ?>

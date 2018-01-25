@@ -42,9 +42,6 @@ AppAsset::register($this);
 				<!-- / brand -->
 			</div>
 			<div flex class="hide-scroll">
-				<nav class="scroll nav-light">
-					<?= SidebarWidget::widget() ?>
-				</nav>
 			</div>
 		</div>
 	</div>
@@ -59,55 +56,16 @@ AppAsset::register($this);
 					<i class="material-icons">&#xe5d2;</i>
 				</a>
 				<!-- / -->
-
 				<!-- Page title - Bind to $state's title -->
 				<div class="navbar-item pull-left" id="pageTitle">
 					<!-- navbar collapse -->
-					<div class="collapse navbar-toggleable-sm" id="collapse">
-						<div><!-- search form -->
-							<form class="navbar-form form-inline pull-right pull-none-sm navbar-item v-m" role="search">
-								<div class="form-group">
-									<div class="input-group">
-										<i class="fa fa-search" aria-hidden="true"></i>
-										<input type="text" class="form-control form-control-sm p-x b-a rounded"
-										       placeholder="Tìm kiếm theo mã đơn hàng...">
-									</div>
-								</div>
-							</form>
-							<!-- / search form -->
-						</div>
-						<!-- / -->
-					</div>
 					<!-- / navbar collapse -->
 				</div>
 
 				<!-- navbar right -->
 				<ul class="nav navbar-nav pull-right">
 					<li class="nav-item dropdown">
-						<a class="nav-link clear" href data-toggle="dropdown">
-                            <span class="avatar w-32">
-                                <img src="<?= Yii::$app->request->baseUrl ?>/images/default-avatar.jpg" alt="...">
-                                <i class="on b-white bottom"></i>
-                            </span>
-						</a>
-						<div class="dropdown-menu pull-right dropdown-menu-scale">
-							<a class="dropdown-item" ui-sref="app.inbox.list">
-								<span>Inbox</span>
-								<span class="label warn m-l-xs">3</span>
-							</a>
-							<a class="dropdown-item" ui-sref="app.page.profile">
-								<span>Profile</span>
-							</a>
-							<a class="dropdown-item" ui-sref="app.page.setting">
-								<span>Settings</span>
-								<span class="label primary m-l-xs">3/9</span>
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" ui-sref="app.docs">
-								Need help?
-							</a>
-							<a class="dropdown-item" href="<?= Url::to(['/user/security/logout']) ?>" data-method="POST">Sign out</a>
-						</div>
+
 
 					</li>
 					<li class="nav-item hidden-md-up">
