@@ -15,7 +15,7 @@ class m180122_100949_update_kpi_sale extends Migration
 //        $this->addColumn('kpi_sale', 'year', $this->integer(4));
 //        $this->dropColumn('kpi_sale', 'month');
 //        $this->dropColumn('kpi_sale', 'year');
-        $this->addColumn('kpi_sale', 'month', $this->dateTime());
+//        $this->addColumn('kpi_sale', 'month', $this->dateTime());
     }
 
     /**
