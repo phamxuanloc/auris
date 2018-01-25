@@ -1,49 +1,42 @@
 <?php
-use yii\bootstrap\ActiveForm;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EkipSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title                   = 'Quản lý Ekips';
+
+$this->title = 'Ekips';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ekip-index">
+    <div class="help-block"></div>
 
-	<h1><?= Html::encode($this->title) ?></h1>
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <p>
+        <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Tạo Ekip', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-	<div class="ekip-form col-sm-12">
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => "{items}\n{pager}",
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'ekip_name',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    if ($data->status == 1) {
+                        return "Hoạt động";
+                    } else {
+                        return "Không hoạt động";
+                    }
+                }
+            ],
+            'created_date',
+            'end_date',
 
-		<?php $form = ActiveForm::begin(); ?>
-		<div class="col-sm-4">
-			<?= $form->field($model, 'ekip_name')->textInput(['maxlength' => true])->label(false) ?>
-		</div>
-		<div class="form-group col-sm-3">
-			<?= Html::submitButton('Tạo ekip', ['class' => 'btn btn-success']) ?>
-		</div>
-
-		<?php ActiveForm::end(); ?>
-
-	</div>
-
-	<?= GridView::widget([
-		'dataProvider' => $dataProvider,
-		//		'filterModel'  => $searchModel,
-		'columns'      => [
-			[
-				'class'  => 'yii\grid\SerialColumn',
-				'header' => 'ID',
-			],
-			'ekip_name',
-			'created_date',
-			//'update_date',
-			//'update_user',
-			//'end_date',
-			['class'    => 'yii\grid\ActionColumn',
-			 'template' => '{delete}',
-			],
-		],
-	]); ?>
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+        ],
+    ]); ?>
 </div>

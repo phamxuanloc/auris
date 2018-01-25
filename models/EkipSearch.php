@@ -68,7 +68,7 @@ class EkipSearch extends Ekip {
 		// grid filtering conditions
 		$query->andFilterWhere([
 			'id'           => $this->id,
-			'status'       => $this::STATUS_DELETE,
+//			'status'       => $this::STATUS_DELETE,
 			'created_date' => $this->created_date,
 			'created_user' => $this->created_user,
 			'update_date'  => $this->update_date,

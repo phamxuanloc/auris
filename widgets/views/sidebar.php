@@ -16,6 +16,24 @@ echo Menu::widget([
         [
             'label' => '<span class="nav-icon">
                       <i class="material-icons">
+                        <img src="' . Yii::$app->request->baseUrl . '/images/message.png"/>
+                      </i>
+                    </span>',
+            'url' => '#',
+            'items' => [
+                [
+                    'label' => 'DirectSale',
+                    'url' => ['direct-sale/index']
+                ],
+                [
+                    'label' => 'Ekip',
+                    'url' => ['ekip/index']
+                ],
+            ]
+        ],
+        [
+            'label' => '<span class="nav-icon">
+                      <i class="material-icons">
                         <img src="' . Yii::$app->request->baseUrl . '/images/ic-home.png"/>
                       </i>
                     </span>',
