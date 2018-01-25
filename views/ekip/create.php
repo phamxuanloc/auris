@@ -6,16 +6,16 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ekip */
 
-$this->title = 'Create Ekip';
+$this->title = 'Thêm mới Ekip';
 $this->params['breadcrumbs'][] = ['label' => 'Ekips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ekip-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="help-block"></div>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'title' => $this->title,
     ]) ?>
 
 </div>

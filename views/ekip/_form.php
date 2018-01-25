@@ -8,28 +8,27 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="ekip-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'ekip_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_date')->textInput() ?>
-
-    <?= $form->field($model, 'created_user')->textInput() ?>
-
-    <?= $form->field($model, 'update_date')->textInput() ?>
-
-    <?= $form->field($model, 'update_user')->textInput() ?>
-
-    <?= $form->field($model, 'end_date')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+<div class="box">
+    <div class="box-header b-b">
+        <h3><?= $title ?></h3>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <div class="box-body">
 
+        <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'ekip_name')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'status')->dropDownList(['1' => 'Hoạt động', '0' => 'Không hoạt động']) ?>
+
+        <?= $form->field($model, 'created_date')->textInput() ?>
+
+        <?= $form->field($model, 'end_date')->textInput() ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('<i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu', ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>

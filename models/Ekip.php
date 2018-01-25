@@ -66,12 +66,12 @@ class Ekip extends Model {
 		return [
 			'id'           => 'ID',
 			'ekip_name'    => 'Tên ekip',
-			'status'       => 'Status',
+			'status'       => 'Trạng thái',
 			'created_date' => 'Ngày tạo',
-			'created_user' => 'Created User',
+			'created_user' => 'Bắt đầu',
 			'update_date'  => 'Update Date',
 			'update_user'  => 'Update User',
-			'end_date'     => 'Ngày hủy',
+			'end_date'     => 'Kết thúc',
 		];
 	}
 }
