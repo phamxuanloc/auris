@@ -77,10 +77,13 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
             'modelMap' => [
-                'User' => 'app\models\User',
+//                'User' => 'app\models\User',
                 //IMPORTANT & REQUIRED, change to your User model if overridden
                 'LoginForm' => 'navatech\role\models\LoginForm',
                 //IMPORTANT & REQUIRED
+            ],
+            'controllerMap' => [
+	            'admin' => 'app\controllers\AdminController',
             ],
         ],
         'role' => [

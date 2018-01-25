@@ -60,6 +60,28 @@ echo Menu::widget([
         [
             'label' => '<span class="nav-icon">
                       <i class="material-icons">
+                           <img src="' . Yii::$app->request->baseUrl . '/images/ic-plus.png"/>
+                      </i>
+                    </span>',
+            'url' => '#',
+            'items' => [
+                [
+                    'label' => 'Quản lý ekip',
+                    'url' => ['ekip/index']
+                ],
+                [
+                    'label' => 'Quản lý nhân viên',
+                    'url' => ['user/admin']
+                ],
+//                [
+//                    'label' => 'Quản lý quyền hạn',
+//                    'url' => ['color/index']
+//                ],
+            ]
+        ],
+        [
+            'label' => '<span class="nav-icon">
+                      <i class="material-icons">
                            <img src="' . Yii::$app->request->baseUrl . '/images/ic-coppy.png"/>
                       </i>
                     </span>',

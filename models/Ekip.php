@@ -65,13 +65,13 @@ class Ekip extends Model {
 	public function attributeLabels() {
 		return [
 			'id'           => 'ID',
-			'ekip_name'    => 'Ekip Name',
+			'ekip_name'    => 'Tên ekip',
 			'status'       => 'Status',
-			'created_date' => 'Created Date',
+			'created_date' => 'Ngày tạo',
 			'created_user' => 'Created User',
 			'update_date'  => 'Update Date',
 			'update_user'  => 'Update User',
-			'end_date'     => 'End Date',
+			'end_date'     => 'Ngày hủy',
 		];
 	}
 }
