@@ -36,7 +36,6 @@ class EkipController extends Controller {
 	public function actionIndex() {
 		$searchModel  = new EkipSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
 		return $this->render('index', [
 			'searchModel'  => $searchModel,
 			'dataProvider' => $dataProvider,
@@ -66,8 +65,7 @@ class EkipController extends Controller {
 		$model = new Ekip();
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect([
-				'view',
-				'id' => $model->id,
+				'index',
 			]);
 		}
 		return $this->render('create', [
