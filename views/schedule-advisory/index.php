@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'customer_code',
+//            'customer_code',
             'full_name',
             [
                 'attribute' => 'sex',
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'note',
             ],
 
-//            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],
     ]); ?>
 </div>

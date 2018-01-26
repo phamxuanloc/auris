@@ -41,33 +41,33 @@ $this->registerJs($js);
                     ],
                 ]) ?>
 
-                <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-                <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true, 'readonly' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip()) ?>
+                <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale()) ?>
+                <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale(), ['prompt' => 'Vui Lòng Chọn']) ?>
             </div>
         </div>
 
         <div class="help-block"></div>
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($model, 'service_id')->dropDownList($model->getListService()) ?>
+                <?= $form->field($model, 'service_id')->dropDownList($model->getListService(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct()) ?>
+                <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'color_id')->dropDownList($model->getListColor()) ?>
+                <?= $form->field($model, 'color_id')->dropDownList($model->getListColor(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'price')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
                 <?= $form->field($model, 'quantiy')->textInput() ?>
 
                 <?= $form->field($model, 'discount')->textInput() ?>
 
-                <?= $form->field($model, 'total_price')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'total_price')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
                 <?php DynamicFormWidget::begin([
                     'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]

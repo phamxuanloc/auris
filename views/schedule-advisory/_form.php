@@ -26,22 +26,22 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                 <input id="url" value="<?= $url ?>" type="hidden">
                 <input id="scheduleadvisory-customer_id" name="ScheduleAdvisory[customer_id]" type="hidden">
 
-                <?= $form->field($model, 'customer_code')->widget(\yii\jui\AutoComplete::classname(), [
-                    'options' => ['class' => 'form-control'],
-                    'clientOptions' => [
-                        'source' => $model->getListCustomer(),
-                    ],
-                ]) ?>
+<!--                --><?php //= $form->field($model, 'customer_code')->widget(\yii\jui\AutoComplete::classname(), [
+//                    'options' => ['class' => 'form-control'],
+//                    'clientOptions' => [
+//                        'source' => $model->getListCustomer(),
+//                    ],
+//                ]) ?>
 
                 <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'sex')->dropDownList(['1' => 'Nam', '2' => 'Nữ']) ?>
+                <?= $form->field($model, 'sex')->dropDownList(['2' => 'Nữ', '1' => 'Nam']) ?>
 
                 <?= $form->field($model, 'birthday')->widget(\kartik\date\DatePicker::className(), [
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'yyyy/mm/dd'
+                        'format' => 'dd/mm/yyyy'
                     ]
                 ]) ?>
 
@@ -53,7 +53,7 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'yyyy/mm/dd H:i:s'
+                        'format' => 'dd/mm/yyyy H:i:s'
                     ]
                 ]) ?>
 
