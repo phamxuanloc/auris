@@ -75,7 +75,7 @@ class OrderController extends Controller
         $model = new Order;
         $modelCheckouts = [new OrderCheckout];
         if ($model->load(Yii::$app->request->post())) {
-//            print_r($this->genOrderCode());exit;
+            print_r($this->genOrderCode());exit;
             $model->order_code = $this->genOrderCode();
             $customer = Customer::find()->where("customer_code = '$model->customer_code'")->one();
             if ($customer) {
