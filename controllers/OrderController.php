@@ -81,11 +81,13 @@ class OrderController extends Controller
                 $model->customer_id = $customer->id;
             }
             if ($model->save()) {
-                $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-                if($kpiSale){
-                    $kpiSale->estimate_revenue = $model->total_price;
-                    $kpiSale->total_customer = $kpiSale->total_customer + 1;
-                    $kpiSale->save();
+                if($model->sale_id) {
+                    $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                    if ($kpiSale) {
+                        $kpiSale->estimate_revenue = $model->total_price;
+                        $kpiSale->total_customer = $kpiSale->total_customer + 1;
+                        $kpiSale->save();
+                    }
                 }
                 return $this->redirect(['index']);
             }else{
@@ -139,10 +141,12 @@ class OrderController extends Controller
                             break;
                         }
                     }
-                    $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-                    if($kpiSale){
-                        $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
-                        $kpiSale->save();
+                    if($model->sale_id) {
+                        $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                        if ($kpiSale) {
+                            $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
+                            $kpiSale->save();
+                        }
                     }
                     $model->total_payment = $model->total_payment + $totalPayment;
                     $model->update();
