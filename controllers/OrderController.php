@@ -75,6 +75,7 @@ class OrderController extends Controller
         $model = new Order;
         $modelCheckouts = [new OrderCheckout];
         if ($model->load(Yii::$app->request->post())) {
+//            print_r($this->genOrderCode());exit;
             $model->order_code = $this->genOrderCode();
             $customer = Customer::find()->where("customer_code = '$model->customer_code'")->one();
             if ($customer) {
@@ -168,8 +169,9 @@ class OrderController extends Controller
 
     public function genOrderCode()
     {
-        $order = Order::find()->select('max(order_code) as order_code')->one();
+        $order = Order::find()->orderBy('id DESC')->one();
         if ($order) {
+//            echo $order->order_code;exit;
             $orderCode = substr($order->order_code, 6, 7);
             $value = $orderCode;
             $length = 0;
@@ -178,7 +180,6 @@ class OrderController extends Controller
                 $length++;
 //                echo $length;
             }
-//            exit;
             if (($length) == 1) {
                 $a = $orderCode + 1;
                 return "AU1-HD000000" . $a;
