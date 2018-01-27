@@ -29,13 +29,13 @@ class VoteController extends Controller {
 					'delete' => ['POST'],
 				],
 			],
-			//			'role'  => [
-			//				'class'   => RoleFilter::className(),
-			//				'name'    => 'Trang chủ',
-			//				'actions' => [
-			//					'index' => 'Trang bầu chọn',
-			//				],
-			//			],
+			'role' => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Trang chủ',
+				'actions' => [
+					'index' => 'Trang bầu chọn',
+				],
+			],
 		];
 	}
 

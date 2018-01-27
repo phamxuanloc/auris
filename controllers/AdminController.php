@@ -6,7 +6,6 @@
  * @date    11/29/2016
  * @time    11:13 PM
  */
-
 namespace app\controllers;
 
 use app\components\Model;

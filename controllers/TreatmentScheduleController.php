@@ -16,37 +16,34 @@ use yii\filters\VerbFilter;
 /**
  * TreatmentScheduleController implements the CRUD actions for TreatmentSchedule model.
  */
-class TreatmentScheduleController extends Controller
-{
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+class TreatmentScheduleController extends Controller {
 
-    /**
-     * Lists all TreatmentSchedule models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new TreatmentHistorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors() {
+		return [
+			'verbs' => [
+				'class'   => VerbFilter::className(),
+				'actions' => [
+					'delete' => ['POST'],
+				],
+			],
+		];
+	}
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+	/**
+	 * Lists all TreatmentSchedule models.
+	 * @return mixed
+	 */
+	public function actionIndex() {
+		$searchModel  = new TreatmentHistorySearch();
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		return $this->render('index', [
+			'searchModel'  => $searchModel,
+			'dataProvider' => $dataProvider,
+		]);
+	}
 
 	public function actionVote() {
 		$this->layout = 'vote';
@@ -67,101 +64,96 @@ class TreatmentScheduleController extends Controller
 		]);
 	}
 
-    /**
-     * Creates a new TreatmentSchedule model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new TreatmentHistory();
+	/**
+	 * Creates a new TreatmentSchedule model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * @return mixed
+	 */
+	public function actionCreate() {
+		$model = new TreatmentHistory();
+		if($model->load(Yii::$app->request->post())) {
+			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
+			if($order) {
+				$model->order_code = $order->order_code;
+			}
+			if($model->save()) {
+				return $this->redirect(['index']);
+			} else {
+				print_r($model->getErrors());
+				exit;
+			}
+		}
+		return $this->render('create', [
+			'model' => $model,
+		]);
+	}
 
-        if ($model->load(Yii::$app->request->post())) {
-            $order = Order::find()->where("order_code like '%$model->order_code%'")->one();
-            if($order){
-                $model->order_code = $order->order_code;
-            }
-            if($model->save()) {
-                return $this->redirect(['index']);
-            }else{
-                print_r($model->getErrors());exit;
-            }
-        }
+	public function actionStart() {
+		$id               = $_POST['id'];
+		$treatmentHistory = TreatmentHistory::findOne($id);
+		if($treatmentHistory) {
+			$treatmentHistory->real_start = date('Y-m-d H:i:s');
+			$treatmentHistory->save();
+			return true;
+		}
+	}
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+	public function actionEnd() {
+		$id               = $_POST['id'];
+		$treatmentHistory = TreatmentHistory::findOne($id);
+		if($treatmentHistory) {
+			$treatmentHistory->real_end = date('Y-m-d H:i:s');
+			$treatmentHistory->save();
+			return true;
+		}
+	}
 
-    public function actionStart()
-    {
-        $id = $_POST['id'];
-        $treatmentHistory = TreatmentHistory::findOne($id);
-        if ($treatmentHistory) {
-            $treatmentHistory->real_start = date('Y-m-d H:i:s');
-            $treatmentHistory->save();
-            return true;
-        }
-    }
+	/**
+	 * Updates an existing TreatmentSchedule model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	public function actionUpdate($id) {
+		$model = $this->findModel($id);
+		if($model->load(Yii::$app->request->post()) && $model->save()) {
+			return $this->redirect(['index']);
+		}
+		return $this->render('update', [
+			'model' => $model,
+		]);
+	}
 
-    public function actionEnd()
-    {
-        $id = $_POST['id'];
-        $treatmentHistory = TreatmentHistory::findOne($id);
-        if ($treatmentHistory) {
-            $treatmentHistory->real_end = date('Y-m-d H:i:s');
-            $treatmentHistory->save();
-            return true;
-        }
-    }
+	/**
+	 * Deletes an existing TreatmentSchedule model.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @param integer $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	public function actionDelete($id) {
+		$this->findModel($id)->delete();
+		return $this->redirect(['index']);
+	}
 
-    /**
-     * Updates an existing TreatmentSchedule model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing TreatmentSchedule model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the TreatmentSchedule model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return TreatmentSchedule the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = TreatmentSchedule::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
+	/**
+	 * Finds the TreatmentSchedule model based on its primary key value.
+	 * If the model is not found, a 404 HTTP exception will be thrown.
+	 *
+	 * @param integer $id
+	 *
+	 * @return TreatmentSchedule the loaded model
+	 * @throws NotFoundHttpException if the model cannot be found
+	 */
+	protected function findModel($id) {
+		if(($model = TreatmentSchedule::findOne($id)) !== null) {
+			return $model;
+		}
+		throw new NotFoundHttpException('The requested page does not exist.');
+	}
 }
