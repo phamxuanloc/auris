@@ -48,7 +48,8 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
                     'pluginOptions' => [
                         'autoclose'=>true,
                         'format' => 'hh:ii dd/mm/yyyy',
-                        'endDate' => "0d"
+                        'minView' => 1,
+                        'startDate' => date('Y-m-d')
                     ]
                 ]) ?>
 
