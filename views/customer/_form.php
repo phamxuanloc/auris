@@ -33,11 +33,11 @@ use yii\bootstrap\ActiveForm;
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
                         'autoclose'=>true,
-                        'format' => 'yyyy/mm/dd'
+                        'format' => 'dd/mm/yyyy'
                     ]
                 ]) ?>
 
-                <?= $form->field($model, 'sex')->dropDownList(['1' => 'Nam', '2' => "Nữ"]) ?>
+                <?= $form->field($model, 'sex')->dropDownList(['2' => "Nữ", '1' => 'Nam']) ?>
 
                 <?= $form->field($model, 'address')->textInput() ?>
 

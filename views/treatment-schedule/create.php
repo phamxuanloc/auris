@@ -34,11 +34,11 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
                     ],
                 ]) ?>
 
-                <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-                <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-                <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
                 <?= $form->field($model, 'ap_date')->widget(DateTimePicker::className(),[
                     'name' => 'ap_date',
@@ -47,7 +47,8 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
                     'size' => 'lg',
                     'pluginOptions' => [
                         'autoclose'=>true,
-                        'format' => 'yyyy/mm/dd hh:ii'
+                        'format' => 'hh:ii dd/mm/yyyy',
+                        'endDate' => "0d"
                     ]
                 ]) ?>
 

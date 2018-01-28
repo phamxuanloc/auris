@@ -61,7 +61,7 @@ $this->registerJs($js);
 
                 <?= $form->field($model, 'color_id')->dropDownList($model->getListColor(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'price')->textInput(['maxlength' => true, 'readonly' => true]) ?>
+                <?= $form->field($model, 'price', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model->price)]])->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
                 <?= $form->field($model, 'quantiy')->textInput() ?>
 

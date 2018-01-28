@@ -25,8 +25,9 @@ $this->registerJs($js);
     <div class="help-block"></div>
 
     <div class="box">
-        <div class="box-header b-b">
+        <div class="box-header b-b" style="display: flex;">
             <h3><?= $this->title ?></h3>
+            <a class="btn btn-primary" style="position: absolute;right: 20px;top: 7px;" href="<?= Yii::$app->urlManager->createUrl(['treatment-schedule/create', 'order_id' => $model->id])?>">Tạo lịch điều trị</a>
         </div>
 
         <div class="box-body">

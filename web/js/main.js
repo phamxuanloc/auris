@@ -12,7 +12,7 @@ $(document).ready(function () {
                 data: {value: value},
                 dataType: "json",
                 success: function (resultData) {
-                    if(resultData.status == 1) {
+                    if (resultData.status == 1) {
                         console.log(resultData.data.customer_code);
                         $('#treatmenthistory-order_id').val(resultData.data.order_id);
                         $('#treatmenthistory-customer_id').val(resultData.data.customer_id);
@@ -36,8 +36,8 @@ $(document).ready(function () {
                 data: {value: value},
                 dataType: "json",
                 success: function (resultData) {
-                    if(resultData.status == 1) {
-                        console.log(resultData.data);
+                    if (resultData.status == 1) {
+                        // console.log(resultData.data);
                         $('#order-customer_id').val(resultData.data.order_id);
                         $('#order-customer_name').val(resultData.data.customer_name);
                         $('#order-customer_phone').val(resultData.data.customer_phone);
@@ -58,8 +58,8 @@ $(document).ready(function () {
                 data: {value: value},
                 dataType: "json",
                 success: function (resultData) {
-                    if(resultData.status == 1) {
-                        console.log(resultData.data);
+                    if (resultData.status == 1) {
+                        // console.log(resultData.data);
                         // $('#order-customer_id').val(resultData.data.order_id);
                         $('#scheduleadvisory-full_name').val(resultData.data.customer_name);
                         $('#scheduleadvisory-sex').val(resultData.data.customer_sex);
@@ -78,22 +78,33 @@ $(document).ready(function () {
             data: {value: $("#order-product_id").val()},
             dataType: "json",
             success: function (resultData) {
-                if(resultData.status == 1) {
-                    $('#order-price').val(resultData.data.price);
+                if (resultData.status == 1) {
+                    $('#order-price').val(addCommas(resultData.data.price));
                 }
             }
         });
     });
     $("#order-quantiy").change(function () {
-        $("#order-total_price").val($("#order-price").val() * $("#order-quantiy").val() - $("#order-discount").val());
+        var order_price = $('#order-price').val().replace('.', '');
+        var order_quantiy = $('#order-quantiy').val().replace('.', '');
+        var order_discount = $('#order-discount').val().replace('.', '');
+        $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#order-discount").change(function () {
-        $("#order-total_price").val($("#order-price").val() * $("#order-quantiy").val() - $("#order-discount").val());
+        var order_price = $('#order-price').val().replace('.', '');
+        var order_quantiy = $('#order-quantiy').val().replace('.', '');
+        var order_discount = $('#order-discount').val().replace('.', '');
+        $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#kpisalesearch-sale_id").change(function () {
         $("#kpi-search-form").submit();
     });
 });
+function addCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(".");
+}
 
 function start(id) {
     var url = "index.php?r=treatment-schedule/start";
@@ -103,7 +114,7 @@ function start(id) {
         data: {id: id},
         dataType: "json",
         success: function (data) {
-            $.pjax.reload({container:'#w0'});
+            $.pjax.reload({container: '#w0'});
         }
     });
 }
@@ -116,7 +127,7 @@ function end(id) {
         data: {id: id},
         dataType: "json",
         success: function (data) {
-            $.pjax.reload({container:'#refresh-grid'});
+            $.pjax.reload({container: '#refresh-grid'});
         }
     });
 }

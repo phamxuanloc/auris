@@ -42,6 +42,16 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 		return 'treatment_history';
 	}
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->ap_date = date('Y-m-d H:i', strtotime($this->ap_date));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 	/**
 	 * @inheritdoc
 	 */

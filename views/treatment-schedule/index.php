@@ -28,8 +28,20 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'order_code',
-            'customer_code',
+            [
+                'attribute' => 'order_code',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id]));
+                }
+            ],
+            [
+                'attribute' => 'customer_code',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->customer_code, Yii::$app->urlManager->createUrl(['customer/update', 'id' => $model->id]));
+                }
+            ],
             'customer_name',
             'customer_phone',
             [

@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
-            'customer_code',
+            [
+                'attribute' => 'customer_code',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->customer_code, Yii::$app->urlManager->createUrl(['customer/update', 'id' => $model->id]));
+                }
+            ],
             'name',
             [
                 'attribute' => 'sex',
@@ -47,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'header' => 'Đã thanh toán',
                 'format' => ['decimal', '0'],
-                'value' => function($model){
+                'value' => function ($model) {
                     return $model->getPayment($model->id);
                 }
             ],

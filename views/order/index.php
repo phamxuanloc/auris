@@ -26,12 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
-            'order_code',
+            [
+                'attribute' => 'order_code',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id]));
+                }
+            ],
             [
                 'attribute' => 'customer_code',
-                'contentOptions' => [
-                    'style' => 'width:100px'
-                ]
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->customer_code, Yii::$app->urlManager->createUrl(['customer/update', 'id' => $model->id]));
+                }
             ],
             [
                 'attribute' => 'customer_name',
@@ -93,10 +100,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['decimal', 0],
             ],
             [
-                'attribute' => 'note',
+                'attribute' => 'total_payment',
+                'header' => 'Đã thanh toán',
                 'contentOptions' => [
-                    'style' => 'width:280px'
-                ]
+                    'style' => 'width:180px'
+                ],
+                'value' => function($data){
+                    if($data->total_payment < $data->total_price){
+                        return "<span style='color: red;'>".number_format($data->total_payment, '0', ',', '.')."</span>";
+                    }else{
+                        return "<span style='color: #0E7E12;'>".number_format($data->total_payment, '0', ',', '.')."</span>";
+                    }
+                },
+                'format' => 'raw',
             ],
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],

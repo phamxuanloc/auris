@@ -62,6 +62,23 @@ class Customer extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->birthday = date('Y-m-d', strtotime($this->birthday));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function afterFind()
+    {
+        $this->birthday = date('d/m/Y', strtotime($this->birthday));
+
+        parent::afterFind();
+    }
+
     public function upload()
     {
         if ($this->validate()) {

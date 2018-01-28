@@ -38,13 +38,26 @@ class Order extends Model
         return 'order';
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->price = str_replace( '.', '', $this->price);
+            $this->quantiy = str_replace( '.', '', $this->quantiy);
+            $this->total_price = str_replace( '.', '', $this->total_price);
+            $this->discount = str_replace( '.', '', $this->discount);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['customer_code', 'customer_name', 'service_id', 'product_id', 'price', 'quantiy', 'total_price'], 'required'],
+            [['customer_code', 'customer_name', 'service_id', 'product_id'], 'required'],
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
             [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
