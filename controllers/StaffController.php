@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\StaffSearch;
+use app\models\User;
+use dektrium\user\helpers\Password;
 use Yii;
 use app\models\DirectSale;
-use app\models\DirectSaleSearch;
+use yii\bootstrap\ActiveForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * DirectSaleController implements the CRUD actions for DirectSale model.
  */
-class DirectSaleController extends Controller {
+class StaffController extends Controller {
 
 	/**
 	 * {@inheritdoc}
@@ -33,7 +36,7 @@ class DirectSaleController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$searchModel  = new DirectSaleSearch();
+		$searchModel  = new StaffSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		return $this->render('index', [
 			'searchModel'  => $searchModel,
@@ -61,12 +64,23 @@ class DirectSaleController extends Controller {
 	 * @return mixed
 	 */
 	public function actionCreate() {
-		$model          = new DirectSale();
-		$model->role_id = 2;
-		if($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect([
-				'index',
-			]);
+		$model           = new User();
+		$model->scenario = 'create_staff';
+		if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+			Yii::$app->response->format = 'json';
+			return ActiveForm::validate($model);
+		}
+		if($model->load(Yii::$app->request->post())) {
+			$model->confirmed_at = time();
+			if($model->save()) {
+				return $this->redirect([
+					'index',
+				]);
+			} else {
+				echo '<pre>';
+				print_r($model->errors);
+				die;
+			}
 		}
 		return $this->render('create', [
 			'model' => $model,
@@ -83,11 +97,19 @@ class DirectSaleController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	public function actionUpdate($id) {
-		$model = $this->findModel($id);
-		if($model->load(Yii::$app->request->post()) && $model->save()) {
+		$model           = $this->findModel($id);
+		$model->scenario = 'update_staff';
+		if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+			Yii::$app->response->format = 'json';
+			return ActiveForm::validate($model);
+		}
+		$oldPass              = $model->password_hash;
+		$model->password_hash = null;
+		if($model->load(Yii::$app->request->post())) {
+			$model->password_hash != null ? $model->password_hash = Password::hash($model->password_hash) : $model->password_hash = $oldPass;
+			$model->save();
 			return $this->redirect([
-				'view',
-				'id' => $model->id,
+				'index',
 			]);
 		}
 		return $this->render('update', [
@@ -115,11 +137,11 @@ class DirectSaleController extends Controller {
 	 *
 	 * @param integer $id
 	 *
-	 * @return DirectSale the loaded model
+	 * @return User the loaded model
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id) {
-		if(($model = DirectSale::findOne($id)) !== null) {
+		if(($model = User::findOne($id)) !== null) {
 			return $model;
 		}
 		throw new NotFoundHttpException('The requested page does not exist.');

@@ -10,7 +10,7 @@ use app\models\DirectSale;
 /**
  * DirectSaleSearch represents the model behind the search form of `app\models\DirectSale`.
  */
-class DirectSaleSearch extends DirectSale {
+class StaffSearch extends User {
 
 	/**
 	 * {@inheritdoc}
@@ -60,7 +60,7 @@ class DirectSaleSearch extends DirectSale {
 	 * @return ActiveDataProvider
 	 */
 	public function search($params) {
-		$query = DirectSale::find();
+		$query = User::find();
 		// add conditions that should always apply here
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
@@ -79,7 +79,7 @@ class DirectSaleSearch extends DirectSale {
 			'created_at'    => $this->created_at,
 			'updated_at'    => $this->updated_at,
 			'flags'         => $this->flags,
-			'role_id'       => 2,
+			'role_id'       => $this->role_id,
 			'last_login_at' => $this->last_login_at,
 		]);
 		$query->andFilterWhere([
