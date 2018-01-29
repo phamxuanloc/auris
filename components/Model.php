@@ -29,6 +29,8 @@ class Model extends ActiveRecord {
 
 	const ROLE_ADMIN    = 1;
 
+	const ROLE          = [];
+
 	public function getListEkip() {
 		return ArrayHelper::map(Ekip::find()->all(), 'id', 'ekip_name');
 	}
