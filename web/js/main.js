@@ -84,16 +84,17 @@ $(document).ready(function () {
             }
         });
     });
+
     $("#order-quantiy").change(function () {
-        var order_price = $('#order-price').val().replace('.', '');
-        var order_quantiy = $('#order-quantiy').val().replace('.', '');
-        var order_discount = $('#order-discount').val().replace('.', '');
+        var order_price = $('#order-price').val().replace(/\./g, '');
+        var order_quantiy = $('#order-quantiy').val().replace(/\./g, '');
+        var order_discount = $('#order-discount').val().replace(/\./g, '');
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#order-discount").change(function () {
-        var order_price = $('#order-price').val().replace('.', '');
-        var order_quantiy = $('#order-quantiy').val().replace('.', '');
-        var order_discount = $('#order-discount').val().replace('.', '');
+        var order_price = $('#order-price').val().replace(/./g, '');
+        var order_quantiy = $('#order-quantiy').val().replace(/./g, '');
+        var order_discount = $('#order-discount').val().replace(/./g, '');
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#kpisalesearch-sale_id").change(function () {
