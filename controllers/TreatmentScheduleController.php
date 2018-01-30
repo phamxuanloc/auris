@@ -6,6 +6,7 @@ use app\models\Customer;
 use app\models\Order;
 use app\models\TreatmentHistory;
 use app\models\TreatmentHistorySearch;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\TreatmentSchedule;
 use app\models\TreatmentScheduleSeacrh;
@@ -29,6 +30,18 @@ class TreatmentScheduleController extends Controller {
 					'delete' => ['POST'],
 				],
 			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý lịch điều trị',
+				'actions' => [
+					'index'  => 'Danh sách lịch điều trị',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật lịch điều trị',
+					'start'  => 'Bắt đầu điều trị',
+					'end'    => 'Kết thúc điều trị',
+					'delete' => 'Xóa lịch điều trị',
+				],
+			],
 		];
 	}
 
@@ -43,11 +56,6 @@ class TreatmentScheduleController extends Controller {
 			'searchModel'  => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
-	}
-
-	public function actionVote() {
-		$this->layout = 'vote';
-		return $this->render('vote');
 	}
 
 	/**
@@ -71,14 +79,13 @@ class TreatmentScheduleController extends Controller {
 	 */
 	public function actionCreate($order_id = null) {
 		$model = new TreatmentHistory();
-        if($order_id != null){
-            $order = Order::findOne($order_id);
-            $model->order_code = $order->order_code;
-            $model->customer_code = $order->customer_code;
-            $model->customer_name = $order->customer_name;
-            $model->customer_phone = $order->customer_phone;
-        }
-
+		if($order_id != null) {
+			$order                 = Order::findOne($order_id);
+			$model->order_code     = $order->order_code;
+			$model->customer_code  = $order->customer_code;
+			$model->customer_name  = $order->customer_name;
+			$model->customer_phone = $order->customer_phone;
+		}
 		if($model->load(Yii::$app->request->post())) {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {

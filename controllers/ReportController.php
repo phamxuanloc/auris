@@ -32,7 +32,7 @@ class ReportController extends Controller {
 					'class'   => RoleFilter::className(),
 					'name'    => 'Báo cáo',
 					'actions' => [
-						'index' => 'Trang chi tiết báo c',
+						'index' => 'Trang chi tiết báo chi tiết',
 					],
 				],
 			],
