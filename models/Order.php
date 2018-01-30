@@ -41,10 +41,10 @@ class Order extends Model
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->price = str_replace( '.', '', $this->price);
-            $this->quantiy = str_replace( '.', '', $this->quantiy);
-            $this->total_price = str_replace( '.', '', $this->total_price);
-            $this->discount = str_replace( '.', '', $this->discount);
+            $this->price = preg_replace( '/\./', '', $_POST['Order']['price']);
+            $this->quantiy = preg_replace( '/\./', '', $_POST['Order']['quantiy']);
+            $this->total_price = preg_replace( '/\./', '', $_POST['Order']['total_price']);
+            $this->discount = preg_replace( '/\./', '', $_POST['Order']['discount']);
             return true;
         } else {
             return false;
@@ -59,7 +59,7 @@ class Order extends Model
         return [
             [['customer_code', 'customer_name', 'service_id', 'product_id'], 'required'],
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
-            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
+//            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
             [['created_date'], 'safe'],
             [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
