@@ -71,7 +71,7 @@ class CustomerController extends Controller {
 
 	public function genCustomerCode() {
 		$customer = Customer::find()->select('max(customer_code) as customer_code')->one();
-		if($customer) {
+		if(!empty($customer->customer_code)) {
 			$customerCode = substr($customer->customer_code, 4, 5);
 			$value        = $customerCode;
 			$length       = 0;
@@ -92,7 +92,9 @@ class CustomerController extends Controller {
 				$a = "AU1-" . $customerCode + 1;
 				return $a;
 			}
-		}
+		}else{
+		    return "AU1-00001";
+        }
 		//        print_r($orderCode);exit;
 	}
 
