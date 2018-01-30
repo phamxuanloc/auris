@@ -83,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		$('.vote-icon').show();
 	}
 	$('.embarrassed').click(function() {
+		sse.close();
 		var point;
 		point = parseInt($(this).attr('point'));
 		$.ajax({
@@ -101,6 +102,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			success : function(data) {
 				if(data === 0) {
 					window.location.href = "<?=Url::to(['thanks'])?>"
+				} else {
+					window.location.href = "<?=Url::to(['index'])?>"
 				}
 			}
 		});

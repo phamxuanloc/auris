@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -40,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
 	var sse = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
+		sse.close();
 		setTimeout(function() {
 			window.location.href = "<?=Url::to(['index'])?>";
 		}, 3000);

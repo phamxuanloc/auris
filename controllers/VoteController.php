@@ -59,6 +59,9 @@ class VoteController extends Controller {
 			if($history) {
 				if($_POST['type'] == TreatmentHistory::ATT_POINT) {
 					$history->updateAttributes(['att_point' => $_POST['point']]);
+					if($history->is_finish == 0) {
+						$check = 0;
+					}
 				} elseif($_POST['type'] == TreatmentHistory::SPECT_POINT) {
 					$history->updateAttributes(['spect_point' => $_POST['point']]);
 				} else {
