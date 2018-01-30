@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
+use kartik\depdrop\DepDrop;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Order */
@@ -57,7 +59,20 @@ $this->registerJs($js);
             <div class="col-md-6">
                 <?= $form->field($model, 'service_id')->dropDownList($model->getListService(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
-                <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct(), ['prompt' => 'Vui Lòng Chọn']) ?>
+                <?php $districtList = [];
+                if (!empty($model->service_id)) {
+                    $districtList = ArrayHelper::map(\app\models\Product::find()->where(['service_id' => $model->service_id])->all(), 'id', 'name');
+                } ?>
+
+                <?= $form->field($model, 'product_id')->widget(DepDrop::classname(), [
+                    'data' => $districtList,
+                    'options' => ['id' => 'order-product_id', 'prompt' => 'Vui Lòng Chọn'],
+                    'pluginOptions' => [
+                        'depends' => ['order-service_id'],
+                        'placeholder' => 'Vui Lòng Chọn',
+                        'url' => Yii::$app->urlManager->createUrl(['order/product'])
+                    ]
+                ])?>
 
                 <?= $form->field($model, 'color_id')->dropDownList($model->getListColor(), ['prompt' => 'Vui Lòng Chọn']) ?>
 

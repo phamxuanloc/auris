@@ -49,6 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'birthday',
                 'format' => ['date', 'php:d-m-Y'],
             ],
+            [
+                'header' => 'Tỉnh/Thành phố',
+                'value' => 'region.region_name'
+            ],
             'phone',
             [
                 'header' => 'Đã thanh toán',

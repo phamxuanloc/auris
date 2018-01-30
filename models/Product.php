@@ -71,4 +71,13 @@ class Product extends Model {
 	public function getService() {
 		return $this->hasOne(Service::className(), ['id' => 'service_id']);
 	}
+
+    public static function getListShop($district){
+        $data = Product::find()->where(['service_id'=>$district])
+            ->select(['id', 'name'])->asArray()->all();
+        if(count($data)>0){
+            return $data;
+        }
+        return null;
+    }
 }

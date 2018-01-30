@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ];
                 },
                 'attribute' => 'sale_id',
-                'value' => 'sale.username',
+                'value' => 'sale.full_name',
             ],
             [
                 'class' => \yii2mod\editable\EditableColumn::class,
@@ -66,17 +66,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'editableOptions' => function ($model) {
                     return [
                         'mode' => 'inline',
-                        'source' => [3 => 'Chưa đến', 1 => 'Thành công', 2 => 'Không làm'],
+                        'source' => ['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý'],
                         'value' => $model->status,
                     ];
                 },
                 'value' => function ($data) {
                     if ($data->status == 1) {
-                        return '<span class="label label-warning">Thành công</span>';
-                    } else if ($data->status == 2) {
-                        return '<span class="label label-danger">Không làm</span>';
-                    } else {
                         return '<span class="label label-default">Chưa đến</span>';
+                    } else if ($data->status == 2) {
+                        return '<span class="label" style="background-color: yellow">Đã nhắc</span>';
+                    } else if ($data->status == 3){
+                        return '<span class="label label-warning">Không đến</span>';
+                    }else if ($data->status == 4){
+                        return '<span class="label label-danger">Không làm</span>';
+                    }else if ($data->status == 5){
+                        return '<span class="label label-success">Đồng ý</span>';
                     }
                 }
             ],

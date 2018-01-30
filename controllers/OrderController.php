@@ -14,6 +14,7 @@ use app\models\Order;
 use app\models\OrderSearch;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -111,6 +112,19 @@ class OrderController extends Controller
             'model' => $model,
             'modelCheckouts' => (empty($modelCheckouts)) ? [new OrderCheckout] : $modelCheckouts,
         ]);
+    }
+
+    public function actionProduct(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if (!empty($parents)) {
+                $cat_id = $parents;
+                $out = Product::getListShop($cat_id);
+                return Json::encode(['output' => $out, 'selected' => '']);
+            }
+        }
+        return Json::encode(['output' => '', 'selected' => '']);
     }
 
     /**

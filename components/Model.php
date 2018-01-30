@@ -36,11 +36,11 @@ class Model extends ActiveRecord {
 	const ROLE          = [];
 
 	public function getListEkip() {
-		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_EKIP])->all(), 'id', 'username');
+		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_EKIP])->all(), 'id', 'full_name');
 	}
 
 	public function getListDirectSale() {
-		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_SALE])->all(), 'id', 'username');
+		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_SALE])->all(), 'id', 'full_name');
 	}
 
 	public function getListService() {

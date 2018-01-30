@@ -53,13 +53,14 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'dd/mm/yyyy H:i:s'
+                        'format' => 'dd/mm/yyyy H:i:s',
+                        'startDate' => date('Y-m-d')
                     ]
                 ]) ?>
 
                 <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale()) ?>
 
-                <?= $form->field($model, 'status')->dropDownList(['3' => 'Chưa đến', '1' => 'Thành công', '2' => 'Không làm']) ?>
+                <?= $form->field($model, 'status')->dropDownList(['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý']) ?>
 
                 <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
             </div>

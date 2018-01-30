@@ -6,6 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="box">
@@ -41,6 +42,8 @@ use yii\bootstrap\ActiveForm;
 
                 <?= $form->field($model, 'address')->textInput() ?>
 
+                <?= $form->field($model, 'region_id')->dropDownList($model->getListRegion()) ?>
+
                 <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'email')->textInput() ?>
@@ -63,7 +66,7 @@ use yii\bootstrap\ActiveForm;
                 } ?>
                 <?= $form->field($model, 'customer_img')->fileInput()->label(false) ?>
 
-                <?= $form->field($model, 'character_type')->dropDownList($model->getCharaterType()) ?>
+                <?= $form->field($model, 'character_type')->dropDownList($model->getCharaterType(), ['prompt' => 'Vui lòng chọn']) ?>
 
                 <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
             </div>

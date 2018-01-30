@@ -53,7 +53,7 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['getfly_id', 'sex', 'customer_type', 'character_type', 'status', 'created_id', 'update_id', 'sale_id'], 'integer'],
+            [['getfly_id', 'sex', 'customer_type', 'character_type', 'status', 'created_id', 'update_id', 'sale_id', 'region_id'], 'integer'],
             [['birthday', 'created_date', 'getfly_date'], 'safe'],
             [['debt'], 'number'],
             [['customer_img'], 'file'],
@@ -92,6 +92,11 @@ class Customer extends \yii\db\ActiveRecord
         }
     }
 
+    public function getRegion()
+    {
+        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -127,6 +132,7 @@ class Customer extends \yii\db\ActiveRecord
             'treatment_direction' => 'Hướng điều trị',
             'address' => 'Địa chỉ',
             'email' => 'Email',
+            'region_id' => 'Tỉnh/Thành phố',
         ];
     }
 
@@ -197,5 +203,9 @@ class Customer extends \yii\db\ActiveRecord
         }else{
             return 0;
         }
+    }
+
+    public function getListRegion(){
+        return ArrayHelper::map(Region::find()->all(), 'id', 'region_name');;
     }
 }
