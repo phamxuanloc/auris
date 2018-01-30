@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\Model;
 use app\models\Service;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
@@ -25,6 +26,15 @@ class ProductController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý sản phẩm',
+				'actions' => [
+					'index'  => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
 				],
 			],
 		];

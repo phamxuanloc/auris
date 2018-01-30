@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\KpiSale;
 use app\models\KpiSaleSearch;
@@ -23,6 +24,16 @@ class KpiSaleController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý KPI',
+				'actions' => [
+					'index'  => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
+					'delete' => 'Xoá',
 				],
 			],
 		];

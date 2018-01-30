@@ -35,17 +35,17 @@ class AdminController extends BaseAdminController {
 					'delete' => ['POST'],
 				],
 			],
-			'role'  => [
-				'class'   => RoleFilter::className(),
-				'name'    => 'Trang Admin',
-				//NOT REQUIRED, only if you want to translate
-				'actions' => [
-					//without translate
-					'index'        => 'Danh sách ',
-					'update'       => 'Cập nhật ',
-					'create'       => 'Thêm mới người dùng',
-				],
-			],
+//			'role'  => [
+//				'class'   => RoleFilter::className(),
+//				'name'    => 'Trang Admin',
+//				//NOT REQUIRED, only if you want to translate
+//				'actions' => [
+//					//without translate
+//					'index'        => 'Danh sách ',
+//					'update'       => 'Cập nhật ',
+//					'create'       => 'Thêm mới người dùng',
+//				],
+//			],
 		];
 	}
 

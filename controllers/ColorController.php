@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Color;
 use app\models\ColorSearch;
@@ -23,6 +24,15 @@ class ColorController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý màu sắc',
+				'actions' => [
+					'index'  => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
 				],
 			],
 		];

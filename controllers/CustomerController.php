@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Order;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Customer;
 use app\models\CustomerSearch;
@@ -25,6 +26,17 @@ class CustomerController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý khách hàng',
+				'actions' => [
+					'index' => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
+					'get-info' => 'Lấy thông tin',
+					'delete' => 'Xoá',
 				],
 			],
 		];

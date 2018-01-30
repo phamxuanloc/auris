@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Order;
 use app\models\OrderSearch;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Customer;
 use app\models\CustomerSearch;
@@ -26,6 +27,13 @@ class ReportController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+				'role'    => [
+					'class'   => RoleFilter::className(),
+					'name'    => 'Báo cáo',
+					'actions' => [
+						'index' => 'Trang chi tiết báo c',
+					],
 				],
 			],
 		];
