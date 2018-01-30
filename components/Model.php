@@ -29,15 +29,18 @@ class Model extends ActiveRecord {
 
 	const ROLE_ADMIN    = 1;
 
+	const ROLE_EKIP     = 2;
+
+	const ROLE_SALE     = 3;
+
 	const ROLE          = [];
 
-
 	public function getListEkip() {
-		return ArrayHelper::map(Ekip::find()->all(), 'id', 'ekip_name');
+		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_EKIP])->all(), 'id', 'username');
 	}
 
 	public function getListDirectSale() {
-		return ArrayHelper::map(User::find()->all(), 'id', 'username');
+		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_SALE])->all(), 'id', 'username');
 	}
 
 	public function getListService() {
