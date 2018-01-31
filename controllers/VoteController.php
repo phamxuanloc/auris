@@ -49,11 +49,10 @@ class VoteController extends Controller {
 	}
 
 	public function actionTest() {
-		header('Cache-Control: no-cache');
-		header('X-Accel-Buffering:no');
 		ob_end_flush();
 		flush();
 		$sse = Yii::$app->sse;
+		$sse->sleep_time = 1;
 		$sse->addEventListener('message', new Test());
 		$sse->start();
 	}
