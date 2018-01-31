@@ -52,6 +52,8 @@ class VoteController extends Controller {
 		$sse = Yii::$app->sse;
 		$sse->addEventListener('message', new Test());
 		$sse->start();
+		ob_end_flush();
+		flush();
 	}
 
 	public function actionIndex() {
