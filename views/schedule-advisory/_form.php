@@ -39,7 +39,7 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
 
                 <?= $form->field($model, 'birthday')->widget(\kartik\date\DatePicker::className(), [
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
-                    'pluginOptions' => [ ádf
+                    'pluginOptions' => [
                         'autoclose' => true,
 //                        'format' => 'dd/mm/yyyy'
                     ]
