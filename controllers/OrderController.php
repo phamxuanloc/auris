@@ -113,7 +113,7 @@ class OrderController extends Controller
                         $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
                         if ($kpiSale) {
                             $kpiSale->estimate_revenue = $model->total_price;
-                            $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
+                            $kpiSale->real_revenue = $totalPayment;
                             $kpiSale->total_customer = $kpiSale->total_customer + 1;
                             $kpiSale->save();
                         }
@@ -193,7 +193,7 @@ class OrderController extends Controller
                     if ($model->sale_id) {
                         $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
                         if ($kpiSale) {
-                            $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
+                            $kpiSale->real_revenue = $totalPayment;
                             $kpiSale->save();
                         }
                     }
