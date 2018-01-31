@@ -34,7 +34,7 @@ class MessageEventHandler extends SSEBase {
 		if($history || $history_finish) {
 			$tracking = true;
 		}
-		return $tracking;
+		return true;
 	}
 
 	public function update() {
