@@ -40,6 +40,7 @@ class VoteController extends Controller {
 	}
 
 	public function actionRealtime() {
+		session_write_close();
 		$sse = Yii::$app->sse;
 		//		$sse->exec_limit = 300;
 		$sse->addEventListener('message', new MessageEventHandler());
