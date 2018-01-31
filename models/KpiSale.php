@@ -35,7 +35,7 @@ class KpiSale extends \yii\db\ActiveRecord
     {
         return [
             [['sale_id', 'kpi'], 'required'],
-            [['sale_id', 'total_customer', 'att_point', 'year'], 'integer'],
+            [['sale_id', 'total_customer', 'att_point'], 'integer'],
             [['kpi', 'estimate_revenue', 'real_revenue'], 'number'],
             [['created_date', 'month'], 'safe'],
         ];
