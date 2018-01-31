@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td style="font-size: 20px;font-weight: 600"><?= number_format($totalCustomer, '0', ',', '.')?></td>
                     <td style="color:red;font-size: 20px;font-weight: 600"><?= number_format($totalPrice, '0', ',', '.')?></td>
                     <td style="color: green;font-size: 20px;font-weight: 600"><?= number_format($totalPayment, '0', ',', '.')?></td>
-                    <td style="color:red;font-size: 20px;font-weight: 600"><?= number_format( $totalPrice / $totalCustomer, '0', ',', '.')?></td>
-                    <td style="color: green;font-size: 20px;font-weight: 600"><?= number_format($totalPayment / $totalCustomer, '0', ',', '.')?></td>
+                    <td style="color:red;font-size: 20px;font-weight: 600"><?= $totalCustomer != 0 ? number_format( $totalPrice / $totalCustomer, '0', ',', '.') : 0?></td>
+                    <td style="color: green;font-size: 20px;font-weight: 600"><?= $totalCustomer != 0 ? number_format($totalPayment / $totalCustomer, '0', ',', '.') : 0?></td>
                 </tr>
                 <?php foreach ($model as $history) { ?>
                     <tr>
