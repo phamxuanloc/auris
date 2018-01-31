@@ -32,14 +32,14 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
                 'attribute' => 'order_code',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id]));
+                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->order_id]));
                 }
             ],
             [
                 'attribute' => 'customer_code',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return Html::a($model->customer_code, Yii::$app->urlManager->createUrl(['customer/update', 'id' => $model->id]));
+                    return Html::a($model->customer_code, Yii::$app->urlManager->createUrl(['customer/update', 'id' => $model->customer_id]));
                 }
             ],
             'customer_name',
