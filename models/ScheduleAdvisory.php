@@ -30,16 +30,16 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
         return 'schedule_advisory';
     }
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-//            $this->ap_date = date('Y-m-d H:i:s', strtotime($this->ap_date));
-//            $this->birthday = date('Y-m-d', strtotime($this->birthday));
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public function beforeSave($insert)
+//    {
+//        if (parent::beforeSave($insert)) {
+////            $this->ap_date = date('Y-m-d H:i:s', strtotime($this->ap_date));
+////            $this->birthday = date('Y-m-d', strtotime($this->birthday));
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
 //    public function afterFind()
 //    {
