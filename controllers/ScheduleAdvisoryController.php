@@ -82,6 +82,8 @@ class ScheduleAdvisoryController extends EditableController {
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
+        $model->ap_date = date('H, d/m/Y', strtotime($model->ap_date));
+        $model->birthday = date('d/m/Y', strtotime($model->birthday));
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}

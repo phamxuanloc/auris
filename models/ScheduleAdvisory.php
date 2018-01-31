@@ -41,13 +41,13 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
         }
     }
 
-    public function afterFind()
-    {
-        $this->ap_date = date('d-m-Y H:i:s', strtotime($this->ap_date));
-        $this->birthday = date('d-m-Y', strtotime($this->birthday));
-
-        parent::afterFind();
-    }
+//    public function afterFind()
+//    {
+//        $this->ap_date = date('d-m-Y H:i:s', strtotime($this->ap_date));
+//        $this->birthday = date('d-m-Y', strtotime($this->birthday));
+//
+//        parent::afterFind();
+//    }
 
 
     /**

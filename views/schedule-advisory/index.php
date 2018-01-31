@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             [
                 'attribute' => 'ap_date',
-//                'value' => function ($data) {
-//                    return date('H, d/m/Y', strtotime($data->ap_date));
-//                }
+                'value' => function ($data) {
+                    return date('H, d/m/Y', strtotime($data->ap_date));
+                }
             ],
             [
                 'class' => \yii2mod\editable\EditableColumn::class,
