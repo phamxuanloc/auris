@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\TreatmentHistory;
 use app\sse\MessageEventHandler;
+use app\sse\Test;
 use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Customer;
@@ -44,6 +45,12 @@ class VoteController extends Controller {
 		$sse = Yii::$app->sse;
 		//		$sse->exec_limit = 300;
 		$sse->addEventListener('message', new MessageEventHandler());
+		$sse->start();
+	}
+
+	public function actionTest() {
+		$sse = Yii::$app->sse;
+		$sse->addEventListener('message', new Test());
 		$sse->start();
 	}
 
