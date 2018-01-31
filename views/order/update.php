@@ -159,6 +159,9 @@ $this->registerJs($js);
                                 <td><?= $history->note ?></td>
                                 <td><?= $history->real_start ?></td>
                                 <td><?= $history->real_end ?></td>
+                                <td><?= $history->att_point ?></td>
+                                <td><?= $history->spect_point ?></td>
+                                <td><?= $history->ae_point ?></td>
                             </tr>
                         <?php } ?>
                         </tbody>

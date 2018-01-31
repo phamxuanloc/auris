@@ -61,7 +61,7 @@ class KpiSale extends \yii\db\ActiveRecord
 
     public function getListDirectSale()
     {
-        return ArrayHelper::map(User::find()->all(), 'id', 'username');
+        return ArrayHelper::map(User::find()->where('role_id = 3')->all(), 'id', 'full_name');
     }
 
     public function getMonth()

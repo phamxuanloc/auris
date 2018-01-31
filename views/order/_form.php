@@ -72,7 +72,7 @@ $this->registerJs($js);
                         'placeholder' => 'Vui Lòng Chọn',
                         'url' => Yii::$app->urlManager->createUrl(['order/product'])
                     ]
-                ])?>
+                ]) ?>
 
                 <?= $form->field($model, 'color_id')->dropDownList($model->getListColor(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
@@ -83,53 +83,58 @@ $this->registerJs($js);
                 <?= $form->field($model, 'discount')->textInput() ?>
 
                 <?= $form->field($model, 'total_price')->textInput(['maxlength' => true, 'readonly' => true]) ?>
+            </div>
+            <div class="clearfix"></div>
+            <div class="help-block"></div>
+            <?php DynamicFormWidget::begin([
+                'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                'widgetBody' => '.container-items', // required: css class selector
+                'widgetItem' => '.item', // required: css class
+                'limit' => 4, // the maximum times, an element can be cloned (default 999)
+                'min' => 1, // 0 or 1 (default 1)
+                'insertButton' => '.add-item', // css class
+                'deleteButton' => '.remove-item', // css class
+                'model' => $modelCheckouts[0],
+                'formId' => 'dynamic-form',
+                'formFields' => [
+                    'money',
+                ],
+            ]); ?>
 
-                <?php DynamicFormWidget::begin([
-                    'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
-                    'widgetBody' => '.container-items', // required: css class selector
-                    'widgetItem' => '.item', // required: css class
-                    'limit' => 4, // the maximum times, an element can be cloned (default 999)
-                    'min' => 1, // 0 or 1 (default 1)
-                    'insertButton' => '.add-item', // css class
-                    'deleteButton' => '.remove-item', // css class
-                    'model' => $modelCheckouts[0],
-                    'formId' => 'dynamic-form',
-                    'formFields' => [
-                        'money',
-                    ],
-                ]); ?>
-
-                <div class="container-items"><!-- widgetContainer -->
-                    <?php foreach ($modelCheckouts as $index => $modelCheckout): ?>
-                        <div class="item"><!-- widgetBody -->
-                            <?php
-                            // necessary for update action.
-                            if (!$modelCheckout->isNewRecord) {
-                                echo Html::activeHiddenInput($modelCheckout, "[{$index}]id");
-                            }
-                            ?>
+            <div class="container-items"><!-- widgetContainer -->
+                <?php foreach ($modelCheckouts as $index => $modelCheckout): ?>
+                    <div class="item clearfix"><!-- widgetBody -->
+                        <?php
+                        // necessary for update action.
+                        if (!$modelCheckout->isNewRecord) {
+                            echo Html::activeHiddenInput($modelCheckout, "[{$index}]id");
+                        }
+                        ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelCheckout, "[{$index}]money")->textInput(['maxlength' => true])->label("Lần thanh toán " . ($index + 1)) ?>
                         </div>
-                    <?php endforeach; ?>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-lg-offset-6">
-                    <button type="button" class="add-item btn btn-success btn-xs"><i class="fa fa-plus"></i>
-                        Thêm
-                        thanh toán
-                    </button>
-                </div>
-                <?php DynamicFormWidget::end(); ?>
+                        <div class="col-md-6">
+                            <?= $form->field($modelCheckout, "[{$index}]cash_type", ['template' => "<div class=\"col-lg-12\">{input}</div>"])->radioList(['1' => 'Tiền mặt', '2' => 'Thẻ'])->label(false) ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-
-        <div class="form-group row m-t-lg">
-            <div class="col-sm-4 col-sm-offset-2">
-                <?= Html::submitButton('<i class="fa fa-floppy-o" aria-hidden="true"></i> Tạo đơn hàng', ['class' => 'btn btn-success']) ?>
+            <div class="clearfix"></div>
+            <div class="col-lg-offset-6">
+                <button type="button" class="add-item btn btn-success btn-xs"><i class="fa fa-plus"></i>
+                    Thêm
+                    thanh toán
+                </button>
             </div>
+            <?php DynamicFormWidget::end(); ?>
         </div>
-
-        <?php ActiveForm::end(); ?>
     </div>
 
+    <div class="form-group row m-t-lg">
+        <div class="col-sm-4 col-sm-offset-2">
+            <?= Html::submitButton('<i class="fa fa-floppy-o" aria-hidden="true"></i> Tạo đơn hàng', ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 </div>

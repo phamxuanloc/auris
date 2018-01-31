@@ -28,14 +28,14 @@ class ReportController extends Controller {
 				'actions' => [
 					'delete' => ['POST'],
 				],
-				'role'    => [
-					'class'   => RoleFilter::className(),
-					'name'    => 'Báo cáo',
-					'actions' => [
-						'index' => 'Trang chi tiết báo chi tiết',
-					],
-				],
 			],
+            'role'    => [
+                'class'   => RoleFilter::className(),
+                'name'    => 'Báo cáo',
+                'actions' => [
+                    'index' => 'Trang chi tiết báo chi tiết',
+                ],
+            ],
 		];
 	}
 

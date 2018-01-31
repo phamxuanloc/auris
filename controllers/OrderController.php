@@ -93,19 +93,44 @@ class OrderController extends Controller
             if ($customer) {
                 $model->customer_id = $customer->id;
             }
-            if ($model->save()) {
-                if ($model->sale_id) {
-                    $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-                    if ($kpiSale) {
-                        $kpiSale->estimate_revenue = $model->total_price;
-                        $kpiSale->total_customer = $kpiSale->total_customer + 1;
-                        $kpiSale->save();
+            $modelCheckouts = Models::createMultiple(OrderCheckout::classname());
+            Models::loadMultiple($modelCheckouts, Yii::$app->request->post());
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                if ($flag = $model->save(false)) {
+                    $totalPayment = 0;
+                    foreach ($modelCheckouts as $modelCheckout) {
+                        $modelCheckout->created_date = date('Y-m-d H:i:s');
+                        $modelCheckout->order_id = $model->id;
+                        $modelCheckout->customer_id = $model->customer_id;
+                        $totalPayment += $modelCheckout->money;
+                        if (! ($flag = $modelCheckout->save(false))) {
+                            $transaction->rollBack();
+                            break;
+                        }
                     }
+                    if ($model->sale_id) {
+                        $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                        if ($kpiSale) {
+                            $kpiSale->estimate_revenue = $model->total_price;
+                            $kpiSale->real_revenue = $kpiSale->real_revenue + $totalPayment;
+                            $kpiSale->total_customer = $kpiSale->total_customer + 1;
+                            $kpiSale->save();
+                        }
+                    }
+                } else {
+                    print_r($model->getErrors());
                 }
-                return $this->redirect(['index']);
-            } else {
-                print_r($model->getErrors());
-                exit;
+
+                $model->total_payment = $model->total_payment + $totalPayment;
+                $model->update();
+
+                if ($flag) {
+                    $transaction->commit();
+                    return $this->redirect(['index']);
+                }
+            }catch (Exception $e) {
+                $transaction->rollBack();
             }
         }
         return $this->render('create', [

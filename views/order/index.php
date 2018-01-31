@@ -56,9 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'sale_id',
-                'value' => 'sale.username',
+                'value' => 'sale.full_name',
                 'contentOptions' => [
-                    'style' => 'width:90px'
+                    'style' => 'width:160px'
                 ]
             ],
             [
