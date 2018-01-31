@@ -92,10 +92,9 @@ $(document).ready(function () {
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#order-discount").change(function () {
-        var order_price = $('#order-price').val().replace(/./g, '');
-        var order_quantiy = $('#order-quantiy').val().replace(/./g, '');
-        var order_discount = $('#order-discount').val().replace(/./g, '');
-        alert(order_discount);
+        var order_price = $('#order-price').val().replace(/\./g, '');
+        var order_quantiy = $('#order-quantiy').val().replace(/\./g, '');
+        var order_discount = $('#order-discount').val();
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#kpisalesearch-sale_id").change(function () {
