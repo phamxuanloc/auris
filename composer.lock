@@ -229,7 +229,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2018-01-17T11:51:05+00:00"
+            "time": "2018-01-17 11:51:05"
         },
         {
             "name": "dektrium/yii2-user",
@@ -288,7 +288,7 @@
                 "yii2",
                 "yii2-user"
             ],
-            "time": "2018-01-29T13:21:02+00:00"
+            "time": "2018-01-29 13:21:02"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -384,7 +384,7 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2017-09-09T18:26:15+00:00"
+            "time": "2017-09-09 18:26:15"
         },
         {
             "name": "kartik-v/dependent-dropdown",
@@ -431,7 +431,7 @@
                 "option",
                 "select"
             ],
-            "time": "2017-08-01T11:43:55+00:00"
+            "time": "2017-08-01 11:43:55"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -483,7 +483,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2017-12-11T15:57:27+00:00"
+            "time": "2017-12-11 15:57:27"
         },
         {
             "name": "kartik-v/yii2-editable",
@@ -536,7 +536,7 @@
                 "popover-x",
                 "widget"
             ],
-            "time": "2017-06-28T05:11:45+00:00"
+            "time": "2017-06-28 05:11:45"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -589,7 +589,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-01-25T21:06:49+00:00"
+            "time": "2018-01-25 21:06:49"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -640,7 +640,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-11-17T06:34:33+00:00"
+            "time": "2017-11-17 06:34:33"
         },
         {
             "name": "kartik-v/yii2-popover-x",
@@ -742,7 +742,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-06T06:18:08+00:00"
+            "time": "2017-09-06 06:18:08"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -791,7 +791,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-07-18T08:42:00+00:00"
+            "time": "2017-07-18 08:42:00"
         },
         {
             "name": "kartik-v/yii2-widget-depdrop",
@@ -840,7 +840,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10T17:30:48+00:00"
+            "time": "2016-01-10 17:30:48"
         },
         {
             "name": "navatech/yii2-navatech-base",
@@ -886,7 +886,7 @@
                 "navatech",
                 "yii2"
             ],
-            "time": "2016-09-26T17:23:25+00:00"
+            "time": "2016-09-26 17:23:25"
         },
         {
             "name": "navatech/yii2-user-role",
@@ -932,7 +932,7 @@
                 "user role",
                 "yii2"
             ],
-            "time": "2016-10-22T06:51:57+00:00"
+            "time": "2016-10-22 06:51:57"
         },
         {
             "name": "odannyc/yii2-sse",
@@ -966,7 +966,7 @@
                 }
             ],
             "description": "Yii2 SSE is a wrapper for the library libSSE-php. Its used for managing Server Sent Events in Yii2.",
-            "time": "2016-07-28T18:10:36+00:00"
+            "time": "2016-07-28 18:10:36"
         },
         {
             "name": "paragonie/random_compat",
@@ -1068,7 +1068,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-01-23T07:37:21+00:00"
+            "time": "2018-01-23 07:37:21"
         },
         {
             "name": "symfony/css-selector",
@@ -1231,7 +1231,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-29T09:03:43+00:00"
+            "time": "2018-01-29 09:03:43"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1239,12 +1239,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "750a2b259dd68436e3b918a4241e80b023a80663"
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/750a2b259dd68436e3b918a4241e80b023a80663",
-                "reference": "750a2b259dd68436e3b918a4241e80b023a80663",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
             },
             "require": {
@@ -1256,7 +1256,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1290,7 +1290,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-12-17T16:08:10+00:00"
+            "time": "2018-01-30 19:27:44"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -1298,12 +1298,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff"
+                "reference": "3532bfcd8f933a7816f3a0a59682fc404776600f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff",
-                "reference": "0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/3532bfcd8f933a7816f3a0a59682fc404776600f",
+                "reference": "3532bfcd8f933a7816f3a0a59682fc404776600f",
                 "shasum": ""
             },
             "require": {
@@ -1313,7 +1313,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1349,7 +1349,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11T12:05:26+00:00"
+            "time": "2018-01-30 19:27:44"
         },
         {
             "name": "tonyhhyip/sse",
@@ -1405,7 +1405,7 @@
             "keywords": [
                 "sse"
             ],
-            "time": "2017-02-21T12:28:27+00:00"
+            "time": "2017-02-21 12:28:27"
         },
         {
             "name": "wbraganca/yii2-dynamicform",
@@ -1453,7 +1453,7 @@
                 "yii2 dynamic form",
                 "yii2-dynamicform"
             ],
-            "time": "2016-09-29T16:38:47+00:00"
+            "time": "2016-09-29 16:38:47"
         },
         {
             "name": "yii2mod/yii2-editable",
@@ -1499,7 +1499,7 @@
                 "yii2 editable column",
                 "yii2 editable field"
             ],
-            "time": "2018-01-15T15:00:16+00:00"
+            "time": "2018-01-15 15:00:16"
         },
         {
             "name": "yiisoft/yii2",
@@ -1507,12 +1507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "6a8105d04af4d2fbe9f20e0c0ab2c1c2a2b77693"
+                "reference": "2087cee25203b9243e5022a234b507a8014a42eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6a8105d04af4d2fbe9f20e0c0ab2c1c2a2b77693",
-                "reference": "6a8105d04af4d2fbe9f20e0c0ab2c1c2a2b77693",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2087cee25203b9243e5022a234b507a8014a42eb",
+                "reference": "2087cee25203b9243e5022a234b507a8014a42eb",
                 "shasum": ""
             },
             "require": {
@@ -1599,7 +1599,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2018-01-26T12:31:27+00:00"
+            "time": "2018-01-30 20:03:21"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -1711,7 +1711,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2018-01-12T15:11:42+00:00"
+            "time": "2018-01-12 15:11:42"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1808,7 +1808,7 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2018-01-23T11:46:00+00:00"
+            "time": "2018-01-23 11:46:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -1854,7 +1854,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2017-12-24T16:46:34+00:00"
+            "time": "2017-12-24 16:46:34"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2076,7 +2076,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2018-01-27T23:54:49+00:00"
+            "time": "2018-01-27 23:54:49"
         },
         {
             "name": "codeception/specify",
@@ -2289,7 +2289,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2018-01-25T17:02:46+00:00"
+            "time": "2018-01-25 17:02:46"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -2448,7 +2448,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-10-21T17:27:45+00:00"
+            "time": "2016-10-21 17:27:45"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3821,7 +3821,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-29T09:03:43+00:00"
+            "time": "2018-01-29 09:03:43"
         },
         {
             "name": "symfony/debug",
@@ -3877,7 +3877,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-18T22:16:57+00:00"
+            "time": "2018-01-18 22:16:57"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4047,7 +4047,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-21T19:05:02+00:00"
+            "time": "2018-01-21 19:05:02"
         },
         {
             "name": "webmozart/assert",
@@ -4055,12 +4055,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "87f8f5fd77fbd9ef83e8c21dc5ec002203ba83d3"
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/87f8f5fd77fbd9ef83e8c21dc5ec002203ba83d3",
-                "reference": "87f8f5fd77fbd9ef83e8c21dc5ec002203ba83d3",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
                 "shasum": ""
             },
             "require": {
@@ -4097,7 +4097,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2018-01-29T08:33:01+00:00"
+            "time": "2018-01-29T19:49:41+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -4144,7 +4144,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2018-01-18T16:03:52+00:00"
+            "time": "2018-01-18 16:03:52"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -4244,7 +4244,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2018-01-23T11:15:52+00:00"
+            "time": "2018-01-23 11:15:52"
         }
     ],
     "aliases": [],

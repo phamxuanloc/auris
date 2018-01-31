@@ -13,7 +13,6 @@ use odannyc\Yii2SSE\SSEBase;
 class Test extends SSEBase {
 
 	public function check() {
-
 		return true;
 	}
 
