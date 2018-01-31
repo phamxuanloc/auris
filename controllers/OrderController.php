@@ -224,6 +224,8 @@ class OrderController extends Controller
                 $a = $orderCode + 1;
                 return "AU1-HD" . $a;
             }
+        }else{
+            return "AU1-HD0000001";
         }
         //        print_r($orderCode);exit;
     }
