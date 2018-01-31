@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
                 </thead>
                 <?php
-                $totalCustomer = 1;
+                $totalCustomer = 0;
                 $totalPrice = 0;
                 $totalPayment = 0;
                 foreach ($model as $history) {
