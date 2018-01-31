@@ -49,6 +49,7 @@ class VoteController extends Controller {
 	}
 
 	public function actionTest() {
+		session_write_close();
 		ob_end_flush();
 		flush();
 		$sse = Yii::$app->sse;
