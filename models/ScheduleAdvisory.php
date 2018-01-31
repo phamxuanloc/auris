@@ -33,7 +33,9 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
+            $this->ap_date = str_replace('/', '-', $this->ap_date);
             $this->ap_date = date('Y-m-d H:i:s', strtotime($this->ap_date));
+            $this->birthday = str_replace('/', '-', $this->birthday);
             $this->birthday = date('Y-m-d', strtotime($this->birthday));
             return true;
         } else {
@@ -43,9 +45,9 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
 
     public function afterFind()
     {
-        $this->ap_date = date('d-m-Y H:i:s', strtotime($this->ap_date));
+//        $this->ap_date = date('H, d-m-Y', strtotime($this->ap_date));
         $this->birthday = date('d-m-Y', strtotime($this->birthday));
-
+//
         parent::afterFind();
     }
 

@@ -193,7 +193,6 @@ class OrderController extends Controller
     {
         $order = Order::find()->orderBy('id DESC')->one();
         if ($order) {
-            //            echo $order->order_code;exit;
             $orderCode = substr($order->order_code, 6, 7);
             $value = $orderCode;
             $length = 0;
@@ -224,6 +223,8 @@ class OrderController extends Controller
                 $a = $orderCode + 1;
                 return "AU1-HD" . $a;
             }
+        }else{
+            return "AU1-HD0000001";
         }
         //        print_r($orderCode);exit;
     }

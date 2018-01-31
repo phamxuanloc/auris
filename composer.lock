@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9514d2da355789bdd7230a3ad78a4fa6",
+    "content-hash": "259fa758e9b3646864d6672aef50b914",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -229,7 +229,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2018-01-17 11:51:05"
+            "time": "2018-01-17T11:51:05+00:00"
         },
         {
             "name": "dektrium/yii2-user",
@@ -288,7 +288,7 @@
                 "yii2",
                 "yii2-user"
             ],
-            "time": "2018-01-29 13:21:02"
+            "time": "2018-01-29T13:21:02+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -384,7 +384,54 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2017-09-09 18:26:15"
+            "time": "2017-09-09T18:26:15+00:00"
+        },
+        {
+            "name": "kartik-v/dependent-dropdown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/dependent-dropdown.git",
+                "reference": "1349e7f5816a65e89bc227098386aac5b2c89363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/dependent-dropdown/zipball/1349e7f5816a65e89bc227098386aac5b2c89363",
+                "reference": "1349e7f5816a65e89bc227098386aac5b2c89363",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\depdrop\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A multi level dependent dropdown JQuery plugin that allows nested dependencies.",
+            "homepage": "https://github.com/kartik-v/dependent-dropdown",
+            "keywords": [
+                "dependent",
+                "dropdown",
+                "jquery",
+                "option",
+                "select"
+            ],
+            "time": "2017-08-01T11:43:55+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -436,7 +483,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2017-12-11 15:57:27"
+            "time": "2017-12-11T15:57:27+00:00"
         },
         {
             "name": "kartik-v/yii2-editable",
@@ -489,7 +536,7 @@
                 "popover-x",
                 "widget"
             ],
-            "time": "2017-06-28 05:11:45"
+            "time": "2017-06-28T05:11:45+00:00"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -542,7 +589,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-01-25 21:06:49"
+            "time": "2018-01-25T21:06:49+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -593,7 +640,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-11-17 06:34:33"
+            "time": "2017-11-17T06:34:33+00:00"
         },
         {
             "name": "kartik-v/yii2-popover-x",
@@ -695,7 +742,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-06 06:18:08"
+            "time": "2017-09-06T06:18:08+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -744,7 +791,56 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-07-18 08:42:00"
+            "time": "2017-07-18T08:42:00+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-depdrop",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-depdrop.git",
+                "reference": "6918ca6f7d7be153c80f6aa9c261f9b333293e9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-depdrop/zipball/6918ca6f7d7be153c80f6aa9c261f9b333293e9c",
+                "reference": "6918ca6f7d7be153c80f6aa9c261f9b333293e9c",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/dependent-dropdown": "~1.4",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\depdrop\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Widget that enables setting up dependent dropdowns with nested dependencies (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-depdrop",
+            "keywords": [
+                "dependent",
+                "dropdown",
+                "extension",
+                "form",
+                "jquery",
+                "plugin",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-01-10T17:30:48+00:00"
         },
         {
             "name": "navatech/yii2-navatech-base",
@@ -790,7 +886,7 @@
                 "navatech",
                 "yii2"
             ],
-            "time": "2016-09-26 17:23:25"
+            "time": "2016-09-26T17:23:25+00:00"
         },
         {
             "name": "navatech/yii2-user-role",
@@ -836,7 +932,7 @@
                 "user role",
                 "yii2"
             ],
-            "time": "2016-10-22 06:51:57"
+            "time": "2016-10-22T06:51:57+00:00"
         },
         {
             "name": "odannyc/yii2-sse",
@@ -870,7 +966,7 @@
                 }
             ],
             "description": "Yii2 SSE is a wrapper for the library libSSE-php. Its used for managing Server Sent Events in Yii2.",
-            "time": "2016-07-28 18:10:36"
+            "time": "2016-07-28T18:10:36+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -972,7 +1068,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-01-23 07:37:21"
+            "time": "2018-01-23T07:37:21+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -1135,7 +1231,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-29 09:03:43"
+            "time": "2018-01-29T09:03:43+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1253,7 +1349,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11 12:05:26"
+            "time": "2017-10-11T12:05:26+00:00"
         },
         {
             "name": "tonyhhyip/sse",
@@ -1309,7 +1405,7 @@
             "keywords": [
                 "sse"
             ],
-            "time": "2017-02-21 12:28:27"
+            "time": "2017-02-21T12:28:27+00:00"
         },
         {
             "name": "wbraganca/yii2-dynamicform",
@@ -1357,7 +1453,7 @@
                 "yii2 dynamic form",
                 "yii2-dynamicform"
             ],
-            "time": "2016-09-29 16:38:47"
+            "time": "2016-09-29T16:38:47+00:00"
         },
         {
             "name": "yii2mod/yii2-editable",
@@ -1403,7 +1499,7 @@
                 "yii2 editable column",
                 "yii2 editable field"
             ],
-            "time": "2018-01-15 15:00:16"
+            "time": "2018-01-15T15:00:16+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -1503,7 +1599,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2018-01-26 12:31:27"
+            "time": "2018-01-26T12:31:27+00:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -1615,7 +1711,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2018-01-12 15:11:42"
+            "time": "2018-01-12T15:11:42+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1712,7 +1808,7 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2018-01-23 11:46:00"
+            "time": "2018-01-23T11:46:00+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -1758,7 +1854,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2017-12-24 16:46:34"
+            "time": "2017-12-24T16:46:34+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2352,7 +2448,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-10-21 17:27:45"
+            "time": "2016-10-21T17:27:45+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2856,12 +2952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e92a128096c1cf00050212fb64253f40757ab5a2"
+                "reference": "023f4f054490228cb01523743326a2c54b97521c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e92a128096c1cf00050212fb64253f40757ab5a2",
-                "reference": "e92a128096c1cf00050212fb64253f40757ab5a2",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/023f4f054490228cb01523743326a2c54b97521c",
+                "reference": "023f4f054490228cb01523743326a2c54b97521c",
                 "shasum": ""
             },
             "require": {
@@ -2930,7 +3026,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-01-26T16:47:27+00:00"
+            "time": "2018-01-29T15:25:00+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3781,7 +3877,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-18 22:16:57"
+            "time": "2018-01-18T22:16:57+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -3951,7 +4047,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-21 19:05:02"
+            "time": "2018-01-21T19:05:02+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -4048,7 +4144,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2018-01-18 16:03:52"
+            "time": "2018-01-18T16:03:52+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -4148,7 +4244,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2018-01-23 11:15:52"
+            "time": "2018-01-23T11:15:52+00:00"
         }
     ],
     "aliases": [],
@@ -4160,7 +4256,8 @@
         "odannyc/yii2-sse": 20,
         "kartik-v/yii2-widget-datepicker": 20,
         "wbraganca/yii2-dynamicform": 20,
-        "yiisoft/yii2-jui": 20
+        "yiisoft/yii2-jui": 20,
+        "kartik-v/yii2-widget-depdrop": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

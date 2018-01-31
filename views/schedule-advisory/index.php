@@ -37,12 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'birthday',
-                'format' => ['date', 'php:d-m-Y'],
+                'value' => function ($data) {
+                    return date('d/m/Y', strtotime($data->birthday));
+                }
             ],
             'phone',
             [
                 'attribute' => 'ap_date',
-                'format' => ['date', 'php:g, d/m/Y'],
+                'value' => function ($data) {
+                    return date('H, d/m/Y', strtotime($data->ap_date));
+                }
             ],
             [
                 'class' => \yii2mod\editable\EditableColumn::class,
@@ -75,11 +79,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return '<span class="label label-default">Chưa đến</span>';
                     } else if ($data->status == 2) {
                         return '<span class="label" style="background-color: yellow">Đã nhắc</span>';
-                    } else if ($data->status == 3){
+                    } else if ($data->status == 3) {
                         return '<span class="label label-warning">Không đến</span>';
-                    }else if ($data->status == 4){
+                    } else if ($data->status == 4) {
                         return '<span class="label label-danger">Không làm</span>';
-                    }else if ($data->status == 5){
+                    } else if ($data->status == 5) {
                         return '<span class="label label-success">Đồng ý</span>';
                     }
                 }

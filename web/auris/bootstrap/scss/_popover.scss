@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   z-index: $zindex-popover;
-  display: block;
+  display: none;
   max-width: $popover-max-width;
   padding: $popover-inner-padding;
   // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.

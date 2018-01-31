@@ -89,7 +89,7 @@ sup {
   white-space: nowrap;
   vertical-align: baseline;
   font-weight: bold;
-  background-color: #b8b8b8;
+  /*background-color: #b8b8b8;*/
   color: #fff;
   border-radius: .2rem; }
   .label.no-bg {
