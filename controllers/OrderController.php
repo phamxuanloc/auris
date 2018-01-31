@@ -131,6 +131,7 @@ class OrderController extends Controller
                 }
             }catch (Exception $e) {
                 $transaction->rollBack();
+                print_r($e->getMessage());exit;
             }
         }
         return $this->render('create', [
