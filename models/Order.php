@@ -68,7 +68,7 @@ class Order extends Model
 
     public function getEkip()
     {
-        return $this->hasOne(Ekip::className(), ['id' => 'ekip_id']);
+        return $this->hasOne(User::className(), ['id' => 'ekip_id']);
     }
     public function getSale()
     {

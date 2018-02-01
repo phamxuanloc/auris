@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'customer_phone',
             [
                 'attribute' => 'ekip_id',
-                'value' => 'sale.full_name',
+                'value' => 'ekip.full_name',
                 'contentOptions' => [
                     'style' => 'width:150px'
                 ]

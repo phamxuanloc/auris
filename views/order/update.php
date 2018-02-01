@@ -57,11 +57,11 @@ $this->registerJs($js);
                     <table style="width: 100%">
                         <tr>
                             <td class="col-sm-3 control-label">Ekip Phục Vụ</td>
-                            <td class="col-sm-9"><?= @$model->ekip->ekip_name ?></td>
+                            <td class="col-sm-9"><?= @$model->ekip->full_name ?></td>
                         </tr>
                         <tr>
                             <td class="col-sm-3 control-label">Direct Sale</td>
-                            <td class="col-sm-9"><?= @$model->sale->username ?></td>
+                            <td class="col-sm-9"><?= @$model->sale->full_name ?></td>
                         </tr>
                     </table>
                 </div>
