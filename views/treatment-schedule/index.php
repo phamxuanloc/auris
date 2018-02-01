@@ -46,11 +46,11 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
             'customer_phone',
             [
                 'header' => 'Ekip',
-                'value' => 'order.ekip.ekip_name',
+                'value' => 'order.ekip.full_name',
             ],
             [
                 'header' => 'Direct Sale',
-                'value' => 'order.sale.username'
+                'value' => 'order.sale.full_name'
             ],
             [
                 'header' => 'Loại dịch vụ',
