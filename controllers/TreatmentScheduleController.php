@@ -91,6 +91,7 @@ class TreatmentScheduleController extends Controller {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {
 				$model->order_code = $order->order_code;
+				$model->order_id = $order->id;
 			}
 			if($model->save()) {
 				return $this->redirect(['index']);
