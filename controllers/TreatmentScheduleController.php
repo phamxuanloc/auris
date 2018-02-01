@@ -82,6 +82,7 @@ class TreatmentScheduleController extends Controller {
 		if($order_id != null) {
 			$order                 = Order::findOne($order_id);
 			$model->order_code     = $order->order_code;
+			$model->order_id     = $order->id;
 			$model->customer_code  = $order->customer_code;
 			$model->customer_name  = $order->customer_name;
 			$model->customer_phone = $order->customer_phone;
