@@ -12,7 +12,6 @@ use app\models\TreatmentHistory;
  */
 class TreatmentHistorySearch extends TreatmentHistory
 {
-    public $sale_id;
     /**
      * @inheritdoc
      */
