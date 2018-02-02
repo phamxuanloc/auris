@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <tr>
                         <td><?= date('d/m/Y', strtotime($history->created_date))?></td>
                         <td><?= number_format($history->id)?></td>
-                        <td style="color:red"><?= number_format($history->total_price, '0', ',', '.')?></td>
+                        <td style="color:red"><?= $history->total_price?></td>
                         <td style="color: green;"><?= number_format($history->total_payment, '0', ',', '.')?></td>
                         <td style="color:red"><?= number_format($history->total_price / $history->id, '0', ',', '.')?></td>
                         <td style="color: green;"><?= number_format($history->total_payment / $history->id, '0', ',', '.')?></td>
