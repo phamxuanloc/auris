@@ -76,9 +76,12 @@ class OrderSearch extends Order
             'debt' => $this->debt,
         ]);
 
-//        $query->andFilterWhere(['>=', 'DATE(created_date)', date("Y-m-d", strtotime($this->start_date))]);
-//        $query->andFilterWhere(['<=', 'DATE(created_date)', date("Y-m-d", strtotime($this->end_date))]);
-
+        if(!$this->start_date){
+            $this->start_date = date("d/m/Y", strtotime("-1 month"));
+        }
+        if(!$this->end_date){
+            $this->end_date = date("d/m/Y");
+        }
         $start_date = \DateTime::createFromFormat('d/m/Y', $this->start_date);
         $end_date = \DateTime::createFromFormat('d/m/Y', $this->end_date);
         $query->andFilterWhere(['between', "DATE(created_date)", $start_date->format('Y-m-d'), $end_date->format('Y-m-d')]);

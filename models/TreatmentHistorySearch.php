@@ -19,7 +19,7 @@ class TreatmentHistorySearch extends TreatmentHistory
     {
         return [
             [['id', 'order_id', 'customer_id', 'att_point', 'spect_point', 'ae_point', 'sale_id', 'ekip_id',], 'integer'],
-            [['customer_code', 'customer_name', 'customer_phone', 'ap_date', 'real_start', 'real_end'], 'safe'],
+            [['customer_code', 'customer_name', 'customer_phone', 'ap_date', 'real_start', 'real_end', 'created_date', 'start_date', 'end_date'], 'safe'],
         ];
     }
 
@@ -61,6 +61,8 @@ class TreatmentHistorySearch extends TreatmentHistory
         $query->andFilterWhere([
             'id' => $this->id,
             'order_id' => $this->order_id,
+            'sale_id' => $this->sale_id,
+            'ekip_id' => $this->ekip_id,
             'customer_id' => $this->customer_id,
             'ap_date' => $this->ap_date,
             'real_start' => $this->real_start,
@@ -69,6 +71,16 @@ class TreatmentHistorySearch extends TreatmentHistory
             'spect_point' => $this->spect_point,
             'ae_point' => $this->ae_point,
         ]);
+
+        if(!$this->start_date){
+            $this->start_date = date("d/m/Y", strtotime("-1 month"));
+        }
+        if(!$this->end_date){
+            $this->end_date = date("d/m/Y");
+        }
+        $start_date = \DateTime::createFromFormat('d/m/Y', $this->start_date);
+        $end_date = \DateTime::createFromFormat('d/m/Y', $this->end_date);
+        $query->andFilterWhere(['between', "DATE(created_date)", $start_date->format('Y-m-d'), $end_date->format('Y-m-d')]);
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])
             ->andFilterWhere(['like', 'customer_name', $this->customer_name])

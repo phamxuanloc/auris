@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderSearch */
@@ -12,7 +13,44 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
     <div class="help-block"></div>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => ['index'],
+        'method' => 'get',
+        'layout' => 'horizontal',
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'col-lg-4 control-label'],
+        ],
+    ]); ?>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <?= $form->field($modelSearch, 'start_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd/mm/yyyy',
+                    ]
+                ])->label("Từ ngày") ?>
+            </div>
+
+            <div class="col-md-3">
+                <?= $form->field($modelSearch, 'end_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd/mm/yyyy',
+                    ]
+                ])->label("Đến ngày") ?>
+            </div>
+
+            <div class="form-group">
+                <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-primary']) ?>
+            </div>
+        </div>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
     <div class="row">
         <div class="col-md-12">
