@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'quantiy',
             [
                 'attribute' => 'price',
-                'format' => ['decimal', 0],
+//                'format' => ['decimal', 0],
             ],
             [
                 'attribute' => 'type',
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'total_price',
-                'format' => ['decimal', 0],
+//                'format' => ['decimal', 0],
             ],
             [
                 'attribute' => 'total_payment',
