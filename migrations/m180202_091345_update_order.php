@@ -12,7 +12,7 @@ class m180202_091345_update_order extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('order', 'created_date', $this->timestamp()->defaultExpression( 'CURRENT_TIMESTAMP'));
+        $this->alterColumn('order', 'created_date', $this->timestamp()->defaultExpression( 'CURRENT_TIMESTAMP'));
     }
 
     /**
