@@ -86,6 +86,9 @@ class TreatmentHistory extends Model {
 					'ap_date',
 					'real_start',
 					'real_end',
+                    'start_date',
+                    'end_date',
+                    'created_date'
 				],
 				'safe',
 			],
