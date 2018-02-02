@@ -11,7 +11,7 @@ class m180202_073450_update_treatment_history extends Migration {
 	 * {@inheritdoc}
 	 */
 	public function safeUp() {
-		$this->addColumn('treatment_history', 'created_date', $this->timestamp()->defaultValue(['expression' => 'CURRENT_TIMESTAMP']));
+		$this->addColumn('treatment_history', 'created_date', $this->timestamp()->defaultExpression( 'CURRENT_TIMESTAMP'));
 	}
 
 	/**

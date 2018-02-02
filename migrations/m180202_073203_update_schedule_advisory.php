@@ -12,7 +12,7 @@ class m180202_073203_update_schedule_advisory extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('schedule_advisory', 'created_date', $this->timestamp()->defaultValue(['expression'=>'CURRENT_TIMESTAMP']));
+        $this->addColumn('schedule_advisory', 'created_date', $this->timestamp()->defaultExpression( 'CURRENT_TIMESTAMP'));
     }
 
     /**
