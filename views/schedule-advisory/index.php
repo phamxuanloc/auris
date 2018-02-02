@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schedule-advisory-index">
     <div class="help-block"></div>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Tạo lịch hẹn', ['create'], ['class' => 'btn btn-success']) ?>

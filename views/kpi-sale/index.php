@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm KPI', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= $this->render('_search',['model' => $searchModel])?>
+    <?= $this->render('_search', ['model' => $searchModel]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -34,15 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'estimate_revenue',
                 'format' => 'raw',
-                'value' => function($data){
-                    return "<b style='font-size: 16px;color: red;'>".number_format($data->estimate_revenue, 0, ',', '.')."</b>";
+                'value' => function ($data) {
+                    return "<b style='font-size: 16px;color: red;'>" . number_format($data->estimate_revenue, 0, ',', '.') . " (" . (($data->estimate_revenue / $data->kpi) * 100) . "%)</b>";
                 }
             ],
             [
                 'attribute' => 'real_revenue',
                 'format' => 'raw',
-                'value' => function($data){
-                    return "<b style='font-size: 16px;color: green;'>".number_format($data->real_revenue, 0, ',', '.')."</b>";
+                'value' => function ($data) {
+                    return "<b style='font-size: 16px;color: green;'>" . number_format($data->real_revenue, 0, ',', '.') . " (" . (($data->real_revenue / $data->kpi) * 100) . "%)</b>";
                 }
             ],
             [
@@ -52,6 +52,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'att_point',
                 'format' => ['decimal', 0],
+            ],
+            [
+                'header' => '% Tư Vấn Thành Công',
+                'format' => 'raw',
+                'value' => function($data){
+                    return "<span style='color: green;'>".$data->getSuccess($data->sale_id) . " %</span>";
+                }
             ],
         ],
     ]); ?>

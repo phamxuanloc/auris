@@ -14,13 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="help-block"></div>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <button class="btn">Sắp xếp <i class="fa fa-indent" aria-hidden="true"></i></button>
-        <button class="btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
-        <button class="btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
-        <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm khách hàng', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
 //        'filterModel' => $searchModel,

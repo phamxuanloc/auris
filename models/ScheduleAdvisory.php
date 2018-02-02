@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
  */
 class ScheduleAdvisory extends \yii\db\ActiveRecord
 {
+    public $start_date, $end_date;
     /**
      * @inheritdoc
      */
@@ -59,7 +60,7 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
     {
         return [
             [['full_name', 'ap_date'], 'required'],
-            [['birthday', 'ap_date'], 'safe'],
+            [['birthday', 'ap_date', 'start_date', 'end_date'], 'safe'],
             [['sale_id', 'status', 'customer_id'], 'integer'],
             [['note'], 'string'],
             [['customer_code', 'full_name', 'sex', 'phone'], 'string', 'max' => 255],

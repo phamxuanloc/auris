@@ -30,6 +30,7 @@ use yii\helpers\ArrayHelper;
  */
 class Order extends Model
 {
+    public $start_date, $end_date, $payment_status;
     /**
      * @inheritdoc
      */
@@ -58,10 +59,10 @@ class Order extends Model
     {
         return [
             [['customer_code', 'customer_name', 'service_id', 'product_id', 'ekip_id', 'sale_id'], 'required'],
-            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type'], 'integer'],
+            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status'], 'integer'],
 //            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
-            [['created_date'], 'safe'],
+            [['created_date', 'start_date', 'end_date'], 'safe'],
             [['customer_code', 'customer_name', 'customer_phone', 'order_code'], 'string', 'max' => 255],
         ];
     }

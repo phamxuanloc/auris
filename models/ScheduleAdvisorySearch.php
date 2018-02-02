@@ -19,7 +19,7 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
     {
         return [
             [['id', 'sale_id', 'status', 'customer_id'], 'integer'],
-            [['customer_code', 'full_name', 'sex', 'birthday', 'phone', 'ap_date', 'note'], 'safe'],
+            [['customer_code', 'full_name', 'sex', 'birthday', 'phone', 'ap_date', 'note', 'start_date', 'end_date', 'created_date'], 'safe'],
         ];
     }
 
@@ -61,11 +61,11 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
         $query->andFilterWhere([
             'id' => $this->id,
             'birthday' => $this->birthday,
-            'ap_date' => $this->ap_date,
             'sale_id' => $this->sale_id,
             'status' => $this->status,
             'customer_id' => $this->customer_id,
         ]);
+        $query->andFilterWhere(['between', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', $this->start_date, $this->end_date]);
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])
             ->andFilterWhere(['like', 'full_name', $this->full_name])

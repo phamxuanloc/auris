@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m180131_161054_add_column_order_checkout
+ * Class m180202_073203_update_schedule_advisory
  */
-class m180131_161054_add_column_order_checkout extends Migration
+class m180202_073203_update_schedule_advisory extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('order_checkout', 'cash_type', $this->integer(2));
+        $this->addColumn('schedule_advisory', 'created_date', $this->timestamp()->defaultValue('CURRENT_TIMESTAMP'));
     }
 
     /**
@@ -20,7 +20,7 @@ class m180131_161054_add_column_order_checkout extends Migration
      */
     public function safeDown()
     {
-        echo "m180131_161054_add_column_order_checkout cannot be reverted.\n";
+        echo "m180202_073203_update_schedule_advisory cannot be reverted.\n";
 
         return false;
     }
@@ -34,7 +34,7 @@ class m180131_161054_add_column_order_checkout extends Migration
 
     public function down()
     {
-        echo "m180131_161054_add_column_order_checkout cannot be reverted.\n";
+        echo "m180202_073203_update_schedule_advisory cannot be reverted.\n";
 
         return false;
     }

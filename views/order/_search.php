@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\OrderSearch */
@@ -13,47 +13,68 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'layout' => 'horizontal',
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'col-lg-4 control-label'],
+        ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <?= $form->field($model, 'order_code') ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'customer_code') ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'customer_name') ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <?= $form->field($model, 'sale_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListDirectSale(), ['prompt' => 'Tất cả'])->label("DirectSale") ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'ekip_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListEkip(), ['prompt' => 'Tất cả'])->label("Ekip") ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['0'=>'Đang làm', '1'=>'Hoàn tất'], ['prompt' => 'Tất cả'])->label("Tình trạng") ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'payment_status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['1'=>'Đã thanh toán đủ', '0'=>'Chưa thanh toán đủ'], ['prompt' => 'Tất cả'])->label("Thanh toán") ?>
+            </div>
+        </div>
+    </div>
+    <div class="help-block"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <?= $form->field($model, 'start_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd/mm/yyyy',
+                    ]
+                ])->label("Từ ngày") ?>
+            </div>
 
-    <?= $form->field($model, 'customer_id') ?>
+            <div class="col-md-3">
+                <?= $form->field($model, 'end_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
+                    'type' => \kartik\date\DatePicker::TYPE_INPUT,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd/mm/yyyy',
+                    ]
+                ])->label("Đến ngày") ?>
+            </div>
 
-    <?= $form->field($model, 'customer_code') ?>
-
-    <?= $form->field($model, 'customer_name') ?>
-
-    <?= $form->field($model, 'customer_phone') ?>
-
-    <?php // echo $form->field($model, 'ekip_id') ?>
-
-    <?php // echo $form->field($model, 'sale_id') ?>
-
-    <?php // echo $form->field($model, 'service_id') ?>
-
-    <?php // echo $form->field($model, 'product_id') ?>
-
-    <?php // echo $form->field($model, 'color_id') ?>
-
-    <?php // echo $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'quantiy') ?>
-
-    <?php // echo $form->field($model, 'total_price') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'type') ?>
-
-    <?php // echo $form->field($model, 'total_payment') ?>
-
-    <?php // echo $form->field($model, 'debt') ?>
-
-    <?php // echo $form->field($model, 'note') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+            <div class="form-group">
+                <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-primary']) ?>
+            </div>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

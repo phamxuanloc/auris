@@ -30,6 +30,7 @@ use yii\bootstrap\ActiveForm;
 
         <div class="form-group">
             <?= Html::submitButton('Tìm kiếm', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm khách hàng', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 

@@ -236,3 +236,9 @@ select.form-control:not([size]):not([multiple]) {
     float: left;
     /*padding-right: 10px;*/
 }
+.datepicker > div{
+    display: block;
+}
+.form-group{
+    margin-bottom: 10px!important;
+}

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -21,7 +22,9 @@ use Yii;
  * @property int      $ae_point
  * @property Customer $customer
  */
-class TreatmentHistory extends \yii\db\ActiveRecord {
+class TreatmentHistory extends Model {
+
+    public $start_date, $end_date;
 
 	const VOTE_TYPE   = [
 		1 => 'Thái độ phục vụ',

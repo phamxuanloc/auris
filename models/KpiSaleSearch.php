@@ -43,7 +43,7 @@ class KpiSaleSearch extends KpiSale
     public function search($params)
     {
         $query = KpiSale::find();
-        $query->select("month, sum(kpi) as kpi, sum(estimate_revenue) as estimate_revenue, sum(real_revenue) as real_revenue, sum(total_customer) as total_customer, sum(att_point) as att_point");
+        $query->select("month, sum(kpi) as kpi, sum(estimate_revenue) as estimate_revenue, sum(real_revenue) as real_revenue, sum(total_customer) as total_customer, sum(att_point) as att_point, sale_id");
 
         // add conditions that should always apply here
 

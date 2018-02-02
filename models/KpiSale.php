@@ -81,4 +81,10 @@ class KpiSale extends \yii\db\ActiveRecord
             '2018/12/01' => '12',
         ];
     }
+
+    public function getSuccess($sale_id){
+        $total = ScheduleAdvisory::find()->where(['sale_id' => $sale_id])->count();
+        $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5])->count();
+        return $success / $total * 100;
+    }
 }

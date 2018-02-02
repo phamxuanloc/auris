@@ -14,11 +14,8 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
 <div class="treatment-schedule-index">
 
     <div class="help-block"></div>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <button class="btn">Sắp xếp <i class="fa fa-indent" aria-hidden="true"></i></button>
-        <button class="btn"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
-        <button class="btn"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <p style="text-align: right">
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm đơn hàng', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('<i class="fa fa-calendar-o" aria-hidden="true"></i> Tạo lịch hẹn', ['treatment-schedule/create'], ['class' => 'btn btn-success']) ?>
     </p>

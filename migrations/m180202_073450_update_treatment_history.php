@@ -3,17 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m180131_160502_add_column_order
+ * Class m180202_073450_update_treatment_history
  */
-class m180131_160502_add_column_order extends Migration
+class m180202_073450_update_treatment_history extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('order', 'discount', $this->decimal(11));
-        $this->addColumn('order', 'created_date', $this->dateTime());
+        $this->addColumn('treatment_history', 'created_date', $this->timestamp()->defaultValue('CURRENT_TIMESTAMP'));
     }
 
     /**
@@ -21,7 +20,7 @@ class m180131_160502_add_column_order extends Migration
      */
     public function safeDown()
     {
-        echo "m180131_160502_add_column_order cannot be reverted.\n";
+        echo "m180202_073450_update_treatment_history cannot be reverted.\n";
 
         return false;
     }
@@ -35,7 +34,7 @@ class m180131_160502_add_column_order extends Migration
 
     public function down()
     {
-        echo "m180131_160502_add_column_order cannot be reverted.\n";
+        echo "m180202_073450_update_treatment_history cannot be reverted.\n";
 
         return false;
     }
