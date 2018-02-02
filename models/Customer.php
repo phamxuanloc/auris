@@ -206,6 +206,6 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     public function getListRegion(){
-        return ArrayHelper::map(Region::find()->all(), 'id', 'region_name');;
+        return ArrayHelper::map(Region::find()->orderBy("region_name")->all(), 'id', 'region_name');
     }
 }

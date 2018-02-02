@@ -104,18 +104,45 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
             ],
             [
                 'header' => 'Thái độ',
-                'value' => 'att_point'
+                'format' => 'raw',
+                'value' => function($data){
+                    if($data->att_point == 2){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->att_point == 1){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->att_point == -3){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }
+                }
             ],
             [
                 'header' => 'Chuyên môn',
-                'value' => 'spect_point'
+                'format' => 'raw',
+                'value' => function($data){
+                    if($data->spect_point == 2){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->spect_point == 1){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->spect_point == -3){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }
+                }
             ],
             [
                 'header' => 'Thẩm mỹ',
-                'value' => 'ae_point'
+                'format' => 'raw',
+                'value' => function($data){
+                    if($data->ae_point == 2){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->ae_point == 1){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }elseif($data->ae_point == -3){
+                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                    }
+                }
             ],
 
-//            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
     <?php \yii\widgets\Pjax::end(); ?>

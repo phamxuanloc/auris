@@ -33,11 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'estimate_revenue',
-                'format' => ['decimal', 0],
+                'format' => 'raw',
+                'value' => function($data){
+                    return "<b style='font-size: 16px;color: red;'>".number_format($data->estimate_revenue, 0, ',', '.')."</b>";
+                }
             ],
             [
                 'attribute' => 'real_revenue',
-                'format' => ['decimal', 0],
+                'format' => 'raw',
+                'value' => function($data){
+                    return "<b style='font-size: 16px;color: green;'>".number_format($data->real_revenue, 0, ',', '.')."</b>";
+                }
             ],
             [
                 'attribute' => 'total_customer',

@@ -86,6 +86,8 @@ class TreatmentScheduleController extends Controller {
 			$model->customer_code  = $order->customer_code;
 			$model->customer_name  = $order->customer_name;
 			$model->customer_phone = $order->customer_phone;
+			$model->sale_id = $order->sale_id;
+			$model->ekip_id = $order->ekip_id;
 		}
 		if($model->load(Yii::$app->request->post())) {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
@@ -93,6 +95,8 @@ class TreatmentScheduleController extends Controller {
 				$model->order_code = $order->order_code;
 				$model->customer_id = $order->customer_id;
 				$model->order_id = $order->id;
+                $model->sale_id = $order->sale_id;
+                $model->ekip_id = $order->ekip_id;
 			}
 			if($model->save()) {
 				return $this->redirect(['index']);
@@ -140,7 +144,7 @@ class TreatmentScheduleController extends Controller {
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}
-		return $this->render('update', [
+		return $this->render('create', [
 			'model' => $model,
 		]);
 	}
@@ -169,7 +173,7 @@ class TreatmentScheduleController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id) {
-		if(($model = TreatmentSchedule::findOne($id)) !== null) {
+		if(($model = TreatmentHistory::findOne($id)) !== null) {
 			return $model;
 		}
 		throw new NotFoundHttpException('The requested page does not exist.');

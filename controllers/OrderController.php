@@ -100,13 +100,15 @@ class OrderController extends Controller
                 if ($flag = $model->save(false)) {
                     $totalPayment = 0;
                     foreach ($modelCheckouts as $modelCheckout) {
-                        $modelCheckout->created_date = date('Y-m-d H:i:s');
-                        $modelCheckout->order_id = $model->id;
-                        $modelCheckout->customer_id = $model->customer_id;
-                        $totalPayment += $modelCheckout->money;
-                        if (! ($flag = $modelCheckout->save(false))) {
-                            $transaction->rollBack();
-                            break;
+                        if($modelCheckout->money) {
+                            $modelCheckout->created_date = date('Y-m-d H:i:s');
+                            $modelCheckout->order_id = $model->id;
+                            $modelCheckout->customer_id = $model->customer_id;
+                            $totalPayment += $modelCheckout->money;
+                            if (!($flag = $modelCheckout->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
                         }
                     }
                     if ($model->sale_id) {

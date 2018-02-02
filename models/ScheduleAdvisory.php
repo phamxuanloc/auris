@@ -58,6 +58,7 @@ class ScheduleAdvisory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['full_name', 'ap_date'], 'required'],
             [['birthday', 'ap_date'], 'safe'],
             [['sale_id', 'status', 'customer_id'], 'integer'],
             [['note'], 'string'],

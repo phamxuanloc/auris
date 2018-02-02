@@ -60,6 +60,7 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
 
         <div class="form-group row">
             <div class="col-sm-4 col-sm-offset-2">
+                <?= Html::a('<i class="fa fa-arrow-circle-o-left"></i> Quay lại', Yii::$app->urlManager->createUrl(['treatment-schedule/index']), ['class' => 'btn btn-success']) ?>
                 <?= Html::submitButton('<i class="fa fa-floppy-o" aria-hidden="true"></i> Tạo lịch điều trị', ['class' => 'btn btn-success']) ?>
             </div>
         </div>

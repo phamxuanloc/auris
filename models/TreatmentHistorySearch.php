@@ -18,7 +18,7 @@ class TreatmentHistorySearch extends TreatmentHistory
     public function rules()
     {
         return [
-            [['id', 'order_id', 'customer_id', 'att_point', 'spect_point', 'ae_point'], 'integer'],
+            [['id', 'order_id', 'customer_id', 'att_point', 'spect_point', 'ae_point', 'sale_id', 'ekip_id',], 'integer'],
             [['customer_code', 'customer_name', 'customer_phone', 'ap_date', 'real_start', 'real_end'], 'safe'],
         ];
     }

@@ -42,7 +42,7 @@ use yii\bootstrap\ActiveForm;
 
                 <?= $form->field($model, 'address')->textInput() ?>
 
-                <?= $form->field($model, 'region_id')->dropDownList($model->getListRegion()) ?>
+                <?= $form->field($model, 'region_id')->dropDownList($model->getListRegion(), ['prompt' => 'Vui lòng chọn']) ?>
 
                 <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 

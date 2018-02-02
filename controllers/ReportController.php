@@ -44,7 +44,7 @@ class ReportController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		$model = Order::find()->select("date(created_date) as created_date, count(id) as id, sum(total_price) as total_price, sum(total_payment) as total_payment")->groupBy("date(created_date)")->all();
+		$model = Order::find()->select("date(created_date) as created_date, count(id) as id, sum(total_price) as total_price, sum(total_payment) as total_payment")->orderBy("created_date DESC")->groupBy("date(created_date)")->all();
 		return $this->render('index', [
 			'model' => $model,
 		]);

@@ -73,6 +73,8 @@ class TreatmentHistory extends \yii\db\ActiveRecord {
 					'spect_point',
 					'ae_point',
                     'is_finish',
+                    'sale_id',
+                    'ekip_id',
 				],
 				'integer',
 			],
