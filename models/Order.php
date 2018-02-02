@@ -52,6 +52,14 @@ class Order extends Model
         }
     }
 
+    public function afterFind()
+    {
+        $this->total_price = number_format($this->total_price, 0,',', '.');
+        $this->price = number_format($this->price, 0,',', '.');
+        $this->discount = number_format($this->discount, 0,',', '.');
+        parent::afterFind();
+    }
+
     /**
      * @inheritdoc
      */
