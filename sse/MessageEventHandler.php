@@ -71,9 +71,9 @@ class MessageEventHandler extends SSEBase {
 			$title = TreatmentHistory::VOTE_TYPE[TreatmentHistory::AE_POINT];
 			$type  = TreatmentHistory::AE_POINT;
 		}
-		$customer = $history->customer;
+//		$customer = $history->customer;
 		$data     = [
-			'name'  => $customer->name,
+			'name'  => $history->customer_name,
 			'title' => $title,
 			'id'    => $history->id,
 			'type'  => $type,
