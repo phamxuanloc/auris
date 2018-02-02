@@ -16,6 +16,7 @@ class m180202_042210_update_treatment_history extends Migration
         $this->addColumn('treatment_history', 'ekip_id', $this->integer());
     }
 
+
     /**
      * {@inheritdoc}
      */
