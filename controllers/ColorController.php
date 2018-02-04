@@ -30,9 +30,9 @@ class ColorController extends Controller {
 				'class'   => RoleFilter::className(),
 				'name'    => 'Quản lý màu sắc',
 				'actions' => [
-					'index'  => 'Danh sách',
-					'create' => 'Thêm mới',
-					'update' => 'Cập nhật',
+					'index'    => 'Danh sách',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật',
 				],
 			],
 		];
@@ -49,6 +49,10 @@ class ColorController extends Controller {
 			'searchModel'  => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
+	}
+
+	public function actionViewAll() {
+		return true;
 	}
 
 	/**

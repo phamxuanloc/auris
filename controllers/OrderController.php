@@ -25,29 +25,33 @@ use yii\filters\VerbFilter;
 class OrderController extends Controller
 {
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'role' => [
-                'class' => RoleFilter::className(),
-                'name' => 'Quản lý đơn hàng',
-                'actions' => [
-                    'index' => 'Danh sách',
-                    'create' => 'Thêm mới',
-                    'update' => 'Cập nhật',
-                ],
-            ],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors() {
+		return [
+			'verbs' => [
+				'class'   => VerbFilter::className(),
+				'actions' => [
+					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý đơn hàng',
+				'actions' => [
+					'index'    => 'Danh sách',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật',
+					'view-all' => 'Xem tất cả',
+				],
+			],
+		];
+	}
+
+	public function actionViewAll() {
+		return true;
+	}
 
     /**
      * Lists all Order models.

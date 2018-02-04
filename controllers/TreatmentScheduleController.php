@@ -34,15 +34,20 @@ class TreatmentScheduleController extends Controller {
 				'class'   => RoleFilter::className(),
 				'name'    => 'Quản lý lịch điều trị',
 				'actions' => [
-					'index'  => 'Danh sách lịch điều trị',
-					'create' => 'Thêm mới',
-					'update' => 'Cập nhật lịch điều trị',
-					'start'  => 'Bắt đầu điều trị',
-					'end'    => 'Kết thúc điều trị',
-					'delete' => 'Xóa lịch điều trị',
+					'index'    => 'Danh sách lịch điều trị',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật lịch điều trị',
+					'start'    => 'Bắt đầu điều trị',
+					'end'      => 'Kết thúc điều trị',
+					'delete'   => 'Xóa lịch điều trị',
+					'view-all' => 'Xem tất cả',
 				],
 			],
 		];
+	}
+
+	public function actionViewAll() {
+		return true;
 	}
 
 	/**
@@ -82,21 +87,21 @@ class TreatmentScheduleController extends Controller {
 		if($order_id != null) {
 			$order                 = Order::findOne($order_id);
 			$model->order_code     = $order->order_code;
-			$model->order_id     = $order->id;
+			$model->order_id       = $order->id;
 			$model->customer_code  = $order->customer_code;
 			$model->customer_name  = $order->customer_name;
 			$model->customer_phone = $order->customer_phone;
-			$model->sale_id = $order->sale_id;
-			$model->ekip_id = $order->ekip_id;
+			$model->sale_id        = $order->sale_id;
+			$model->ekip_id        = $order->ekip_id;
 		}
 		if($model->load(Yii::$app->request->post())) {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {
-				$model->order_code = $order->order_code;
+				$model->order_code  = $order->order_code;
 				$model->customer_id = $order->customer_id;
-				$model->order_id = $order->id;
-                $model->sale_id = $order->sale_id;
-                $model->ekip_id = $order->ekip_id;
+				$model->order_id    = $order->id;
+				$model->sale_id     = $order->sale_id;
+				$model->ekip_id     = $order->ekip_id;
 			}
 			if($model->save()) {
 				return $this->redirect(['index']);

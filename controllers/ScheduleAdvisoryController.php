@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\editable\EditableController;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\ScheduleAdvisory;
 use app\models\ScheduleAdvisorySearch;
@@ -27,8 +28,20 @@ class ScheduleAdvisoryController extends EditableController {
 					'delete' => ['POST'],
 				],
 			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý lịch hẹn tư vấn mới',
+				'actions' => [
+					'index'    => 'Danh sách lịch hẹn tư vẫn',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật lịch hẹn tư vấn',
+					'delete'   => 'Xóa lịch',
+					'view-all' => 'Xem tất cả',
+				],
+			],
 		];
 	}
+
 	/**
 	 * Lists all ScheduleAdvisory models.
 	 * @return mixed
@@ -82,8 +95,8 @@ class ScheduleAdvisoryController extends EditableController {
 	 */
 	public function actionUpdate($id) {
 		$model = $this->findModel($id);
-//        $model->ap_date = date('H, d/m/Y', strtotime($model->ap_date));
-//        $model->birthday = date('d/m/Y', strtotime($model->birthday));
+		//        $model->ap_date = date('H, d/m/Y', strtotime($model->ap_date));
+		//        $model->birthday = date('d/m/Y', strtotime($model->birthday));
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}

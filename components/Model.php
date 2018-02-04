@@ -7,6 +7,7 @@ use app\models\Ekip;
 use app\models\Product;
 use app\models\Service;
 use app\models\User;
+use yii\console\Application;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -18,10 +19,12 @@ use yii\helpers\ArrayHelper;
  */
 class Model extends ActiveRecord {
 
-	const STATUS        = [
+	const STATUS = [
 		'delete',
 		'active',
 	];
+
+	public $user;
 
 	const STATUS_DELETE = 0;
 
@@ -53,5 +56,12 @@ class Model extends ActiveRecord {
 
 	public function getListColor() {
 		return ArrayHelper::map(Color::find()->where(['status' => Model::STATUS_ACTIVE])->all(), 'id', 'name');
+	}
+
+	public function __construct($config = []) {
+		parent::__construct($config);
+		if(!\Yii::$app instanceof Application) {
+			$this->user = \Yii::$app->user->identity;
+		}
 	}
 }

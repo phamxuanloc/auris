@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\KpiSale;
 use app\models\TreatmentHistory;
 use app\sse\MessageEventHandler;
 use app\sse\Test;
@@ -48,53 +49,8 @@ class VoteController extends Controller {
 		$sse->start();
 	}
 
-	public function actionTest() {
-		session_write_close();
-		$sse = Yii::$app->sse;
-		$sse->sleep_time = 1;
-		$sse->addEventListener('message', new Test());
-		$sse->start();
-	}
-
 	public function actionIndex() {
 		$this->layout = 'vote';
-//		$history = TreatmentHistory::find()->where([
-//			'not',
-//			['real_end' => null],
-//		])->andWhere([
-//			'or',
-//			[
-//				'att_point' => null,
-//				'is_finish' => 0,
-//			],
-//			[
-//				'att_point' => null,
-//			],
-//			[
-//				'spect_point' => null,
-//				'is_finish'   => 1,
-//			],
-//			[
-//				'ae_point'  => null,
-//				'is_finish' => 1,
-//			],
-//		])->one();
-//		$title   = 'Xin cảm ơn';
-//		$type    = null;
-//		if($history->att_point == null) {
-//			$title = TreatmentHistory::VOTE_TYPE[TreatmentHistory::ATT_POINT];
-//			$type  = TreatmentHistory::ATT_POINT;
-//		} elseif($history->spect_point == null && $history->is_finish == 1) {
-//			$title = TreatmentHistory::VOTE_TYPE[TreatmentHistory::SPECT_POINT];
-//			$type  = TreatmentHistory::SPECT_POINT;
-//		} elseif($history->ae_point == null && $history->is_finish == 1) {
-//			$title = TreatmentHistory::VOTE_TYPE[TreatmentHistory::AE_POINT];
-//			$type  = TreatmentHistory::AE_POINT;
-//		}
-//		echo '<pre>';
-//		echo($title);
-//		echo($type);
-//		die;
 		return $this->render('index');
 	}
 
@@ -108,6 +64,12 @@ class VoteController extends Controller {
 					$history->updateAttributes(['att_point' => $_POST['point']]);
 					if($history->is_finish == 0) {
 						$check = 0;
+					} else {
+						// Còn thiếu tính điểm cho kpi ekip;
+						$kpi_sale = KpiSale::findOne(['sale_id' => $history->sale_id]);
+						if($kpi_sale) {
+							$kpi_sale->updateAttributes(['att_point' => $_POST['point']]);
+						}
 					}
 				} elseif($_POST['type'] == TreatmentHistory::SPECT_POINT) {
 					$history->updateAttributes(['spect_point' => $_POST['point']]);
