@@ -168,6 +168,7 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
         $modelsCheckouts = $model->orderCheckout;
+
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($modelsCheckouts, 'id', 'id');
             $modelsCheckouts = Models::createMultiple(OrderCheckout::classname(), $modelsCheckouts);

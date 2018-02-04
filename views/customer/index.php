@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             [
                 'header' => 'Đã thanh toán',
-                'format' => ['decimal', '0'],
+//                'format' => ['decimal', '0'],
                 'value' => function ($model) {
                     return $model->getPayment($model->id);
                 }

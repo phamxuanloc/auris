@@ -26,6 +26,16 @@ class OrderCheckout extends \yii\db\ActiveRecord
         return 'order_checkout';
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->money = preg_replace( '/\./', '', $this->money);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function afterFind()
     {
         $this->money = number_format($this->money, 0,',', '.');
@@ -39,7 +49,7 @@ class OrderCheckout extends \yii\db\ActiveRecord
         return [
 //            [['customer_id', 'order_id', 'money'], 'required'],
             [['customer_id', 'order_id', 'casher', 'status', 'cash_type'], 'integer'],
-            [['money'], 'number'],
+//            [['money'], 'number'],
             [['created_date', 'payment_date'], 'safe'],
         ];
     }
