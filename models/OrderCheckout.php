@@ -26,6 +26,11 @@ class OrderCheckout extends \yii\db\ActiveRecord
         return 'order_checkout';
     }
 
+    public function afterFind()
+    {
+        $this->money = number_format($this->money, 0,',', '.');
+        parent::afterFind();
+    }
     /**
      * {@inheritdoc}
      */
