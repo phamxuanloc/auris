@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\KpiEkip;
 use app\models\KpiSale;
 use app\models\Models;
 use app\models\Customer;
@@ -124,6 +125,13 @@ class OrderController extends Controller
                             $kpiSale->save();
                         }
                     }
+                    $kpiEkip = KpiEkip::find()->where("ekip_id = $model->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                    if ($kpiEkip) {
+                        $kpiEkip->estimate_revenue = $model->total_price;
+                        $kpiEkip->real_revenue = $totalPayment;
+                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
+                        $kpiEkip->save();
+                    }
                 } else {
                     print_r($model->getErrors());
                 }
@@ -187,9 +195,10 @@ class OrderController extends Controller
                     $totalPayment = 0;
                     $model->total_payment = 0;
                     foreach ($modelsCheckouts as $modelCheckouts) {
+                        $money = preg_replace('/\./', '', $modelCheckouts->money);
                         $modelCheckouts->customer_id = $model->customer_id;
                         $modelCheckouts->order_id = $model->id;
-                        $totalPayment += $modelCheckouts->money;
+                        $totalPayment += $money;
                         //                        if(!$modelCheckouts->save()){
                         //                            print_r($modelCheckouts->getErrors());exit;
                         //                        }
@@ -204,6 +213,12 @@ class OrderController extends Controller
                             $kpiSale->real_revenue = $totalPayment;
                             $kpiSale->save();
                         }
+
+                        $kpiEkip = KpiEkip::find()->where("ekip_id = $model->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                        if ($kpiEkip) {
+                            $kpiEkip->real_revenue = $totalPayment;
+                            $kpiEkip->save();
+                        }
                     }
                     $model->total_payment = $model->total_payment + $totalPayment;
                     $model->update();
@@ -213,7 +228,9 @@ class OrderController extends Controller
                     return $this->redirect(['index']);
                 }
             } catch (Exception $e) {
+                print_r($e->getMessage());
                 $transaction->rollBack();
+                exit;
             }
         }
         return $this->render('update', [

@@ -26,21 +26,24 @@ class OrderCheckout extends \yii\db\ActiveRecord
         return 'order_checkout';
     }
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            $this->money = preg_replace( '/\./', '', $this->money);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public function beforeSave($insert)
+//    {
+//        if (parent::beforeSave($insert)) {
+//            for ($i = 0; $i < count($_POST['OrderCheckout']); $i++) {
+//                $this->money = preg_replace('/\./', '', $_POST['OrderCheckout'][$i]['money']);
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public function afterFind()
     {
-        $this->money = number_format($this->money, 0,',', '.');
+        $this->money = number_format($this->money, 0, ',', '.');
         parent::afterFind();
     }
+
     /**
      * {@inheritdoc}
      */

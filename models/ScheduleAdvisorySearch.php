@@ -65,7 +65,7 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
             'status' => $this->status,
             'customer_id' => $this->customer_id,
         ]);
-        $query->andFilterWhere(['between', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', $this->start_date, $this->end_date]);
+        $query->andFilterWhere(['between', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $this->start_date, $this->end_date]);
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])
             ->andFilterWhere(['like', 'full_name', $this->full_name])

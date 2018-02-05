@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Customer;
+use app\models\KpiEkip;
 use app\models\Order;
 use app\models\TreatmentHistory;
 use app\models\TreatmentHistorySearch;
@@ -131,6 +132,12 @@ class TreatmentScheduleController extends Controller {
 		if($treatmentHistory) {
 			$treatmentHistory->real_end = date('Y-m-d H:i:s');
 			$treatmentHistory->save();
+            $first_date = strtotime($treatmentHistory->real_end);
+            $second_date = strtotime($treatmentHistory->real_start);
+            $datediff = abs($first_date - $second_date);
+            $kpiEkip = KpiEkip::find()->where("ekip_id = $treatmentHistory->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+            $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
+            $kpiEkip->save();
 			return true;
 		}
 	}

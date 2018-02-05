@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -18,7 +19,7 @@ use yii\helpers\ArrayHelper;
  * @property int $total_customer
  * @property int $att_point
  */
-class KpiSale extends \yii\db\ActiveRecord
+class KpiSale extends Model
 {
     /**
      * @inheritdoc
@@ -56,29 +57,6 @@ class KpiSale extends \yii\db\ActiveRecord
             'real_revenue' => 'Doanh Thu Thực Tế',
             'total_customer' => 'Tổng Số Khách Hàng',
             'att_point' => 'Thái Độ Phục Vụ',
-        ];
-    }
-
-    public function getListDirectSale()
-    {
-        return ArrayHelper::map(User::find()->where('role_id = 3')->all(), 'id', 'full_name');
-    }
-
-    public function getMonth()
-    {
-        return [
-            '2018/01/01' => '01',
-            '2018/02/01' => '02',
-            '2018/03/01' => '03',
-            '2018/04/01' => '04',
-            '2018/05/01' => '05',
-            '2018/06/01' => '06',
-            '2018/07/01' => '07',
-            '2018/08/01' => '08',
-            '2018/09/01' => '09',
-            '2018/10/01' => '10',
-            '2018/11/01' => '11',
-            '2018/12/01' => '12',
         ];
     }
 

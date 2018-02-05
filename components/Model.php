@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
  */
 class Model extends ActiveRecord {
 
-	const STATUS = [
+	const STATUS        = [
 		'delete',
 		'active',
 	];
@@ -64,4 +64,22 @@ class Model extends ActiveRecord {
 			$this->user = \Yii::$app->user->identity;
 		}
 	}
+
+    public function getMonth()
+    {
+        return [
+            date('Y').'/01/01' => '01',
+            date('Y').'/02/01' => '02',
+            date('Y').'/03/01' => '03',
+            date('Y').'/04/01' => '04',
+            date('Y').'/05/01' => '05',
+            date('Y').'/06/01' => '06',
+            date('Y').'/07/01' => '07',
+            date('Y').'/08/01' => '08',
+            date('Y').'/09/01' => '09',
+            date('Y').'/10/01' => '10',
+            date('Y').'/11/01' => '11',
+            date('Y').'/12/01' => '12',
+        ];
+    }
 }
