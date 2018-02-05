@@ -60,9 +60,11 @@ class KpiSale extends Model
         ];
     }
 
-    public function getSuccess($sale_id){
+    public function getSuccess($sale_id)
+    {
         $total = ScheduleAdvisory::find()->where(['sale_id' => $sale_id])->count();
         $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5])->count();
-        return $success / $total * 100;
+        $notsuccess = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 4])->count();
+        return $success / ($notsuccess + $success) * 100;
     }
 }

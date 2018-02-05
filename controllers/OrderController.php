@@ -220,6 +220,7 @@ class OrderController extends Controller
                             $kpiEkip->save();
                         }
                     }
+
                     $model->total_payment = $model->total_payment + $totalPayment;
                     $model->update();
                 }
