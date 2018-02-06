@@ -71,7 +71,8 @@ class StaffController extends Controller {
 			return ActiveForm::validate($model);
 		}
 		if($model->load(Yii::$app->request->post())) {
-			$model->confirmed_at = time();
+			$model->confirmed_at  = time();
+			$model->password_hash = Password::hash($model->password_hash);
 			if($model->save()) {
 				return $this->redirect([
 					'index',
