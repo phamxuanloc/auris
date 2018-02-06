@@ -60,7 +60,6 @@ class OrderSearch extends Order
             return $dataProvider;
         }
 	    $boolean = RoleChecker::isAuth(OrderController::className(), 'view-all', Yii::$app->user->identity->getRoleId());
-echo $boolean;die;
 	    if(!$boolean) {
 		    $this->sale_id = $this->user->id;
 	    }
