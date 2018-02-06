@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -20,7 +21,7 @@ use yii\helpers\ArrayHelper;
  * @property string $note
  * @property int $customer_id
  */
-class ScheduleAdvisory extends \yii\db\ActiveRecord
+class ScheduleAdvisory extends Model
 {
     public $start_date, $end_date;
     /**

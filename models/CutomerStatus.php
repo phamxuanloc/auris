@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -11,7 +12,7 @@ use Yii;
  * @property string $name
  * @property int $status
  */
-class CutomerStatus extends \yii\db\ActiveRecord
+class CutomerStatus extends Model
 {
     /**
      * @inheritdoc

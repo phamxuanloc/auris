@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\controllers\KpiEkipController;
+use navatech\role\helpers\RoleChecker;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -57,7 +59,11 @@ class KpiEkipSearch extends KpiEkip
             // $query->where('0=1');
             return $dataProvider;
         }
+	    $boolean = RoleChecker::isAuth(KpiEkipController::className(), 'view-all', Yii::$app->user->identity->getRoleId());
 
+	    if(!$boolean) {
+		    $this->ekip_id = $this->user->id;
+	    }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -36,7 +37,7 @@ use yii\helpers\ArrayHelper;
  * @property string $examination
  * @property string $treatment_direction
  */
-class Customer extends \yii\db\ActiveRecord
+class Customer extends Model
 {
     /**
      * @inheritdoc

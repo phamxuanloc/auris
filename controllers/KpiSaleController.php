@@ -28,15 +28,20 @@ class KpiSaleController extends Controller {
 			],
 			'role'  => [
 				'class'   => RoleFilter::className(),
-				'name'    => 'Quản lý KPI',
+				'name'    => 'Quản lý KPI sale',
 				'actions' => [
-					'index'  => 'Danh sách',
-					'create' => 'Thêm mới',
-					'update' => 'Cập nhật',
-					'delete' => 'Xoá',
+					'index'    => 'Danh sách',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật',
+					'delete'   => 'Xoá',
+					'view-all' => 'Xem tất cả',
 				],
 			],
 		];
+	}
+
+	public function actionViewAll() {
+		return true;
 	}
 
 	/**

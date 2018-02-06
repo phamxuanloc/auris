@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -11,7 +12,7 @@ use Yii;
  * @property int $region_id
  * @property string $region_name
  */
-class Region extends \yii\db\ActiveRecord
+class Region extends Model
 {
     /**
      * {@inheritdoc}

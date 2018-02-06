@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -15,7 +16,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property User[] $users
  */
-class Role extends \yii\db\ActiveRecord {
+class Role extends Model {
 
 	/**
 	 * {@inheritdoc}

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -27,7 +28,7 @@ use Yii;
  * @property Token[]         $tokens
  * @property Role            $role
  */
-class DirectSale extends \yii\db\ActiveRecord {
+class DirectSale extends Model {
 
 	/**
 	 * {@inheritdoc}

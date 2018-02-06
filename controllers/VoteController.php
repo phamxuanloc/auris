@@ -41,7 +41,6 @@ class VoteController extends Controller {
 			],
 		];
 	}
-
 	public function actionRealtime() {
 		session_write_close();
 		$sse = Yii::$app->sse;

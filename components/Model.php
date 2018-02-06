@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
  */
 class Model extends ActiveRecord {
 
-	const STATUS        = [
+	const STATUS = [
 		'delete',
 		'active',
 	];
@@ -65,21 +65,42 @@ class Model extends ActiveRecord {
 		}
 	}
 
-    public function getMonth()
-    {
-        return [
-            date('Y').'/01/01' => '01',
-            date('Y').'/02/01' => '02',
-            date('Y').'/03/01' => '03',
-            date('Y').'/04/01' => '04',
-            date('Y').'/05/01' => '05',
-            date('Y').'/06/01' => '06',
-            date('Y').'/07/01' => '07',
-            date('Y').'/08/01' => '08',
-            date('Y').'/09/01' => '09',
-            date('Y').'/10/01' => '10',
-            date('Y').'/11/01' => '11',
-            date('Y').'/12/01' => '12',
-        ];
-    }
+	public function getMonth() {
+		return [
+			date('Y') . '/01/01' => '01',
+			date('Y') . '/02/01' => '02',
+			date('Y') . '/03/01' => '03',
+			date('Y') . '/04/01' => '04',
+			date('Y') . '/05/01' => '05',
+			date('Y') . '/06/01' => '06',
+			date('Y') . '/07/01' => '07',
+			date('Y') . '/08/01' => '08',
+			date('Y') . '/09/01' => '09',
+			date('Y') . '/10/01' => '10',
+			date('Y') . '/11/01' => '11',
+			date('Y') . '/12/01' => '12',
+		];
+	}
+
+	public static function createMultiple($modelClass, $multipleModels = []) {
+		$model    = new $modelClass;
+		$formName = $model->formName();
+		$post     = \Yii::$app->request->post($formName);
+		$models   = [];
+		if(!empty($multipleModels)) {
+			$keys           = array_keys(ArrayHelper::map($multipleModels, 'id', 'id'));
+			$multipleModels = array_combine($keys, $multipleModels);
+		}
+		if($post && is_array($post)) {
+			foreach($post as $i => $item) {
+				if(isset($item['id']) && !empty($item['id']) && isset($multipleModels[$item['id']])) {
+					$models[] = $multipleModels[$item['id']];
+				} else {
+					$models[] = new $modelClass;
+				}
+			}
+		}
+		unset($model, $formName, $post);
+		return $models;
+	}
 }

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -17,7 +18,7 @@ use Yii;
  * @property string $note
  * @property int $is_finish
  */
-class TreatmentSchedule extends \yii\db\ActiveRecord
+class TreatmentSchedule extends Model
 {
     /**
      * @inheritdoc

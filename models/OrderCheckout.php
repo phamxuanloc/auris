@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\Model;
 use Yii;
 
 /**
@@ -16,7 +17,7 @@ use Yii;
  * @property int $casher
  * @property int $status
  */
-class OrderCheckout extends \yii\db\ActiveRecord
+class OrderCheckout extends Model
 {
     /**
      * {@inheritdoc}
