@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\KpiEkip;
 use app\models\KpiSale;
 use app\models\TreatmentHistory;
 use app\sse\MessageEventHandler;
@@ -60,21 +61,31 @@ class VoteController extends Controller {
 		if($_POST['id'] != null) {
 			$history = TreatmentHistory::findOne($_POST['id']);
 			if($history) {
+				$kpi_sale = KpiSale::findOne(['sale_id' => $history->sale_id]);
+				$kpi_ekip = KpiEkip::findOne(['ekip_id' => $history->ekip_id]);
 				if($_POST['type'] == TreatmentHistory::ATT_POINT) {
 					$history->updateAttributes(['att_point' => $_POST['point']]);
 					if($history->is_finish == 0) {
 						$check = 0;
 					} else {
 						// Còn thiếu tính điểm cho kpi ekip;
-						$kpi_sale = KpiSale::findOne(['sale_id' => $history->sale_id]);
 						if($kpi_sale) {
 							$kpi_sale->updateAttributes(['att_point' => $_POST['point']]);
 						}
+						//						if($kpi_ekip){
+						//							$kpi_ekip->updateAttributes([''])
+						//						}
 					}
 				} elseif($_POST['type'] == TreatmentHistory::SPECT_POINT) {
 					$history->updateAttributes(['spect_point' => $_POST['point']]);
+					if($kpi_ekip) {
+						$kpi_ekip->updateAttributes(['spect_point' => $_POST['point']]);
+					}
 				} else {
 					$history->updateAttributes(['ae_point' => $_POST['point']]);
+					if($kpi_ekip) {
+						$kpi_ekip->updateAttributes(['ae_point' => $_POST['point']]);
+					}
 					$check = 0;
 				}
 			}
