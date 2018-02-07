@@ -47,6 +47,8 @@ class VoteController extends Controller {
 		//		$sse->exec_limit = 300;
 		$sse->addEventListener('message', new MessageEventHandler());
 		$sse->start();
+		ob_end_flush();     // Strange behaviour, will not work
+		flush();            // Unless both are called !
 	}
 
 	public function actionIndex() {
