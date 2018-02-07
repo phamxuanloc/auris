@@ -45,8 +45,8 @@ class VoteController extends Controller {
 	public function actionRealtime() {
 		set_time_limit(0);
 		session_write_close();
-		$sse = Yii::$app->sse;
-		//		$sse->exec_limit = 300;
+		$sse             = Yii::$app->sse;
+		$sse->exec_limit = 300;
 		$sse->addEventListener('message', new MessageEventHandler());
 		$sse->start();
 		ob_end_flush();     // Strange behaviour, will not work
