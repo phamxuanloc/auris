@@ -97,9 +97,9 @@ $(document).ready(function () {
         var order_discount = $('#order-discount').val().replace(/\./g, '');
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
-    $("#kpisalesearch-sale_id").change(function () {
-        $("#kpi-search-form").submit();
-    });
+    // $("#kpisalesearch-sale_id").change(function () {
+    //     $("#kpi-search-form").submit();
+    // });
     $("#order-discount").keyup(function(){
         var order_discount = $('#order-discount').val().replace(/\./g, '');
         $("#order-discount").val(addCommas(order_discount));

@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'month',
                 'format' => ['date', 'php:m/Y'],
             ],
+            'kpi',
             [
                 'attribute' => 'total_time',
                 'value' => function ($data) {
@@ -53,14 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'estimate_revenue',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return "<b style='font-size: 16px;color: red;'>" . number_format($data->estimate_revenue, 0, ',', '.') . " (" . (($data->estimate_revenue / $data->kpi) * 100) . "%)</b>";
+                    return "<b style='font-size: 16px;color: red;'>" . number_format($data->estimate_revenue, 0, ',', '.') . "</b>";
                 }
             ],
             [
                 'attribute' => 'real_revenue',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return "<b style='font-size: 16px;color: green;'>" . number_format($data->real_revenue, 0, ',', '.') . " (" . (($data->real_revenue / $data->kpi) * 100) . "%)</b>";
+                    return "<b style='font-size: 16px;color: green;'>" . number_format($data->real_revenue, 0, ',', '.') . "";
                 }
             ],
             'total_customer',

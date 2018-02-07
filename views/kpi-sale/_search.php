@@ -21,6 +21,14 @@ use yii\bootstrap\ActiveForm;
         <div class="col-md-6">
             <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale(), ['prompt'=>'Tất cả'])->label("Lọc Theo DirectSale") ?>
         </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'month')->dropDownList($model->getMonth(), ['prompt' => 'Vui lòng chọn']) ?>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-info']) ?>
+            </div>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

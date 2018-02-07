@@ -2,6 +2,7 @@
 
 namespace app\editable;
 
+use app\models\Order;
 use app\models\ScheduleAdvisory;
 use yii2mod\editable\EditableAction;
 
@@ -26,6 +27,10 @@ class EditableController extends \yii\web\Controller {
 			'change-status' => [
 				'class'      => EditableAction::class,
 				'modelClass' => ScheduleAdvisory::class,
+			],
+            'change-type' => [
+				'class'      => EditableAction::class,
+				'modelClass' => Order::class,
 			],
 		];
 	}

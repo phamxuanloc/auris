@@ -42,10 +42,12 @@ class Order extends Model
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->price = preg_replace( '/\./', '', $_POST['Order']['price']);
-            $this->quantiy = preg_replace( '/\./', '', $_POST['Order']['quantiy']);
-            $this->total_price = preg_replace( '/\./', '', $_POST['Order']['total_price']);
-            $this->discount = preg_replace( '/\./', '', $_POST['Order']['discount']);
+            if(isset($_POST['Order'])) {
+                $this->price = preg_replace('/\./', '', $_POST['Order']['price']);
+                $this->quantiy = preg_replace('/\./', '', $_POST['Order']['quantiy']);
+                $this->total_price = preg_replace('/\./', '', $_POST['Order']['total_price']);
+                $this->discount = preg_replace('/\./', '', $_POST['Order']['discount']);
+            }
             return true;
         } else {
             return false;

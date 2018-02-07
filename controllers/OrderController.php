@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\editable\EditableController;
 use app\models\KpiEkip;
 use app\models\KpiSale;
 use app\models\Models;
@@ -23,7 +24,7 @@ use yii\filters\VerbFilter;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
-class OrderController extends Controller
+class OrderController extends EditableController
 {
 
 	/**

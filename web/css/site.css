@@ -97,9 +97,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
@@ -114,131 +114,175 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-.indigo-900{
+
+.indigo-900 {
     background-color: #fff;
     border-right: 1px solid #707070;
 }
-.navbar-brand img, .navbar-brand svg{
+
+.navbar-brand img, .navbar-brand svg {
     padding-top: 20px;
     max-height: 100%;
 }
+
 .navside .nav li.active {
     background-color: #fff;
     border-right: 2px solid #CA27FB;
 }
-.table > thead:first-child > tr:first-child > th{
+
+.table > thead:first-child > tr:first-child > th {
     border: none;
     color: #A7AFBF;
     font-weight: 400;
     font-size: 12px;
 }
-.table > thead > tr > th{
+
+.table > thead > tr > th {
     padding: 15px 16px;
 }
-.table-bordered{
+
+.table-bordered {
     border: none;
 }
-.table-striped > tbody > tr:nth-child(odd){
+
+.table-striped > tbody > tr:nth-child(odd) {
     background-color: #fff;
     background-clip: unset;
 }
-.table > tbody > tr > td{
+
+.table > tbody > tr > td {
     padding: 18px 8px;
     color: #434343;
     border: none;
 }
+
 table {
     border-collapse: separate;
     border-spacing: 0px 10px;
 }
-.table-striped > tbody > tr{
+
+.table-striped > tbody > tr {
     background-color: #fff;
     border: none;
 }
-.customer-index p, .order-index p{
+
+.customer-index p, .order-index p {
     text-align: right;
 }
-.btn{
+
+.btn {
     font-size: 13px;
 }
-.app-header{
+
+.app-header {
     height: 80px;
 }
-.form-inline .input-group>.form-control{
+
+.form-inline .input-group > .form-control {
     width: 400px;
     border: none;
     box-shadow: none;
     margin-left: 22px;
 }
-.form-inline .input-group{
+
+.form-inline .input-group {
     position: relative;
 }
-.form-inline .input-group i{
+
+.form-inline .input-group i {
     position: absolute;
     left: 10px;
     z-index: 99;
     top: 10px;
     color: #A7AFBF;
 }
-.form-horizontal .control-label{
+
+.form-horizontal .control-label {
     color: rgba(0, 0, 0, 0.87);
     font-size: 0.875rem;
     font-weight: 300;
 }
-.box-header h6{
+
+.box-header h6 {
     font-weight: 400;
     font-size: 1rem;
 }
+
 select.form-control:not([size]):not([multiple]) {
     height: 2.1rem;
 }
-.navside .nav li > a, .navside .nav li.active > a{
+
+.navside .nav li > a, .navside .nav li.active > a {
     color: #CA27FB;
 }
-.order-index .grid-view{
+
+.order-index .grid-view {
     overflow-x: scroll;
 }
-.order-index .grid-view table{
+
+.order-index .grid-view table {
     width: 2500px;
     overflow: scroll;
 }
-.treatment-schedule-index .grid-view table{
+
+.treatment-schedule-index .grid-view table {
     width: 2600px;
     overflow: scroll;
 }
-.submenu{
+
+.submenu {
     width: 200px;
 }
-.vote-index{
+
+.vote-index {
     background-color: #fff;
 }
+
 .treatment-schedule-index .grid-view {
     overflow-x: scroll;
 }
-.treatment-schedule-index .table-responsive{
+
+.treatment-schedule-index .table-responsive {
     width: 2600px;
 }
-.popover{
+
+.popover {
     display: none;
 }
+
 .table > colgroup + thead > tr:first-child > th {
     border: none;
     color: #A7AFBF;
     font-weight: 400;
     font-size: 12px;
 }
-#dynamic-form .radio{
+
+#dynamic-form .radio {
     float: left;
     margin-right: 10px;
 }
-#customer-customer_status_id .checkbox{
+
+#customer-customer_status_id .checkbox {
     width: 50%;
     float: left;
     /*padding-right: 10px;*/
 }
-.datepicker > div{
+
+.datepicker > div {
     display: block;
 }
-.form-group{
-    margin-bottom: 10px!important;
+
+.form-group {
+    margin-bottom: 10px !important;
+}
+
+.nav-icon i {
+    background-color: #A7AFBF;
+}
+
+.navside .nav li a:hover .nav-icon i, .navside .nav li a:focus .nav-icon i {
+    background-color: #CA27FB;
+}
+.navside .nav li.active > a span i{
+    background-color: #CA27FB;
 }

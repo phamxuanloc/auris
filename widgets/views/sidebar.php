@@ -15,7 +15,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                        <img src="' . Yii::$app->request->baseUrl . '/images/message.png"/>
+                        <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/message.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
@@ -33,7 +33,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                        <img src="' . Yii::$app->request->baseUrl . '/images/ic-home.png"/>
+                        <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/ic-home.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
@@ -55,7 +55,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                           <img src="' . Yii::$app->request->baseUrl . '/images/icon-strikethrough.png"/>
+                           <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/icon-strikethrough.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
@@ -99,7 +99,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                           <img src="' . Yii::$app->request->baseUrl . '/images/ic-coppy.png"/>
+                           <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/ic-coppy.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
@@ -125,7 +125,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                           <img src="' . Yii::$app->request->baseUrl . '/images/ic-plus.png"/>
+                           <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/ic-plus.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
@@ -139,7 +139,7 @@ echo Menu::widget([
 		[
 			'label' => '<span class="nav-icon">
                       <i class="material-icons">
-                           <img src="' . Yii::$app->request->baseUrl . '/images/ic-report.png"/>
+                           <img style="width: 18px;" src="' . Yii::$app->request->baseUrl . '/images/ic-report.png"/>
                       </i>
                     </span>',
 			'url'   => '#',
