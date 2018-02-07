@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 $totalPayment = 0;
                 foreach ($model as $history) {
                     $totalCustomer += $history->id;
-                    $totalPrice += $history->total_price;
+                    $totalPrice += preg_replace('/\./', '', $history->total_price);
                     $totalPayment += $history->total_payment;
                 }?>
 
@@ -87,13 +87,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td style="color:red;font-size: 20px;font-weight: 600"><?= $totalCustomer != 0 ? number_format( $totalPrice / $totalCustomer, '0', ',', '.') : 0?></td>
                     <td style="color: green;font-size: 20px;font-weight: 600"><?= $totalCustomer != 0 ? number_format($totalPayment / $totalCustomer, '0', ',', '.') : 0?></td>
                 </tr>
-                <?php foreach ($model as $history) { ?>
+                <?php foreach ($model as $history) {
+                    $totalPrice = preg_replace('/\./', '', $history->total_price);?>
                     <tr>
                         <td><?= date('d/m/Y', strtotime($history->created_date))?></td>
                         <td><?= number_format($history->id)?></td>
                         <td style="color:red"><?= $history->total_price?></td>
                         <td style="color: green;"><?= number_format($history->total_payment, '0', ',', '.')?></td>
-                        <td style="color:red"><?= number_format($history->total_price / $history->id, '0', ',', '.')?></td>
+                        <td style="color:red"><?= number_format($totalPrice / $history->id, '0', ',', '.')?></td>
                         <td style="color: green;"><?= number_format($history->total_payment / $history->id, '0', ',', '.')?></td>
                     </tr>
                 <?php } ?>
