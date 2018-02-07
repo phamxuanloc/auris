@@ -19,25 +19,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_search', ['model' => $searchModel]) ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+    <?= GridView::widget(['dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
-        'columns' => [
-//            [
-//                'attribute' => 'ekip_id',
-//                'value' => 'ekip.full_name',
-//            ],
+        'columns' => [//            [
+            //                'attribute' => 'ekip_id',
+            //                'value' => 'ekip.full_name',
+            //            ],
             [
                 'attribute' => 'month',
                 'format' => ['date', 'php:m/Y'],
             ],
             'kpi',
-//            'total_customer',
-            [
-                'attribute' => 'total_customer',
+            //            'total_customer',
+            ['attribute' => 'total_customer',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return "<b style='font-size: 16px;color: red;'>" . number_format($data->total_customer, 0, ',', '.') . " (" . (($data->total_customer / $data->kpi) * 100) . "%)</b>";
+                    if ($data->kpi <= 0) {
+                        return "<b style='font-size: 16px;color: red;'>" . number_format($data->total_customer, 0, ',', '.') . "</b>";
+                    }else{
+                        return "<b style='font-size: 16px;color: red;'>" . number_format($data->total_customer, 0, ',', '.') . " (" . (($data->total_customer / $data->kpi) * 100) . "%)</b>";
+                    }
                 }
             ],
             [
@@ -53,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $hour = ($data->total_time - $data->total_time % 3600) / 3600;
                         $minute = (($data->total_time % 3600) - ($data->total_time % 3600) % 60) / 60;
                         $second = $data->total_time - $minute * 60 - $hour * 3600;
-                        return $hour." giờ " . $minute . " phút " . $second . " giây";
+                        return $hour . " giờ " . $minute . " phút " . $second . " giây";
                     }
                 }
             ],

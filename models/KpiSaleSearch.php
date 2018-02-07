@@ -78,8 +78,8 @@ class KpiSaleSearch extends KpiSale
             'att_point' => $this->att_point,
         ]);
 
-        $query->orderBy("date(month) DESC");
-        $query->groupBy("date(month)");
+//        $query->orderBy("date(month) DESC");
+//        $query->groupBy("date(month)");
 
         return $dataProvider;
     }

@@ -119,9 +119,11 @@ class OrderController extends EditableController
                             $modelCheckout->order_id = $model->id;
                             $modelCheckout->customer_id = $model->customer_id;
                             $totalPayment += $modelCheckout->money;
-                            if (!($flag = $modelCheckout->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                            if ($modelCheckout->cash_type != "") {
+                                if (!($flag = $modelCheckout->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
                             }
                         }
                         $i++;
@@ -129,6 +131,15 @@ class OrderController extends EditableController
                     if ($model->sale_id) {
                         $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
                         if ($kpiSale) {
+                            $kpiSale->estimate_revenue = $model->total_price;
+                            $kpiSale->real_revenue = $totalPayment;
+                            $kpiSale->total_customer = $kpiSale->total_customer + 1;
+                            $kpiSale->save();
+                        }else{
+                            $kpiSale = new KpiSale();
+                            $kpiSale->sale_id = $model->sale_id;
+                            $kpiSale->kpi = 0;
+                            $kpiSale->month = date('Y-m-d');
                             $kpiSale->estimate_revenue = $model->total_price;
                             $kpiSale->real_revenue = $totalPayment;
                             $kpiSale->total_customer = $kpiSale->total_customer + 1;
@@ -141,6 +152,17 @@ class OrderController extends EditableController
                         $kpiEkip->real_revenue = $totalPayment;
 //                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
                         $kpiEkip->save();
+                    }else{
+                        $kpiEkip = new KpiEkip();
+                        $kpiEkip->ekip_id = $model->ekip_id;
+                        $kpiEkip->kpi = 0;
+                        $kpiEkip->month = date('Y-m-d');
+                        $kpiEkip->estimate_revenue = $model->total_price;
+                        $kpiEkip->real_revenue = $totalPayment;
+                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
+                        if(!$kpiEkip->save()){
+                            print_r($kpiEkip->getErrors());exit;
+                        }
                     }
                 } else {
                     print_r($model->getErrors());
