@@ -29,6 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'ekip.full_name',
             ],
             [
+                'attribute' => 'month',
+                'format' => ['date', 'php:m/Y'],
+            ],
+            [
                 'attribute' => 'total_time',
                 'value' => function ($data) {
                     if ($data->total_time < 60) {
