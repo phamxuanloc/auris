@@ -108,8 +108,13 @@ class OrderController extends EditableController
             try {
                 if ($flag = $model->save(false)) {
                     $totalPayment = 0;
+                    $i = 0;
                     foreach ($modelCheckouts as $modelCheckout) {
-                        if ($modelCheckout->money) {
+//                        print_r($_POST['OrderCheckout'][$i]['money']);exit;
+                        if (isset($_POST['OrderCheckout'][$i]['money'])) {
+                            $money = $_POST['OrderCheckout'][$i]['money'];
+                            $money = preg_replace('/\./', '', $money);
+                            $modelCheckout->money = $money;
                             $modelCheckout->created_date = date('Y-m-d H:i:s');
                             $modelCheckout->order_id = $model->id;
                             $modelCheckout->customer_id = $model->customer_id;
@@ -119,6 +124,7 @@ class OrderController extends EditableController
                                 break;
                             }
                         }
+                        $i++;
                     }
                     if ($model->sale_id) {
                         $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
@@ -232,7 +238,7 @@ class OrderController extends EditableController
                     }
 
                     if ($model->type == 1) {
-                        if($oldModel->type != $model->type) {
+                        if ($oldModel->type != $model->type) {
                             $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
                             $kpiEkip->save();
                         }

@@ -111,7 +111,7 @@ $this->registerJs($js);
                         }
                         ?>
                         <div class="col-md-6">
-                            <?= $form->field($modelCheckout, "[{$index}]money")->textInput(['maxlength' => true])->label("Lần thanh toán " . ($index + 1)) ?>
+                            <?= $form->field($modelCheckout, "[{$index}]money")->textInput(['maxlength' => true, "onkeyup" => "changeValue(this.value, this)"])->label("Lần thanh toán " . ($index + 1)) ?>
                         </div>
                         <div class="col-md-6">
                             <?= $form->field($modelCheckout, "[{$index}]cash_type", ['template' => "<div class=\"col-lg-12\">{input}</div>"])->radioList(['1' => 'Tiền mặt', '2' => 'Thẻ'])->label(false) ?>
