@@ -23,11 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'ekip_id',
-                'value' => 'ekip.full_name',
-            ],
+//            [
+//                'attribute' => 'ekip_id',
+//                'value' => 'ekip.full_name',
+//            ],
             [
                 'attribute' => 'month',
                 'format' => ['date', 'php:m/Y'],

@@ -201,8 +201,11 @@ class OrderController extends EditableController
                     }
                     $totalPayment = 0;
                     $model->total_payment = 0;
+                    $i = 0;
                     foreach ($modelsCheckouts as $modelCheckouts) {
+                        $modelCheckouts->money = $_POST['OrderCheckout'][$i]['money'];
                         $money = preg_replace('/\./', '', $modelCheckouts->money);
+                        echo $money;
                         $modelCheckouts->money = $money;
                         $modelCheckouts->customer_id = $model->customer_id;
                         $modelCheckouts->order_id = $model->id;
@@ -213,7 +216,9 @@ class OrderController extends EditableController
                                 break;
                             }
                         }
+                        $i++;
                     }
+                    exit;
 
                     $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
                     if ($kpiSale) {

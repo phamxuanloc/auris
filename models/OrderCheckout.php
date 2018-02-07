@@ -34,13 +34,13 @@ class OrderCheckout extends Model
 //        }
 //        return parent::beforeSave($insert);
 //    }
+
 //
-////
-//    public function afterFind()
-//    {
-//        $this->money = number_format($this->money, 0, ',', '.');
-//        parent::afterFind();
-//    }
+    public function afterFind()
+    {
+        $this->money = number_format($this->money, 0, ',', '.');
+        parent::afterFind();
+    }
 
     /**
      * {@inheritdoc}
@@ -50,7 +50,7 @@ class OrderCheckout extends Model
         return [
 //            [['customer_id', 'order_id', 'money'], 'required'],
             [['customer_id', 'order_id', 'casher', 'status', 'cash_type'], 'integer'],
-            [['money'], 'number'],
+//            [['money'], 'number'],
             [['created_date', 'payment_date'], 'safe'],
         ];
     }
