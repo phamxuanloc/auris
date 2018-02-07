@@ -11,15 +11,13 @@ $this->title                   = 'Vote';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-index">
-	<div class="header">
-	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="content">
 					<div class="content-header">
 						<div class="col-md-3">
-							<img class="img-responsive" src="<?= Yii::$app->request->baseUrl ?>/images/logo-vote.png"/>
+							<img style="height: 110px;" class="img-responsive" src="<?= Yii::$app->request->baseUrl ?>/images/logo-01.png"/>
 						</div>
 						<div class="col-md-9">
 							<div class="right">
@@ -35,21 +33,21 @@ $this->params['breadcrumbs'][] = $this->title;
 						<div class="row vote-icon">
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-bad" point="-3">
-									<img src="<?= Yii::$app->request->baseUrl ?>/images/embarrassed.png"/>
+									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/1.png"/>
 									<p>Không hài lòng</p>
 									<span>Lựa chọn</span>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-good" point="1">
-									<img src="<?= Yii::$app->request->baseUrl ?>/images/thumbs-up.png"/>
+									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/2.png"/>
 									<p>Tốt</p>
 									<span>Lựa chọn</span>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-excellent" point="2">
-									<img src="<?= Yii::$app->request->baseUrl ?>/images/happy.png"/>
+									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/3.png"/>
 									<p>Rất hài lòng</p>
 									<span>Lựa chọn</span>
 								</div>
