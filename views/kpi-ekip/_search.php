@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip(), ['prompt'=>'Tất cả'])->label("Lọc Theo DirectSale") ?>
+            <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip(), ['prompt'=>'Tất cả'])->label("Lọc Theo Ekip") ?>
         </div>
         <div class="col-md-3">
             <?= $form->field($model, 'month')->dropDownList($model->getMonth(), ['prompt' => 'Vui lòng chọn']) ?>
