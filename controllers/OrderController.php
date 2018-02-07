@@ -20,6 +20,7 @@ use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\Model;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -27,33 +28,35 @@ use yii\filters\VerbFilter;
 class OrderController extends EditableController
 {
 
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors() {
-		return [
-			'verbs' => [
-				'class'   => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
-			],
-			'role'  => [
-				'class'   => RoleFilter::className(),
-				'name'    => 'Quản lý đơn hàng',
-				'actions' => [
-					'index'    => 'Danh sách',
-					'create'   => 'Thêm mới',
-					'update'   => 'Cập nhật',
-					'view-all' => 'Xem tất cả',
-				],
-			],
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            'role' => [
+                'class' => RoleFilter::className(),
+                'name' => 'Quản lý đơn hàng',
+                'actions' => [
+                    'index' => 'Danh sách',
+                    'create' => 'Thêm mới',
+                    'update' => 'Cập nhật',
+                    'view-all' => 'Xem tất cả',
+                ],
+            ],
+        ];
+    }
 
-	public function actionViewAll() {
-		return true;
-	}
+    public function actionViewAll()
+    {
+        return true;
+    }
 
     /**
      * Lists all Order models.
@@ -106,7 +109,7 @@ class OrderController extends EditableController
                 if ($flag = $model->save(false)) {
                     $totalPayment = 0;
                     foreach ($modelCheckouts as $modelCheckout) {
-                        if($modelCheckout->money) {
+                        if ($modelCheckout->money) {
                             $modelCheckout->created_date = date('Y-m-d H:i:s');
                             $modelCheckout->order_id = $model->id;
                             $modelCheckout->customer_id = $model->customer_id;
@@ -130,7 +133,7 @@ class OrderController extends EditableController
                     if ($kpiEkip) {
                         $kpiEkip->estimate_revenue = $model->total_price;
                         $kpiEkip->real_revenue = $totalPayment;
-                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
+//                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
                         $kpiEkip->save();
                     }
                 } else {
@@ -144,9 +147,10 @@ class OrderController extends EditableController
                     $transaction->commit();
                     return $this->redirect(['index']);
                 }
-            }catch (Exception $e) {
+            } catch (Exception $e) {
                 $transaction->rollBack();
-                print_r($e->getMessage());exit;
+                print_r($e->getMessage());
+                exit;
             }
         }
         return $this->render('create', [
@@ -155,7 +159,8 @@ class OrderController extends EditableController
         ]);
     }
 
-    public function actionProduct(){
+    public function actionProduct()
+    {
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
             $parents = $_POST['depdrop_parents'];
@@ -180,6 +185,7 @@ class OrderController extends EditableController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldModel = clone $model;
         $modelsCheckouts = $model->orderCheckout;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -197,27 +203,33 @@ class OrderController extends EditableController
                     $model->total_payment = 0;
                     foreach ($modelsCheckouts as $modelCheckouts) {
                         $money = preg_replace('/\./', '', $modelCheckouts->money);
+                        $modelCheckouts->money = $money;
                         $modelCheckouts->customer_id = $model->customer_id;
                         $modelCheckouts->order_id = $model->id;
-                        $totalPayment += $money;
-                        //                        if(!$modelCheckouts->save()){
-                        //                            print_r($modelCheckouts->getErrors());exit;
-                        //                        }
-                        if (!($flag = $modelCheckouts->save(false))) {
-                            $transaction->rollBack();
-                            break;
+                        $totalPayment += $modelCheckouts->money;
+                        if ($modelCheckouts->cash_type != "") {
+                            if (!($flag = $modelCheckouts->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
                         }
                     }
-                    if ($model->sale_id) {
-                        $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-                        if ($kpiSale) {
-                            $kpiSale->real_revenue = $totalPayment;
-                            $kpiSale->save();
-                        }
 
-                        $kpiEkip = KpiEkip::find()->where("ekip_id = $model->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-                        if ($kpiEkip) {
-                            $kpiEkip->real_revenue = $totalPayment;
+                    $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                    if ($kpiSale) {
+                        $kpiSale->real_revenue = $totalPayment;
+                        $kpiSale->save();
+                    }
+
+                    $kpiEkip = KpiEkip::find()->where("ekip_id = $model->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+                    if ($kpiEkip) {
+                        $kpiEkip->real_revenue = $totalPayment;
+                        $kpiEkip->save();
+                    }
+
+                    if ($model->type == 1) {
+                        if($oldModel->type != $model->type) {
+                            $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
                             $kpiEkip->save();
                         }
                     }
@@ -275,7 +287,7 @@ class OrderController extends EditableController
                 $a = $orderCode + 1;
                 return "AU1-HD" . $a;
             }
-        }else{
+        } else {
             return "AU1-HD0000001";
         }
         //        print_r($orderCode);exit;

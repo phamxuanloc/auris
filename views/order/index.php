@@ -82,24 +82,12 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'format' => ['decimal', 0],
             ],
             [
-                'class' => \yii2mod\editable\EditableColumn::class,
                 'attribute' => 'type',
-                'url' => ['change-type'],
-                'type' => 'select',
-                'contentOptions' => [
-                    'style' => 'width:180px'
-                ],
-                'editableOptions' => function ($model) {
-                    return [
-                        'mode' => 'inline',
-                        'source' => ['1' => 'Đang làm', '2' => 'Hoàn thành'],
-                        'value' => $model->type,
-                    ];
-                },
+                'format' => 'raw',
                 'value' => function ($data) {
-                    if ($data->type == 1) {
-                        return "<span style='color: #0E7E12;'>Đang làm</span>";
-                    } else if ($data->type == 2) {
+                    if ($data->type == 0) {
+                        return "<span style='color: red;'>Đang làm</span>";
+                    } else if ($data->type == 1) {
                         return "<span style='color: #0E7E12;'>Hoàn thành</span>";
                     }
                 }

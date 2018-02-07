@@ -27,7 +27,9 @@ $this->registerJs($js);
     <div class="box">
         <div class="box-header b-b" style="display: flex;">
             <h3><?= $this->title ?></h3>
-            <a class="btn btn-primary" style="position: absolute;right: 20px;top: 7px;" href="<?= Yii::$app->urlManager->createUrl(['treatment-schedule/create', 'order_id' => $model->id])?>">Tạo lịch điều trị</a>
+            <a class="btn btn-primary" style="position: absolute;right: 20px;top: 7px;"
+               href="<?= Yii::$app->urlManager->createUrl(['treatment-schedule/create', 'order_id' => $model->id]) ?>">Tạo
+                lịch điều trị</a>
         </div>
 
         <div class="box-body">
@@ -130,6 +132,11 @@ $this->registerJs($js);
             </div>
 
 
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, "type")->radioList(['0' => 'Đang làm', '1' => 'Đã xong'])->label('Trạng thái') ?>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'note')->textarea(['maxlength' => true]) ?>

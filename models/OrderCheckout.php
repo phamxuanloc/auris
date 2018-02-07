@@ -27,23 +27,20 @@ class OrderCheckout extends Model
         return 'order_checkout';
     }
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            for ($i = 0; $i < count($_POST['OrderCheckout']); $i++) {
-                $this->money = preg_replace('/\./', '', $_POST['OrderCheckout'][$i]['money']);
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function afterFind()
-    {
-        $this->money = number_format($this->money, 0, ',', '.');
-        parent::afterFind();
-    }
+//    public function beforeSave($insert)
+//    {
+//        for ($i = 0; $i < count($_POST['OrderCheckout']); $i++) {
+//            $this->money = preg_replace('/\./', '', $_POST['OrderCheckout'][$i]['money']);
+//        }
+//        return parent::beforeSave($insert);
+//    }
+//
+////
+//    public function afterFind()
+//    {
+//        $this->money = number_format($this->money, 0, ',', '.');
+//        parent::afterFind();
+//    }
 
     /**
      * {@inheritdoc}
@@ -53,7 +50,7 @@ class OrderCheckout extends Model
         return [
 //            [['customer_id', 'order_id', 'money'], 'required'],
             [['customer_id', 'order_id', 'casher', 'status', 'cash_type'], 'integer'],
-//            [['money'], 'number'],
+            [['money'], 'number'],
             [['created_date', 'payment_date'], 'safe'],
         ];
     }

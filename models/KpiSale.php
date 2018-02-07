@@ -65,6 +65,10 @@ class KpiSale extends Model
         $total = ScheduleAdvisory::find()->where(['sale_id' => $sale_id])->count();
         $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5])->count();
         $notsuccess = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 4])->count();
-        return $success / ($notsuccess + $success) * 100;
+        if($notsuccess == 0 && $success == 0){
+            return 0;
+        }else {
+            return $success / ($notsuccess + $success) * 100;
+        }
     }
 }
