@@ -136,3 +136,9 @@ function end(id) {
         }
     });
 }
+
+function changeValue(value, element) {
+    var order_check_out_money = $("#"+element.id).val().replace(/\./g, '');
+    $("#"+element.id).val(addCommas(order_check_out_money));
+    console.log(addCommas(order_check_out_money));
+}
