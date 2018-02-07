@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <div class="box-body">
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale()) ?>
+        <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale(), ['prompt' => 'Vui lòng chọn']) ?>
 
         <?= $form->field($model, 'kpi')->textInput(['maxlength' => true]) ?>
 

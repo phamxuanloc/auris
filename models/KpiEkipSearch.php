@@ -45,6 +45,7 @@ class KpiEkipSearch extends KpiEkip
     public function search($params)
     {
         $query = KpiEkip::find();
+        $query->select("month, sum(kpi) as kpi, sum(estimate_revenue) as estimate_revenue, sum(real_revenue) as real_revenue, sum(total_customer) as total_customer, sum(spect_point) as spect_point, sum(ae_point) as ae_point, sum(total_time) as total_time, ekip_id");
 
         // add conditions that should always apply here
 

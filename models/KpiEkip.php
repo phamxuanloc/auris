@@ -37,6 +37,7 @@ class KpiEkip extends Model
     public function rules()
     {
         return [
+            [['ekip_id', 'kpi'], 'required'],
             [['ekip_id', 'spect_point', 'ae_point', 'total_time'], 'integer'],
             [['estimate_revenue', 'real_revenue', 'total_customer', 'kpi'], 'number'],
             [['month', 'created_date'], 'safe'],

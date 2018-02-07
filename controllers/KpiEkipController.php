@@ -79,9 +79,17 @@ class KpiEkipController extends Controller {
 	public function actionCreate() {
 		$model = new KpiEkip();
 		if($model->load(Yii::$app->request->post())) {
-			if($model->save()) {
-				return $this->redirect(['index']);
-			}
+            $kpiEkip = KpiEkip::find()->where("ekip_id = $model->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+            if($kpiEkip){
+                $kpiEkip->load(Yii::$app->request->post());
+                if($kpiEkip->save()) {
+                    return $this->redirect(['index']);
+                }
+            }else{
+                if($model->save()) {
+                    return $this->redirect(['index']);
+                }
+            }
 		}
 		return $this->render('create', [
 			'model' => $model,

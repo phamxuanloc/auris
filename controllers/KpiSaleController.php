@@ -79,9 +79,17 @@ class KpiSaleController extends Controller {
 	public function actionCreate() {
 		$model = new KpiSale();
 		if($model->load(Yii::$app->request->post())) {
-			if($model->save()) {
-				return $this->redirect(['index']);
-			}
+            $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+            if($kpiSale){
+                $kpiSale->load(Yii::$app->request->post());
+                if($kpiSale->save()) {
+                    return $this->redirect(['index']);
+                }
+            }else {
+                if ($model->save()) {
+                    return $this->redirect(['index']);
+                }
+            }
 		}
 		return $this->render('create', [
 			'model' => $model,
