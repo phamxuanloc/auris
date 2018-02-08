@@ -22,7 +22,7 @@ class KpiSaleSearch extends KpiSale
         return [
             [['id', 'sale_id', 'total_customer', 'att_point'], 'integer'],
             [['kpi', 'estimate_revenue', 'real_revenue'], 'number'],
-            [['created_date', 'month'], 'safe'],
+            [['created_date', 'month', 'start_date', 'end_date'], 'safe'],
         ];
     }
 
@@ -78,8 +78,19 @@ class KpiSaleSearch extends KpiSale
             'att_point' => $this->att_point,
         ]);
 
+        if(!$this->start_date){
+            $this->start_date = date("m/Y", strtotime("-1 month"));
+        }
+        if(!$this->end_date){
+            $this->end_date = date("m/Y");
+        }
+        $start_date = \DateTime::createFromFormat('m/Y', $this->start_date);
+        $end_date = \DateTime::createFromFormat('m/Y', $this->end_date);
+        $query->andFilterWhere(['between', 'DATE_FORMAT(`month`, "%Y-%m")', $start_date->format('Y-m'), $end_date->format('Y-m')]);
+
 //        $query->orderBy("date(month) DESC");
 //        $query->groupBy("date(month)");
+        $query->orderBy("id DESC");
 
         return $dataProvider;
     }

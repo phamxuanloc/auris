@@ -23,6 +23,7 @@ use Yii;
  */
 class KpiEkip extends Model
 {
+    public $start_date, $end_date;
     /**
      * {@inheritdoc}
      */
@@ -40,7 +41,7 @@ class KpiEkip extends Model
             [['ekip_id', 'kpi'], 'required'],
             [['ekip_id', 'spect_point', 'ae_point', 'total_time'], 'integer'],
             [['estimate_revenue', 'real_revenue', 'total_customer', 'kpi'], 'number'],
-            [['month', 'created_date'], 'safe'],
+            [['month', 'created_date', 'start_date', 'end_date'], 'safe'],
             [['ekip_name'], 'string', 'max' => 255],
         ];
     }

@@ -35,21 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
 								<div class="embarrassed" id="vote-bad" point="-3">
 									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/1.png"/>
 									<p>Không hài lòng</p>
-									<span>Lựa chọn</span>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-good" point="1">
 									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/2.png"/>
 									<p>Tốt</p>
-									<span>Lựa chọn</span>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="embarrassed" id="vote-excellent" point="2">
 									<img style="height: 150px;" src="<?= Yii::$app->request->baseUrl ?>/images/3.png"/>
 									<p>Rất hài lòng</p>
-									<span>Lựa chọn</span>
 								</div>
 							</div>
 						</div>

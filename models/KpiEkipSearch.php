@@ -21,7 +21,7 @@ class KpiEkipSearch extends KpiEkip
     {
         return [
             [['id', 'ekip_id', 'spect_point', 'ae_point', 'total_time'], 'integer'],
-            [['ekip_name', 'month', 'created_date'], 'safe'],
+            [['ekip_name', 'month', 'created_date', 'start_date', 'end_date'], 'safe'],
             [['estimate_revenue', 'real_revenue', 'total_customer', 'kpi'], 'number'],
         ];
     }
@@ -80,7 +80,28 @@ class KpiEkipSearch extends KpiEkip
             'kpi' => $this->kpi,
         ]);
 
+
+        if(!$this->start_date){
+            $this->start_date = date("m/Y", strtotime("-1 month"));
+        }
+        if(!$this->end_date){
+            $this->end_date = date("m/Y");
+        }
+        $start_date = \DateTime::createFromFormat('m/Y', $this->start_date);
+        $end_date = \DateTime::createFromFormat('m/Y', $this->end_date);
+        $query->andFilterWhere(['between', 'DATE_FORMAT(`month`, "%Y-%m")', $start_date->format('Y-m'), $end_date->format('Y-m')]);
+
+//        if(isset($_GET['KpiEkipSearch']['start_date']) && $_GET['KpiEkipSearch']['start_date'] != ""){
+//            $start_date = \DateTime::createFromFormat('m/Y', $_GET['KpiEkipSearch']['start_date']);
+//            $query->andFilterWhere(['>=', "DATE(month)", $start_date->format('Y-m')]);
+//        }
+//        if(isset($_GET['KpiEkipSearch']['end_date']) && $_GET['KpiEkipSearch']['end_date'] != ""){
+//            $end_date = \DateTime::createFromFormat('m/Y', $_GET['KpiEkipSearch']['end_date']);
+//            $query->andFilterWhere(['<=', "DATE(month)", $end_date->format('Y-m')]);
+//        }
+
         $query->andFilterWhere(['like', 'ekip_name', $this->ekip_name]);
+//        $query->groupBy('month');
         $query->orderBy("id DESC");
 
         return $dataProvider;

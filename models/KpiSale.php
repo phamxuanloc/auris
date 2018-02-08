@@ -21,6 +21,7 @@ use yii\helpers\ArrayHelper;
  */
 class KpiSale extends Model
 {
+    public $start_date, $end_date;
     /**
      * @inheritdoc
      */
@@ -38,7 +39,7 @@ class KpiSale extends Model
             [['sale_id', 'kpi'], 'required'],
             [['sale_id', 'total_customer', 'att_point'], 'integer'],
             [['kpi', 'estimate_revenue', 'real_revenue'], 'number'],
-            [['created_date', 'month'], 'safe'],
+            [['created_date', 'month', 'start_date', 'end_date'], 'safe'],
         ];
     }
 

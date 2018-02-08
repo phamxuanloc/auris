@@ -11,8 +11,6 @@ $this->title                   = 'Thanks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-index">
-	<div class="header">
-	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">

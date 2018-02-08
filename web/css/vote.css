@@ -45,7 +45,8 @@ body {
 }
 .vote-index .content .content-content p{
     color: #872f80;
-    font-size: 18px;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 .vote-index .content .content-content h2{
     color: #872f80;
@@ -68,4 +69,7 @@ body {
 .vote-index .content .content-content .embarrassed span{
     color: #CA27FB;
     font-size: 18px;
+}
+.vote-index .content .content-content .embarrassed:hover{
+    box-shadow: 0px 0px 7px 1px #ccc
 }

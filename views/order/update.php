@@ -166,9 +166,33 @@ $this->registerJs($js);
                                 <td><?= $history->note ?></td>
                                 <td><?= $history->real_start ?></td>
                                 <td><?= $history->real_end ?></td>
-                                <td><?= $history->att_point ?></td>
-                                <td><?= $history->spect_point ?></td>
-                                <td><?= $history->ae_point ?></td>
+                                <td>
+                                    <?php if($history->att_point == 2){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->att_point == 1){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->att_point == -3){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }?>
+                                </td>
+                                <td>
+                                    <?php if($history->spect_point == 2){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->spect_point == 1){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->spect_point == -3){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }?>
+                                </td>
+                                <td>
+                                    <?php if($history->ae_point == 2){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->ae_point == 1){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }elseif($history->ae_point == -3){
+                                        echo "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                                    }?>
+                                </td>
                             </tr>
                         <?php } ?>
                         </tbody>
