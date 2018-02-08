@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
  */
 class Order extends Model
 {
-    public $start_date, $end_date, $payment_status;
+    public $start_date, $end_date, $payment_status, $region_name, $sex;
     /**
      * @inheritdoc
      */
@@ -104,6 +104,15 @@ class Order extends Model
     public function getOrderCheckout()
     {
         return $this->hasMany(OrderCheckout::className(), ['order_id' => 'id']);
+    }
+
+    public function getCustomerRegion(){
+        return $this->hasOne(Region::className(), ['id' => 'region_id'])->viaTable('customer', ['id'=>'customer_id']);
+    }
+
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
     }
 
     /**

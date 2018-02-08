@@ -98,6 +98,8 @@ class TreatmentScheduleController extends Controller {
 		if($model->load(Yii::$app->request->post())) {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {
+                $ap_date = \DateTime::createFromFormat('H:i:s d/m/Y', $model->ap_date);
+                $model->ap_date = $ap_date->format('Y-m-d H:i');
 				$model->order_code  = $order->order_code;
 				$model->customer_id = $order->customer_id;
 				$model->order_id    = $order->id;
@@ -136,8 +138,19 @@ class TreatmentScheduleController extends Controller {
             $second_date = strtotime($treatmentHistory->real_start);
             $datediff = abs($first_date - $second_date);
             $kpiEkip = KpiEkip::find()->where("ekip_id = $treatmentHistory->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-            $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
-            $kpiEkip->save();
+            if($kpiEkip) {
+                $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
+                $kpiEkip->save();
+            }else{
+                $kpiEkip = new KpiEkip();
+                $kpiEkip->ekip_id = $treatmentHistory->ekip_id;
+                $kpiEkip->kpi = 0;
+                $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
+                $kpiEkip->month = date('Y-m-d');
+                if(!$kpiEkip->save()){
+                    print_r($kpiEkip->getErrors());exit;
+                }
+            }
 			return true;
 		}
 	}

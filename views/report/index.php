@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
+use miloschuman\highcharts\Highcharts;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderSearch */
@@ -10,6 +12,51 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
+
+$hostname = array();
+$total = array();
+
+foreach ($reportProvince as $item) {
+    array_push($hostname, $item->region_name);
+    array_push($total, intval($item->id));
+}
+
+$male = array();
+$female = array();
+$sex = array();
+$payment = array();
+$i = 0;
+foreach ($reportSex as $item) {
+    if($item->sex == 1){
+        $a = "Nam";
+    }else{
+        $a = "Nữ";
+    }
+    $sex = [
+        [
+            'name' => $a,
+            'y' => $item->id,
+            'color' => new JsExpression("Highcharts.getOptions().colors[$i]"), // Jane's color
+        ]
+    ];
+    $i++;
+}
+
+foreach ($reportPayment as $item) {
+    if($item->cash_type == 1){
+        $a = "Tiền mặt";
+    }else{
+        $a = "Thẻ";
+    }
+    $payment = [
+        [
+            'name' => $a,
+            'y' => $item->id,
+            'color' => new JsExpression("Highcharts.getOptions().colors[$i]"), // Jane's color
+        ]
+    ];
+    $i++;
+}
 ?>
 <div class="order-index">
     <div class="help-block"></div>
@@ -52,6 +99,87 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php ActiveForm::end(); ?>
 
+    <div class="row">
+        <div class="col-md-6">
+            <?=
+            Highcharts::widget([
+                'scripts' => [
+                    'modules/exporting',
+                    'themes/grid-light',
+                ],
+                'options' => [
+                    'title' => [
+                        'text' => 'Theo Tỉnh/Thành',
+                    ],
+                    'xAxis' => [
+                        'type' => 'datetime',
+                        'categories' => $hostname
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'bar',
+                            'name' => 'Tỉnh/thành',
+                            'data' => $total,
+                        ],
+                    ],
+                ]
+            ]); ?>
+        </div>
+        <div class="col-md-6">
+            <?=
+            Highcharts::widget([
+                'scripts' => [
+                    'modules/exporting',
+                    'themes/grid-light',
+                ],
+                'options' => [
+                    'title' => [
+                        'text' => 'Theo giới tính',
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'pie',
+                            'data' => $sex,
+                            'center' => [260, 120],
+                            'size' => 200,
+                            'showInLegend' => true,
+                            'dataLabels' => [
+                                'enabled' => true,
+                            ],
+                        ],
+                    ],
+                ]
+            ]); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <?=
+            Highcharts::widget([
+                'scripts' => [
+                    'modules/exporting',
+                    'themes/grid-light',
+                ],
+                'options' => [
+                    'title' => [
+                        'text' => 'Thanh toán',
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'pie',
+                            'data' => $payment,
+                            'center' => [250, 150],
+                            'size' => 200,
+                            'showInLegend' => true,
+                            'dataLabels' => [
+                                'enabled' => true,
+                            ],
+                        ],
+                    ],
+                ]
+            ]); ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="box-header">
