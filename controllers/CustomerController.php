@@ -32,11 +32,11 @@ class CustomerController extends Controller {
 				'class'   => RoleFilter::className(),
 				'name'    => 'Quản lý khách hàng',
 				'actions' => [
-					'index' => 'Danh sách',
-					'create' => 'Thêm mới',
-					'update' => 'Cập nhật',
+					'index'    => 'Danh sách',
+					'create'   => 'Thêm mới',
+					'update'   => 'Cập nhật',
 					'get-info' => 'Lấy thông tin',
-					'delete' => 'Xoá',
+					'delete'   => 'Xoá',
 				],
 			],
 		];
@@ -92,9 +92,9 @@ class CustomerController extends Controller {
 				$a = "AU1-" . $customerCode + 1;
 				return $a;
 			}
-		}else{
-		    return "AU1-00001";
-        }
+		} else {
+			return "AU1-00001";
+		}
 		//        print_r($orderCode);exit;
 	}
 
