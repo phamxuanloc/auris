@@ -10,32 +10,17 @@ use yii\helpers\Url;
 $this->title                   = 'Thanks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="vote-index">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="content">
-					<div class="content-header">
-						<div class="col-md-3">
-							<img class="img-responsive" src="<?= Yii::$app->request->baseUrl ?>/images/logo-vote.png"/>
-						</div>
-						<div class="col-md-9">
-							<div class="right">
-								<p>VIỆN CÔNG NGHỆ NHA KHOA AURIS XIN CẢM ƠN QUÝ KHÁCH HÀNG!</p>
-								<h3 id="customer-name"></h3>
-							</div>
-						</div>
-					</div>
-					<div class="content-content">
-						<p>Rất mong Quý khách dánh ít thời gian để đánh giá quá trình phục vụ của dịch vụ của nha khoa
-							Auris!</p>
-						<h2 id="vote-title" style="text-transform: uppercase">Xin cảm ơn và hẹn gặp lại</h2>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="video-background">
+	<div class="video-foreground">
+		<iframe src="https://www.youtube.com/embed/rt6_XdkSYEw?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=rt6_XdkSYEw" frameborder="0" allowfullscreen></iframe>
 	</div>
 </div>
+
+<!--<div id="vidtop-content">-->
+<!--	<div class="vid-info">-->
+<!--		Test-->
+<!--	</div>-->
+<!--</div>-->
 <script>
 	var sse = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
