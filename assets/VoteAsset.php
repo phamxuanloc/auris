@@ -26,7 +26,9 @@ class VoteAsset extends AssetBundle {
 		'css/vote.css',
 	];
 
-	public $js        = [];
+	public $js        = [
+		'https://code.jquery.com/jquery-migrate-1.3.0.js',
+	];
 
 	public $depends   = [
 		'yii\web\YiiAsset',
