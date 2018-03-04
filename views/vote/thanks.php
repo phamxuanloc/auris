@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--	<source src="uploads/Cover%20-%20Auris%20Dental%20-%20Viện%20Nha%20Khoa%20Thẩm%20Mỹ.mp4">-->
 <!--	Your browser does not support the video tag.-->
 <!--</video>-->
-<img src="uploads/test.gif">
+<img class="full-gif" src="uploads/test.gif">
 <!--<button onclick="abc()">play</button>-->
 <!--</div>-->
 <!--	</div>-->
