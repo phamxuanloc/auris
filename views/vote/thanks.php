@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--<iframe onload="loadImage()" src="https://www.youtube.com/embed/rt6_XdkSYEw" frameborder="0" allowfullscreen></iframe>-->
 <!--		<iframe width='500' height='294' src="https://www.youtube.com/embed/rt6_XdkSYEw?&theme=dark&autoplay=1&keyboard=1&autohide=1&playlist=rt6_XdkSYEw&iv_load_policy=3"  frameborder="0" class="youtube-player" type="text/html"></iframe>-->
 <!--<div class="videoContainer">-->
-<video id="myVideo" controls loop>
+<video id="myVideo" controls autoplay muted>
 	<source src="uploads/Cover%20-%20Auris%20Dental%20-%20Viện%20Nha%20Khoa%20Thẩm%20Mỹ.mp4">
 	Your browser does not support the video tag.
 </video>
@@ -33,8 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	function abc() {
 		$('#myVideo').get(0).play()
 	}
+	//	$(document).ready(function() {
+	//		$("button").trigger("click");
+	//	});
 	$(document).ready(function() {
-		$("button").trigger("click");
+		$("button").trigger("touchstart");
 	});
 	var sse = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
