@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	var vid         = document.getElementById("myVideo");
 	vid.onloadstart = function() {
 		alert('abc');
-		//		vid.play();
+				vid.play();
 	};
 	var sse         = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
