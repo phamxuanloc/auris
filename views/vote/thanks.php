@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<source src="uploads/Cover%20-%20Auris%20Dental%20-%20Viện%20Nha%20Khoa%20Thẩm%20Mỹ.mp4">
 	Your browser does not support the video tag.
 </video>
+<button onclick="abc()">play</button>
 <!--</div>-->
 <!--	</div>-->
 <!--</div>-->
@@ -28,12 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--	</div>-->
 <!--</div>-->
 <script>
-	var vid         = document.getElementById("myVideo");
-	vid.onloadstart = function() {
-		alert('abc');
-				vid.play();
-	};
-	var sse         = new EventSource("<?=Url::to(['realtime'])?>");
+	var vid = document.getElementById("myVideo");
+	function abc() {
+		$('#myVideo').get(0).play()
+	}
+//	$(document).ready(function() {
+//		$("button").trigger("click");
+//	});
+	var sse = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
 		sse.close();
 		setTimeout(function() {
