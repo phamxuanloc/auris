@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	function abc() {
 		$('#myVideo').get(0).play()
 	}
-//	$(document).ready(function() {
-//		$("button").trigger("click");
-//	});
+	$(document).ready(function() {
+		$("button").trigger("click");
+	});
 	var sse = new EventSource("<?=Url::to(['realtime'])?>");
 	sse.addEventListener('message', function(e) {
 		sse.close();
