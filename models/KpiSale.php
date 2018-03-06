@@ -64,9 +64,19 @@ class KpiSale extends Model
     public function getSuccess($sale_id)
     {
         $total = ScheduleAdvisory::find()->where(['sale_id' => $sale_id])->count();
-        $start_date = $_GET['KpiSaleSearch']['start_date'];
-        $start_date = \DateTime::createFromFormat('m/Y', $_GET['KpiSaleSearch']['start_date']);
-        $end_date = \DateTime::createFromFormat('m/Y', $_GET['KpiSaleSearch']['end_date']);
+        if(isset($_GET['KpiSaleSearch']['start_date'])){
+            $start_date = $_GET['KpiSaleSearch']['start_date'];
+        }else{
+            $start_date = date("m/Y", strtotime("-1 month"));
+        }
+
+        if(isset($_GET['KpiSaleSearch']['end_date'])){
+            $end_date = $_GET['KpiSaleSearch']['end_date'];
+        }else{
+            $end_date = date("m/Y");
+        }
+        $start_date = \DateTime::createFromFormat('m/Y', $start_date);
+        $end_date = \DateTime::createFromFormat('m/Y', $end_date);
         $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5]);
         $success = $success->andFilterWhere(['between', 'DATE_FORMAT(`created_date`, "%Y-%m")', $start_date->format('Y-m'), $end_date->format('Y-m')]);
         $success = $success->count();
