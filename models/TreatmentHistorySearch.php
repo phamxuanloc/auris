@@ -107,13 +107,13 @@ class TreatmentHistorySearch extends TreatmentHistory {
 
         if (isset($_GET['type']) && $_GET['type'] == 1) {
             $date = date("d/m/Y", strtotime("-1 day"));
-            $query->andFilterWhere(['=', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', $date]);
+            $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $date]);
         } else if (isset($_GET['type']) && $_GET['type'] == 2) {
-            $query->andFilterWhere(['=', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', date('d/m/Y')]);
+            $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', date('d/m/Y')]);
         } else {
             $query->andFilterWhere([
                 'between',
-                "DATE(created_date)",
+                "DATE(ap_date)",
                 $start_date->format('Y-m-d'),
                 $end_date->format('Y-m-d'),
             ]);
