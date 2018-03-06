@@ -61,25 +61,25 @@ AppAsset::register($this);
 				<!-- / -->
 
 				<!-- Page title - Bind to $state's title -->
-				<div class="navbar-item pull-left" id="pageTitle">
+				<!--<div class="navbar-item pull-left" id="pageTitle">
 					<!-- navbar collapse -->
-					<div class="collapse navbar-toggleable-sm" id="collapse">
-						<div><!-- search form -->
-							<form class="navbar-form form-inline pull-right pull-none-sm navbar-item v-m" role="search">
-								<div class="form-group">
-									<div class="input-group">
-										<i class="fa fa-search" aria-hidden="true"></i>
-										<input type="text" class="form-control form-control-sm p-x b-a rounded"
-										       placeholder="Tìm kiếm theo mã đơn hàng...">
-									</div>
-								</div>
-							</form>
-							<!-- / search form -->
-						</div>
-						<!-- / -->
-					</div>
-					<!-- / navbar collapse -->
-				</div>
+                <!--<div class="collapse navbar-toggleable-sm" id="collapse">
+                    <div><!-- search form -->
+                <!--<form class="navbar-form form-inline pull-right pull-none-sm navbar-item v-m" role="search">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <input type="text" class="form-control form-control-sm p-x b-a rounded"
+                                   placeholder="Tìm kiếm theo mã đơn hàng...">
+                        </div>
+                    </div>
+                </form>
+                <!-- / search form -->
+                <!--</div>
+                <!-- / -->
+                <!--</div>
+                <!-- / navbar collapse -->
+                <!--</div>-->
 
 				<!-- navbar right -->
 				<ul class="nav navbar-nav pull-right">
