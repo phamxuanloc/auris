@@ -79,16 +79,35 @@ class CustomerController extends Controller {
 				$value = intval($value / 10);
 				$length ++;
 			}
-			if(($length) == 1) {
-				$a = $customerCode + 1;
-				return "AU1-0000" . $a;
-			} else if(($length) == 2) {
-				$a = $customerCode + 1;
-				return "AU1-000" . $a;
-			} else if(($length) == 3) {
-				$a = $customerCode + 1;
-				return "AU1-00" . $a;
-			} else {
+//			return $length;
+			if(($length + 1) == 1) {
+				$a = (int)$customerCode + 1;
+				return "AU1-00000" . $a;
+			} else if(($length + 1) == 2) {
+				$a = (int)$customerCode + 1;
+				if($a >= 10){
+                    return "AU1-000" . $a;
+                }else{
+                    return "AU1-0000" . $a;
+                }
+			} else if(($length + 1) == 3) {
+				$a = (int)$customerCode + 1;
+                if($a >= 100){
+                    return "AU1-00" . $a;
+                }else{
+                    return "AU1-000" . $a;
+                }
+			} else if(($length + 1) == 4) {
+                $a = (int)$customerCode + 1;
+                if($a >= 1000){
+                    return "AU1-0" . $a;
+                }else{
+                    return "AU1-00" . $a;
+                }
+            }else if(($length + 1) == 5) {
+                $a = (int)$customerCode + 1;
+                return "AU1-" . $a;
+            }else {
 				$a = "AU1-" . $customerCode + 1;
 				return $a;
 			}

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Order;
 use app\models\OrderCheckout;
 use app\models\OrderSearch;
+use app\models\TreatmentHistory;
 use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\Customer;
@@ -61,6 +62,10 @@ class ReportController extends Controller {
         $reportPayment = OrderCheckout::find();
         $reportPayment->select('count(*) as id, cash_type');
 
+        $start1 = TreatmentHistory::find();
+        $start1 = $start1->select("count(*) as id");
+        $start1->andFilterWhere(['']);
+
         if(isset($_GET['Order']['start_date']) && $_GET['Order']['start_date'] != ""){
             $start_date = $_GET['Order']['start_date'];
             $start_date = \DateTime::createFromFormat('d/m/Y', $start_date);
@@ -82,6 +87,7 @@ class ReportController extends Controller {
 
         $model = $model->orderBy("created_date DESC")->groupBy("date(created_date)");
         $model = $model->all();
+        $start1 = $start1->all();
 		return $this->render('index', [
 			'model' => $model,
 			'modelSearch' => $modelSearch,

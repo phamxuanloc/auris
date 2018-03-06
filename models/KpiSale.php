@@ -64,8 +64,16 @@ class KpiSale extends Model
     public function getSuccess($sale_id)
     {
         $total = ScheduleAdvisory::find()->where(['sale_id' => $sale_id])->count();
-        $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5])->count();
-        $notsuccess = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 4])->count();
+        $start_date = $_GET['KpiSaleSearch']['start_date'];
+        $start_date = \DateTime::createFromFormat('m/Y', $_GET['KpiSaleSearch']['start_date']);
+        $end_date = \DateTime::createFromFormat('m/Y', $_GET['KpiSaleSearch']['end_date']);
+        $success = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 5]);
+        $success = $success->andFilterWhere(['between', 'DATE_FORMAT(`created_date`, "%Y-%m")', $start_date->format('Y-m'), $end_date->format('Y-m')]);
+        $success = $success->count();
+
+        $notsuccess = ScheduleAdvisory::find()->where(['sale_id' => $sale_id, 'status' => 4]);
+        $notsuccess = $notsuccess->andFilterWhere(['between', 'DATE_FORMAT(`created_date`, "%Y-%m")', $start_date->format('Y-m'), $end_date->format('Y-m')]);
+        $notsuccess = $notsuccess->count();
         if($notsuccess == 0 && $success == 0){
             return 0;
         }else {

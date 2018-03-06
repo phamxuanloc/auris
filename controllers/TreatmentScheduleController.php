@@ -169,7 +169,7 @@ class TreatmentScheduleController extends Controller {
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['index']);
 		}
-		return $this->render('create', [
+		return $this->render('update', [
 			'model' => $model,
 		]);
 	}
