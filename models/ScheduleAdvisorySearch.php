@@ -58,11 +58,11 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
             // $query->where('0=1');
             return $dataProvider;
         }
-	    $boolean = RoleChecker::isAuth(ScheduleAdvisoryController::className(), 'view-all', Yii::$app->user->identity->getRoleId());
+        $boolean = RoleChecker::isAuth(ScheduleAdvisoryController::className(), 'view-all', Yii::$app->user->identity->getRoleId());
 
-	    if(!$boolean) {
-		    $this->sale_id = $this->user->id;
-	    }
+        if (!$boolean) {
+            $this->sale_id = $this->user->id;
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -71,7 +71,14 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
             'status' => $this->status,
             'customer_id' => $this->customer_id,
         ]);
-        $query->andFilterWhere(['between', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $this->start_date, $this->end_date]);
+        if (isset($_GET['type']) && $_GET['type'] == 1) {
+            $date = date("d/m/Y", strtotime("-1 day"));
+            $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $date]);
+        } else if (isset($_GET['type']) && $_GET['type'] == 2) {
+            $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', date('d/m/Y')]);
+        } else {
+            $query->andFilterWhere(['between', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $this->start_date, $this->end_date]);
+        }
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])
             ->andFilterWhere(['like', 'full_name', $this->full_name])

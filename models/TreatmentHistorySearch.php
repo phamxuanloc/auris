@@ -104,12 +104,20 @@ class TreatmentHistorySearch extends TreatmentHistory {
 		}
 		$start_date = \DateTime::createFromFormat('d/m/Y', $this->start_date);
 		$end_date   = \DateTime::createFromFormat('d/m/Y', $this->end_date);
-		$query->andFilterWhere([
-			'between',
-			"DATE(created_date)",
-			$start_date->format('Y-m-d'),
-			$end_date->format('Y-m-d'),
-		]);
+
+        if (isset($_GET['type']) && $_GET['type'] == 1) {
+            $date = date("d/m/Y", strtotime("-1 day"));
+            $query->andFilterWhere(['=', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', $date]);
+        } else if (isset($_GET['type']) && $_GET['type'] == 2) {
+            $query->andFilterWhere(['=', 'DATE_FORMAT(created_date,\'%d/%m/%Y\')', date('d/m/Y')]);
+        } else {
+            $query->andFilterWhere([
+                'between',
+                "DATE(created_date)",
+                $start_date->format('Y-m-d'),
+                $end_date->format('Y-m-d'),
+            ]);
+        }
 		$query->andFilterWhere([
 			'like',
 			'customer_code',

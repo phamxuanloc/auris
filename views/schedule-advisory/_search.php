@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <?= $form->field($model, 'sale_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListDirectSale(), ['prompt' => 'Tất cả'])->label("Lọc Theo DirectSale") ?>
             </div>
             <div class="col-md-3">
@@ -44,8 +44,15 @@ use yii\bootstrap\ActiveForm;
                 ])->label("Đến ngày") ?>
             </div>
 
+            <div class="col-md-1">
+                <a class="btn btn-danger" href="<?= Yii::$app->urlManager->createUrl(['schedule-advisory/index', 'type' => 1])?>">Hôm qua</a>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-warning" href="<?= Yii::$app->urlManager->createUrl(['schedule-advisory/index', 'type' => 2])?>">Hôm nay</a>
+            </div>
+
             <div class="form-group">
-                <?= Html::submitButton('Tìm kiếm', ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>

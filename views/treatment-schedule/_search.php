@@ -55,6 +55,13 @@ use yii\bootstrap\ActiveForm;
                 ])->label("Đến ngày") ?>
             </div>
 
+            <div class="col-md-1">
+                <a class="btn btn-danger" href="<?= Yii::$app->urlManager->createUrl(['treatment-schedule/index', 'type' => 1])?>">Hôm qua</a>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-warning" href="<?= Yii::$app->urlManager->createUrl(['treatment-schedule/index', 'type' => 2])?>">Hôm nay</a>
+            </div>
+
             <div class="form-group">
                 <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-primary']) ?>
             </div>
