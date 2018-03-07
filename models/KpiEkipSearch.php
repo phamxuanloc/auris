@@ -82,7 +82,7 @@ class KpiEkipSearch extends KpiEkip
 
 
         if(!$this->start_date){
-            $this->start_date = date("m/Y", strtotime("-1 month"));
+            $this->start_date = date("m/Y");
         }
         if(!$this->end_date){
             $this->end_date = date("m/Y");
