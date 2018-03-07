@@ -97,7 +97,7 @@ class TreatmentHistorySearch extends TreatmentHistory {
 			'ae_point'    => $this->ae_point,
 		]);
 		if(!$this->start_date) {
-			$this->start_date = date("d/m/Y", strtotime("-1 month"));
+			$this->start_date = date("d/m/Y");
 		}
 		if(!$this->end_date) {
 			$this->end_date = date("d/m/Y");
