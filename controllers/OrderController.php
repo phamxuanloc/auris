@@ -210,7 +210,7 @@ class OrderController extends EditableController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $url = "")
     {
         $model = $this->findModel($id);
         $oldModel = clone $model;
@@ -271,7 +271,7 @@ class OrderController extends EditableController
                 }
                 if ($flag) {
                     $transaction->commit();
-                    return $this->redirect(['index']);
+                    return $this->redirect($url);
                 }
             } catch (Exception $e) {
                 print_r($e->getMessage());

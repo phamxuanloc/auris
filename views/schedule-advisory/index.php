@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schedule-advisory-index">
     <div class="help-block"></div>
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Tạo lịch hẹn', ['create'], ['class' => 'btn btn-success']) ?>
@@ -98,7 +98,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'note',
             ],
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $url = Yii::$app->urlManager->createUrl(['schedule-advisory/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]);
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
+                            'title' => 'Update'
+                        ]);
+                    }
+                ]
+            ],
         ],
     ]); ?>
 </div>

@@ -164,10 +164,10 @@ class TreatmentScheduleController extends Controller {
 	 * @return mixed
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
-	public function actionUpdate($id) {
+	public function actionUpdate($id, $url = "") {
 		$model = $this->findModel($id);
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['index']);
+			return $this->redirect($url);
 		}
 		return $this->render('update', [
 			'model' => $model,

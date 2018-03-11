@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
     <div class="help-block"></div>
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm đơn hàng', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('<i class="fa fa-calendar-o" aria-hidden="true"></i> Tạo lịch hẹn', ['treatment-schedule/create'], ['class' => 'btn btn-success']) ?>
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'order_code',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id]));
+                    return Html::a($model->order_code, Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]));
                 }
             ],
             [
@@ -102,16 +102,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'style' => 'width:180px'
                 ],
-                'value' => function($data){
-                    if($data->total_payment < $data->total_price){
-                        return "<span style='color: red;'>".number_format($data->total_payment, '0', ',', '.')."</span>";
-                    }else{
-                        return "<span style='color: #0E7E12;'>".number_format($data->total_payment, '0', ',', '.')."</span>";
+                'value' => function ($data) {
+                    if ($data->total_payment < $data->total_price) {
+                        return "<span style='color: red;'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";
+                    } else {
+                        return "<span style='color: #0E7E12;'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";
                     }
                 },
                 'format' => 'raw',
             ],
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $url = Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]);
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
+                            'title' => 'Update'
+                        ]);
+                    }
+                ]
+            ],
         ],
     ]); ?>
 </div>

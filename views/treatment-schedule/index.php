@@ -77,11 +77,11 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
                 'header' => 'Bắt đầu',
                 'attribute' => 'real_start',
                 'format' => 'raw',
-                'value' => function($data){
+                'value' => function ($data) {
                     $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
-                    if($data->real_start == "" || $data->real_start == null){
+                    if ($data->real_start == "" || $data->real_start == null) {
                         return "<button class='btn btn-default' onclick='start($data->id);return false;'>Bắt đầu</button>";
-                    }else{
+                    } else {
                         return $data->real_start;
                     }
                 },
@@ -90,11 +90,11 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
                 'header' => 'Kết thúc',
                 'attribute' => 'real_end',
                 'format' => 'raw',
-                'value' => function($data){
+                'value' => function ($data) {
                     $url = Yii::$app->urlManager->createUrl(['treatment-schedule/end']);
-                    if($data->real_end == "" || $data->real_end == null){
+                    if ($data->real_end == "" || $data->real_end == null) {
                         return "<button class='btn btn-default' onclick='end($data->id); return false;'>Kết thúc</button>";
-                    }else{
+                    } else {
                         return $data->real_end;
                     }
                 },
@@ -102,44 +102,55 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
             [
                 'header' => 'Thái độ',
                 'format' => 'raw',
-                'value' => function($data){
-                    if($data->att_point == 2){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->att_point == 1){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->att_point == -3){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                'value' => function ($data) {
+                    if ($data->att_point == 2) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->att_point == 1) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->att_point == -3) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
                     }
                 }
             ],
             [
                 'header' => 'Chuyên môn',
                 'format' => 'raw',
-                'value' => function($data){
-                    if($data->spect_point == 2){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->spect_point == 1){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->spect_point == -3){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                'value' => function ($data) {
+                    if ($data->spect_point == 2) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->spect_point == 1) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->spect_point == -3) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
                     }
                 }
             ],
             [
                 'header' => 'Thẩm mỹ',
                 'format' => 'raw',
-                'value' => function($data){
-                    if($data->ae_point == 2){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->ae_point == 1){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/> <img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
-                    }elseif($data->ae_point == -3){
-                        return "<img style='width:15px' src='".Yii::$app->request->baseUrl."/images/ic-star.png'/>";
+                'value' => function ($data) {
+                    if ($data->ae_point == 2) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->ae_point == 1) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/> <img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
+                    } elseif ($data->ae_point == -3) {
+                        return "<img style='width:15px' src='" . Yii::$app->request->baseUrl . "/images/ic-star.png'/>";
                     }
                 }
             ],
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        $url = Yii::$app->urlManager->createUrl(['treatment-schedule/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]);
+                        return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
+                            'title' => 'Update'
+                        ]);
+                    }
+                ]
+            ],
         ],
     ]); ?>
     <?php \yii\widgets\Pjax::end(); ?>

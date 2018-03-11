@@ -93,12 +93,12 @@ class ScheduleAdvisoryController extends EditableController {
 	 * @return mixed
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
-	public function actionUpdate($id) {
+	public function actionUpdate($id, $url = "") {
 		$model = $this->findModel($id);
 		//        $model->ap_date = date('H, d/m/Y', strtotime($model->ap_date));
 		//        $model->birthday = date('d/m/Y', strtotime($model->birthday));
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['index']);
+			return $this->redirect($url);
 		}
 		return $this->render('update', [
 			'model' => $model,
