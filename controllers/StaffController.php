@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\StaffSearch;
 use app\models\User;
 use dektrium\user\helpers\Password;
+use navatech\role\filters\RoleFilter;
 use Yii;
 use app\models\DirectSale;
 use yii\bootstrap\ActiveForm;
@@ -26,6 +27,16 @@ class StaffController extends Controller {
 				'class'   => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['POST'],
+				],
+			],
+			'role'  => [
+				'class'   => RoleFilter::className(),
+				'name'    => 'Quản lý Nhân v',
+				'actions' => [
+					'index'  => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
+					'delete' => 'Xoá',
 				],
 			],
 		];
