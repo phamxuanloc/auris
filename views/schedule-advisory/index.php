@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'ap_date',
                 'value' => function ($data) {
-                    return date('H:i, d/m/Y', strtotime($data->ap_date));
+                    return date('H:i A, d/m/Y', strtotime($data->ap_date));
                 }
             ],
             [
