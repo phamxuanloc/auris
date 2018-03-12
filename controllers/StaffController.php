@@ -31,7 +31,7 @@ class StaffController extends Controller {
 			],
 			'role'  => [
 				'class'   => RoleFilter::className(),
-				'name'    => 'Quản lý Nhân v',
+				'name'    => 'Quản lý Nhân viên',
 				'actions' => [
 					'index'  => 'Danh sách',
 					'create' => 'Thêm mới',
