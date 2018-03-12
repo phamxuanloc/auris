@@ -67,7 +67,7 @@ class ProductSearch extends Product {
 		$query->andFilterWhere([
 			'id'         => $this->id,
 			'service_id' => $this->service_id,
-			'status'     => $this::STATUS_ACTIVE,
+			'status'     => $this->status,
 			'price'      => $this->price,
 		]);
 		$query->andFilterWhere([

@@ -86,8 +86,7 @@ class ProductController extends Controller {
 		$model = new Product();
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect([
-				'view',
-				'id' => $model->id,
+				'index',
 			]);
 		}
 		return $this->render('create', [
@@ -108,8 +107,7 @@ class ProductController extends Controller {
 		$model = $this->findModel($id);
 		if($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect([
-				'view',
-				'id' => $model->id,
+				'index',
 			]);
 		}
 		return $this->render('update', [
