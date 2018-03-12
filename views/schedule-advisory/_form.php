@@ -53,7 +53,7 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'dd/mm/yyyy H:i:s',
+                        'format' => 'hh:ii:ss dd/mm/yyyy',
                         'startDate' => date('Y-m-d')
                     ]
                 ]) ?>
