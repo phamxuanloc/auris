@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 			[
 				'class'    => 'yii\grid\ActionColumn',
-				'template' => '{update}',
+				'template' => '{update}{delete}',
 			],
 		],
 	]); ?>

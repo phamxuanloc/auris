@@ -62,6 +62,11 @@ class StaffSearch extends User {
 	public function search($params) {
 		$query = User::find();
 		// add conditions that should always apply here
+		$query->where([
+			'!=',
+			'role_id',
+			8,
+		]);
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 		]);
