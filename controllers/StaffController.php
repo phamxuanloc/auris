@@ -128,7 +128,9 @@ class StaffController extends Controller {
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	public function actionDelete($id) {
-		$this->findModel($id)->updateAttributes(['role_id' => 8]);
+		$model          = $this->findModel($id);
+		$model->role_id = 8;
+		$model->save();
 		return $this->redirect(['index']);
 	}
 
