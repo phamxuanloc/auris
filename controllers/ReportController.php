@@ -64,7 +64,7 @@ class ReportController extends Controller {
 
         $start1 = TreatmentHistory::find();
         $start1 = $start1->select("count(*) as id");
-        $start1->andFilterWhere(['']);
+//        $start1->andFilterWhere(['']);
 
         if(isset($_GET['Order']['start_date']) && $_GET['Order']['start_date'] != ""){
             $start_date = $_GET['Order']['start_date'];
