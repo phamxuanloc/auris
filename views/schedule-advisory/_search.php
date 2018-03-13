@@ -21,10 +21,16 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <?= $form->field($model, 'sale_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListDirectSale(), ['prompt' => 'Tất cả'])->label("Lọc Theo DirectSale") ?>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
+                <?= $form->field($model, 'full_name', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->textInput()->label("Họ tên") ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'phone', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->textInput()->label("Số điện thoại") ?>
+            </div>
+            <div class="col-md-4">
                 <?= $form->field($model, 'start_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
@@ -34,7 +40,7 @@ use yii\bootstrap\ActiveForm;
                 ])->label("Từ ngày") ?>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <?= $form->field($model, 'end_date', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->widget(\kartik\date\DatePicker::className(), [
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [

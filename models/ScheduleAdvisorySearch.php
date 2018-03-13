@@ -77,21 +77,24 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
         } else if (isset($_GET['type']) && $_GET['type'] == 2) {
             $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', date('d/m/Y')]);
         } else {
-            if(isset($this->start_date) || isset($this->end_date)){
+            if(!empty($this->start_date) && !empty($this->start_date)){
                 $start_date = str_replace('/', '-', $this->start_date);
                 $start_date = date("Y/m/d", strtotime($start_date));
                 $end_date = str_replace('/', '-', $this->end_date);
                 $end_date = date("Y/m/d", strtotime($end_date));
                 $query->andFilterWhere(['between', 'DATE_FORMAT(ap_date,\'%Y/%m/%d\')', $start_date, $end_date]);
             }else {
-                $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', date('d/m/Y')]);
+                if(!empty($this->full_name) || !empty($this->phone)){
+                    $query->andFilterWhere(['like', 'full_name', $this->full_name]);
+                    $query->andFilterWhere(['like', 'phone', $this->phone]);
+                }else {
+                    $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', date('d/m/Y')]);
+                }
             }
         }
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])
-            ->andFilterWhere(['like', 'full_name', $this->full_name])
             ->andFilterWhere(['like', 'sex', $this->sex])
-            ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'note', $this->note]);
 
         return $dataProvider;
