@@ -30,9 +30,9 @@ class ColorController extends Controller {
 				'class'   => RoleFilter::className(),
 				'name'    => 'Quản lý màu sắc',
 				'actions' => [
-					'index'    => 'Danh sách',
-					'create'   => 'Thêm mới',
-					'update'   => 'Cập nhật',
+					'index'  => 'Danh sách',
+					'create' => 'Thêm mới',
+					'update' => 'Cập nhật',
 				],
 			],
 		];
@@ -43,6 +43,9 @@ class ColorController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
+		echo '<pre>';
+		echo "The time is " . date("h:i:sa");
+		die;
 		$searchModel  = new ColorSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		return $this->render('index', [
