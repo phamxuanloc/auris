@@ -43,7 +43,7 @@ class ColorController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-        echo date();exit;
+        echo date('Y-m-d H:i:s');exit;
 		$searchModel  = new ColorSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		return $this->render('index', [
