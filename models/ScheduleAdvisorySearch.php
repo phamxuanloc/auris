@@ -101,7 +101,7 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
             ->andFilterWhere(['like', 'sex', $this->sex])
             ->andFilterWhere(['like', 'note', $this->note]);
 
-        $query->orderBy('ap_date DESC');
+        $query->orderBy('ap_date');
 
         return $dataProvider;
     }
