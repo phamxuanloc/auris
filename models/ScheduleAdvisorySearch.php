@@ -83,6 +83,10 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
                 $end_date = str_replace('/', '-', $this->end_date);
                 $end_date = date("Y/m/d", strtotime($end_date));
                 $query->andFilterWhere(['between', 'DATE_FORMAT(ap_date,\'%Y/%m/%d\')', $start_date, $end_date]);
+                if(!empty($this->full_name) || !empty($this->phone)){
+                    $query->andFilterWhere(['like', 'full_name', $this->full_name]);
+                    $query->andFilterWhere(['like', 'phone', $this->phone]);
+                }
             }else {
                 if(!empty($this->full_name) || !empty($this->phone)){
                     $query->andFilterWhere(['like', 'full_name', $this->full_name]);
