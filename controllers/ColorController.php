@@ -43,10 +43,6 @@ class ColorController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
-		echo '<pre>';
-		date_default_timezone_set("America/New_York");
-		echo "The time is " . date("h:i:sa");
-		die;
 		$searchModel  = new ColorSearch();
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		return $this->render('index', [
