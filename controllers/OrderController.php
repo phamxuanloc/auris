@@ -37,7 +37,7 @@ class OrderController extends EditableController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+//                    'delete' => ['POST'],
                 ],
             ],
             'role' => [
@@ -48,6 +48,7 @@ class OrderController extends EditableController
                     'create' => 'Thêm mới',
                     'update' => 'Cập nhật',
                     'view-all' => 'Xem tất cả',
+                    'delete' => 'Xóa đơn hàng',
                 ],
             ],
         ];

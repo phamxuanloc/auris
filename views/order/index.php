@@ -113,15 +113,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}',
+                'template' => '{update} {delete}',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         $url = Yii::$app->urlManager->createUrl(['order/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]);
                         return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
                             'title' => 'Update'
                         ]);
+                    },
+                    'delete' => function($url) {
+                        if (\navatech\role\helpers\RoleChecker::isAuth(\app\controllers\OrderController::className(), 'delete', Yii::$app->user->identity->getRoleId())) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                'title' => 'Delete'
+                            ]);
+                        }
                     }
-                ]
+                ],
             ],
         ],
     ]); ?>

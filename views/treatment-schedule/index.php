@@ -141,13 +141,20 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}',
+                'template' => '{update} {delete}',
                 'buttons' => [
                     'update' => function ($url, $model) {
                         $url = Yii::$app->urlManager->createUrl(['treatment-schedule/update', 'id' => $model->id, 'url' => \yii\helpers\Url::current()]);
                         return Html::a('<span class="glyphicon glyphicon-edit"></span>', $url, [
                             'title' => 'Update'
                         ]);
+                    },
+                    'delete' => function($url) {
+                        if (\navatech\role\helpers\RoleChecker::isAuth(\app\controllers\TreatmentScheduleController::className(), 'delete', Yii::$app->user->identity->getRoleId())) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                'title' => 'Delete'
+                            ]);
+                        }
                     }
                 ]
             ],
