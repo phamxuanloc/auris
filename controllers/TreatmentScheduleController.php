@@ -97,7 +97,6 @@ class TreatmentScheduleController extends Controller {
 			$model->ekip_id        = $order->ekip_id;
 		}
 		if($model->load(Yii::$app->request->post())) {
-		    echo $model->customer_id;exit;
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {
                 $ap_date = \DateTime::createFromFormat('H:i:s d/m/Y', $model->ap_date);
