@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'style' => 'width:180px'
                 ],
                 'value' => function ($data) {
-                    if ($data->total_payment < $data->total_price) {
+                    if ($data->total_payment >= $data->total_price) {
                         return "<span style='color: red;'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";
                     } else {
                         return "<span style='color: #0E7E12;'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";
