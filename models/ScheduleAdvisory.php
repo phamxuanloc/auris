@@ -63,7 +63,7 @@ class ScheduleAdvisory extends Model
             [['full_name', 'ap_date'], 'required'],
             [['birthday', 'ap_date', 'start_date', 'end_date'], 'safe'],
             [['sale_id', 'status', 'customer_id'], 'integer'],
-            [['note'], 'string'],
+            [['note', 'note_direct'], 'string'],
             [['customer_code', 'full_name', 'sex', 'phone'], 'string', 'max' => 255],
         ];
     }
@@ -90,6 +90,7 @@ class ScheduleAdvisory extends Model
             'status' => 'Tình Trạng',
             'note' => 'Ghi Chú',
             'customer_id' => 'Customer ID',
+            'note_direct' => 'Ghi chú Direct',
         ];
     }
 

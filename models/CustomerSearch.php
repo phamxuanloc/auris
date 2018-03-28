@@ -19,7 +19,7 @@ class CustomerSearch extends Customer
     {
         return [
             [['id', 'getfly_id', 'sex', 'customer_type', 'character_type', 'status', 'created_id', 'update_id', 'sale_id', 'customer_status_id'], 'integer'],
-            [['name', 'customer_code', 'birthday', 'phone', 'note', 'customer_img', 'created_date', 'getfly_date', 'bl_pressure', 'current_medicine', 'current_treatment', 'level_treatment', 'other', 'disire', 'examination', 'treatment_direction'], 'safe'],
+            [['name', 'customer_code', 'birthday', 'phone', 'note', 'customer_img', 'created_date', 'getfly_date', 'bl_pressure', 'current_medicine', 'current_treatment', 'level_treatment', 'other', 'disire', 'examination', 'treatment_direction', 'start_date', 'end_date'], 'safe'],
             [['debt'], 'number'],
         ];
     }
@@ -68,7 +68,6 @@ class CustomerSearch extends Customer
             'debt' => $this->debt,
             'character_type' => $this->character_type,
             'status' => $this->status,
-            'created_date' => $this->created_date,
             'getfly_date' => $this->getfly_date,
             'created_id' => $this->created_id,
             'update_id' => $this->update_id,
@@ -89,6 +88,16 @@ class CustomerSearch extends Customer
             ->andFilterWhere(['like', 'disire', $this->disire])
             ->andFilterWhere(['like', 'examination', $this->examination])
             ->andFilterWhere(['like', 'treatment_direction', $this->treatment_direction]);
+
+        if(!empty($this->start_date)){
+            $start_date = \DateTime::createFromFormat('d/m/Y', $this->start_date);
+            $query->andFilterWhere(['>=', 'created_date', $start_date->format('Y-m-d')]);
+        }
+
+        if(!empty($this->end_date)){
+            $end_date = \DateTime::createFromFormat('d/m/Y', $this->end_date);
+            $query->andFilterWhere(['<=', 'created_date', $end_date->format('Y-m-d')]);
+        }
 
         return $dataProvider;
     }

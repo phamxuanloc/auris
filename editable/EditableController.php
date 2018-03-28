@@ -32,6 +32,10 @@ class EditableController extends \yii\web\Controller {
 				'class'      => EditableAction::class,
 				'modelClass' => Order::class,
 			],
+            'change-note-direct' => [
+                'class'      => EditableAction::class,
+                'modelClass' => ScheduleAdvisory::class,
+            ],
 		];
 	}
 }

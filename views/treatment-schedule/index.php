@@ -40,7 +40,7 @@ $url = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
                 }
             ],
             'customer_name',
-            'customer_phone',
+//            'customer_phone',
             [
                 'header' => 'Ekip',
                 'value' => 'order.ekip.full_name',

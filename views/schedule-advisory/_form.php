@@ -46,9 +46,7 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                 ]) ?>
 
                 <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-            </div>
 
-            <div class="col-md-6">
                 <?= $form->field($model, 'ap_date')->widget(\kartik\datetime\DateTimePicker::className(), [
                     'type' => \kartik\date\DatePicker::TYPE_INPUT,
                     'pluginOptions' => [
@@ -61,8 +59,13 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
                 <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale(), ['prompt' => 'Chọn']) ?>
 
                 <?= $form->field($model, 'status')->dropDownList(['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý']) ?>
+            </div>
+
+            <div class="col-md-6">
 
                 <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
+
+                <?= $form->field($model, 'note_direct')->textarea(['rows' => 6]) ?>
             </div>
 
             <div class="form-group row m-t-lg">

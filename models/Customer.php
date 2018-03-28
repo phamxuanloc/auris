@@ -39,6 +39,7 @@ use yii\helpers\ArrayHelper;
  */
 class Customer extends Model
 {
+    public $start_date, $end_date;
     /**
      * @inheritdoc
      */

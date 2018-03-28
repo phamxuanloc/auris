@@ -99,6 +99,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
+                'class' => \yii2mod\editable\EditableColumn::class,
+                'url' => ['change-note-direct'],
+                'editableOptions' => [
+                    'mode' => 'inline',
+                ],
+                'attribute' => 'note_direct',
+                'value' => 'note_direct',
+            ],
+
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
                 'buttons' => [

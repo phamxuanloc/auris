@@ -60,6 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->characterType($data->character_type);
                 }
             ],
+            [
+                'attribute' => 'created_date',
+                'format' => ['date', 'php:d-m-Y'],
+            ],
             'note',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],
