@@ -27,8 +27,7 @@ class TreatmentScheduleController extends Controller {
 		return [
 			'verbs' => [
 				'class'   => VerbFilter::className(),
-				'actions' => [
-//					'delete' => ['POST'],
+				'actions' => [//					'delete' => ['POST'],
 				],
 			],
 			'role'  => [
@@ -89,7 +88,7 @@ class TreatmentScheduleController extends Controller {
 			$order                 = Order::findOne($order_id);
 			$model->order_code     = $order->order_code;
 			$model->order_id       = $order->id;
-            $model->customer_id    = $order->customer_id;
+			$model->customer_id    = $order->customer_id;
 			$model->customer_code  = $order->customer_code;
 			$model->customer_name  = $order->customer_name;
 			$model->customer_phone = $order->customer_phone;
@@ -99,8 +98,8 @@ class TreatmentScheduleController extends Controller {
 		if($model->load(Yii::$app->request->post())) {
 			$order = Order::find()->where("order_code like '%$model->order_code%'")->one();
 			if($order) {
-                $ap_date = \DateTime::createFromFormat('H:i:s d/m/Y', $model->ap_date);
-                $model->ap_date = $ap_date->format('Y-m-d H:i');
+				$ap_date            = \DateTime::createFromFormat('H:i:s d/m/Y', $model->ap_date);
+				$model->ap_date     = $ap_date->format('Y-m-d H:i');
 				$model->order_code  = $order->order_code;
 				$model->customer_id = $order->customer_id;
 				$model->order_id    = $order->id;
@@ -135,24 +134,37 @@ class TreatmentScheduleController extends Controller {
 		if($treatmentHistory) {
 			$treatmentHistory->real_end = date('Y-m-d H:i:s');
 			$treatmentHistory->save();
-            $first_date = strtotime($treatmentHistory->real_end);
-            $second_date = strtotime($treatmentHistory->real_start);
-            $datediff = abs($first_date - $second_date);
-            $kpiEkip = KpiEkip::find()->where("ekip_id = $treatmentHistory->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
-            if($kpiEkip) {
-                $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
-                $kpiEkip->save();
-            }else{
-                $kpiEkip = new KpiEkip();
-                $kpiEkip->ekip_id = $treatmentHistory->ekip_id;
-                $kpiEkip->kpi = 0;
-                $kpiEkip->total_time = $kpiEkip->total_time + $datediff;
-                $kpiEkip->month = date('Y-m-d');
-                if(!$kpiEkip->save()){
-                    print_r($kpiEkip->getErrors());exit;
-                }
-            }
+			$first_date  = strtotime($treatmentHistory->real_end);
+			$second_date = strtotime($treatmentHistory->real_start);
+			$datediff    = abs($first_date - $second_date);
+			$kpiEkip     = KpiEkip::find()->where("ekip_id = $treatmentHistory->ekip_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
+			if($kpiEkip) {
+				$kpiEkip->total_time = $kpiEkip->total_time + $datediff;
+				$kpiEkip->save();
+			} else {
+				$kpiEkip             = new KpiEkip();
+				$kpiEkip->ekip_id    = $treatmentHistory->ekip_id;
+				$kpiEkip->kpi        = 0;
+				$kpiEkip->total_time = $kpiEkip->total_time + $datediff;
+				$kpiEkip->month      = date('Y-m-d');
+				if(!$kpiEkip->save()) {
+					print_r($kpiEkip->getErrors());
+					exit;
+				}
+			}
 			return true;
+		}
+	}
+
+	public function actionVote() {
+		$id               = $_POST['id'];
+		$treatmentHistory = TreatmentHistory::findOne($id);
+		if($treatmentHistory && $treatmentHistory->real_end !== null) {
+			$treatmentHistory->is_vote = 1;
+			$treatmentHistory->save();
+			return true;
+		} else {
+			return false;
 		}
 	}
 

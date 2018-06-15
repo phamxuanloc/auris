@@ -62,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	var id   = null;
 	var type = null;
 	sse.addEventListener('message', function(e) {
-		console.log('a');
 		const data = $.parseJSON(e.data);
 		$('#customer-name').html(data.name);
 		$('#vote-title').html(data.title);

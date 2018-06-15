@@ -20,16 +20,22 @@ use Yii;
  * @property int      $att_point
  * @property int      $spect_point
  * @property int      $ae_point
+ * @property int      $is_vote
  * @property Customer $customer
  */
 class TreatmentHistory extends Model {
 
-    public $start_date, $end_date;
+	public $start_date, $end_date;
 
 	const VOTE_TYPE   = [
 		1 => 'Thái độ phục vụ',
 		2 => 'Tính chuyên môn',
 		3 => 'Tính thẩm mỹ',
+	];
+
+	const IS_VOTE     = [
+		'Chưa vote',
+		'Đã/Đang vote',
 	];
 
 	const ATT_POINT   = 1;
@@ -45,15 +51,13 @@ class TreatmentHistory extends Model {
 		return 'treatment_history';
 	}
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-
-            return true;
-        } else {
-            return false;
-        }
-    }
+	public function beforeSave($insert) {
+		if(parent::beforeSave($insert)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * @inheritdoc
@@ -62,9 +66,9 @@ class TreatmentHistory extends Model {
 		return [
 			[
 				[
-				    'order_code',
-//					'order_id',
-//					'customer_id',
+					'order_code',
+					//					'order_id',
+					//					'customer_id',
 				],
 				'required',
 			],
@@ -75,9 +79,10 @@ class TreatmentHistory extends Model {
 					'att_point',
 					'spect_point',
 					'ae_point',
-                    'is_finish',
-                    'sale_id',
-                    'ekip_id',
+					'is_finish',
+					'sale_id',
+					'ekip_id',
+					'is_vote',
 				],
 				'integer',
 			],
@@ -86,9 +91,9 @@ class TreatmentHistory extends Model {
 					'ap_date',
 					'real_start',
 					'real_end',
-                    'start_date',
-                    'end_date',
-                    'created_date'
+					'start_date',
+					'end_date',
+					'created_date',
 				],
 				'safe',
 			],
@@ -128,7 +133,8 @@ class TreatmentHistory extends Model {
 			'ae_point'       => 'Ae Point',
 			'order_code'     => 'Mã đơn hàng',
 			'note'           => 'Ghi chú',
-			'is_finish'           => 'Đợt Điều Trị Cuối Cùng (Khi bạn chọn ô này, Khách Hàng có thể đánh giá Chuyên Môn, Tính Thẩm Mỹ)',
+			'is_vote'        => 'Trạng thái vote',
+			'is_finish'      => 'Đợt Điều Trị Cuối Cùng (Khi bạn chọn ô này, Khách Hàng có thể đánh giá Chuyên Môn, Tính Thẩm Mỹ)',
 		];
 	}
 
@@ -136,15 +142,12 @@ class TreatmentHistory extends Model {
 		return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
 	}
 
-	public function getOrder(){
-	    return $this->hasOne(Order::className(), ['id' => 'order_id']);
-    }
-    public function getListOrder()
-    {
-        $data = Order::find()
-            ->select(['order_code as value'])
-            ->asArray()
-            ->all();
-        return $data;
-    }
+	public function getOrder() {
+		return $this->hasOne(Order::className(), ['id' => 'order_id']);
+	}
+
+	public function getListOrder() {
+		$data = Order::find()->select(['order_code as value'])->asArray()->all();
+		return $data;
+	}
 }

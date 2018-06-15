@@ -136,6 +136,21 @@ function end(id) {
         }
     });
 }
+function vote(id) {
+    var url = "index.php?r=treatment-schedule/vote";
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {id: id},
+        dataType: "json",
+        success: function (data) {
+            $.pjax.reload({container: '#refresh-grid'});
+        },
+        error: function() {
+            alert('Bạn phải kết thúc mới có thể đánh giá')
+		}
+    });
+}
 
 function changeValue(value, element) {
     var order_check_out_money = $("#"+element.id).val().replace(/\./g, '');

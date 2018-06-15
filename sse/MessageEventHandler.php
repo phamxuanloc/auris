@@ -38,7 +38,7 @@ class MessageEventHandler extends SSEBase {
 	}
 
 	public function update() {
-		$history = TreatmentHistory::find()->where([
+		$history = TreatmentHistory::find()->where(['is_vote' => 1])->andWhere([
 			'not',
 			['real_end' => null],
 		])->andWhere([
@@ -71,8 +71,8 @@ class MessageEventHandler extends SSEBase {
 			$title = TreatmentHistory::VOTE_TYPE[TreatmentHistory::AE_POINT];
 			$type  = TreatmentHistory::AE_POINT;
 		}
-//		$customer = $history->customer;
-		$data     = [
+		//		$customer = $history->customer;
+		$data = [
 			'name'  => $history->customer_name,
 			'title' => $title,
 			'id'    => $history->id,
