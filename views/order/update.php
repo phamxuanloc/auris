@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\DetailView;
 use wbraganca\dynamicform\DynamicFormWidget;
+use yii\helpers\ArrayHelper;
+use kartik\depdrop\DepDrop;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Order */
@@ -65,25 +67,88 @@ $this->registerJs($js);
                             <td class="col-sm-3 control-label">Direct Sale</td>
                             <td class="col-sm-9"><?= @$model->sale->full_name ?></td>
                         </tr>
+                        <tr>
+                            <td class="col-sm-3 control-label">Tư vấn Online</td>
+                            <td class="col-sm-9"><?= @$model->advisory->full_name ?></td>
+                        </tr>
                     </table>
                 </div>
             </div>
             <div style="padding-top: 40px;"></div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'service_id')->dropDownList($model->getListService()) ?>
+                    <?php DynamicFormWidget::begin([
+                        'widgetContainer' => 'dynamicform_wrapper_service', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                        'widgetBody' => '.container-items_service', // required: css class selector
+                        'widgetItem' => '.item_service', // required: css class
+                        'limit' => 4, // the maximum times, an element can be cloned (default 999)
+                        'min' => 1, // 0 or 1 (default 1)
+                        'insertButton' => '.add-item_service', // css class
+                        'deleteButton' => '.remove-item_service', // css class
+                        'model' => $modelsServices[0],
+                        'formId' => 'dynamic-form',
+                        'id' => 'service-form',
+                        'formFields' => [
+                            'money',
+                        ],
+                    ]); ?>
 
-                    <?= $form->field($model, 'product_id')->dropDownList($model->getListProduct()) ?>
 
-                    <?= $form->field($model, 'color_id')->dropDownList($model->getListColor()) ?>
+                    <div class="container-items_service"><!-- widgetContainer -->
+                        <?php foreach ($modelsServices as $index => $modelService): ?>
+                            <div class="item_service clearfix"><!-- widgetBody -->
+                                <?php
+//                                echo '<pre>';
+                                // necessary for update action.
+                                if (!$modelService->isNewRecord) {
+                                    echo Html::activeHiddenInput($modelService, "[{$index}]id");
+                                }
+                                ?>
+                                <?php $districtList = [];
+                                if (!empty($modelService->service_id)) {
+                                    $districtList = ArrayHelper::map(\app\models\Product::find()->where(['service_id' => $modelService->service_id])->all(), 'id', 'name');
+                                } ?>
 
-                    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelService, "[{$index}]service_id")->dropDownList($model->getListService(), ['prompt' => 'Vui Lòng Chọn'])->label("Dịch vụ") ?>
 
-                    <?= $form->field($model, 'quantiy')->dropDownList($model->getQuantity()) ?>
+                                <?= $form->field($modelService, "[{$index}]product_id")->widget(DepDrop::classname(), [
+                                    'data' => $districtList,
+                                    'options' => ['id' => "order-{$index}-product_id", 'prompt' => 'Vui Lòng Chọn', "onchange" => "changeProduct(this.id)"],
+                                    'pluginOptions' => [
+                                        'depends' => ["orderservice-{$index}-service_id"],
+                                        'placeholder' => 'Vui Lòng Chọn',
+                                        'url' => Yii::$app->urlManager->createUrl(['order/product'])
+                                    ]
+                                ])->label("Sản phẩm") ?>
+
+                                <?= $form->field($modelService, "[{$index}]color_id")->dropDownList($model->getListColor(), ['prompt' => 'Vui Lòng Chọn'])->label("Màu sắc") ?>
+
+                                <?= $form->field($modelService, "[{$index}]price", ['inputOptions' => ['value' => $modelService->price]])->textInput(['maxlength' => true, 'readonly' => true])->label("Đơn giá") ?>
+
+                                <input id="quantity_<?= $index?>_old" value="<?= $modelService->quantity?>" type="hidden"/>
+
+                                <?= $form->field($modelService, "[{$index}]quantity")->textInput(['onchange' => "changeQuantityUpdate(this.id)"])->label("Số lượng") ?>
+
+                                <div style="border-top:1px solid #ccc"></div>
+                                <div class="help-block"></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-lg-offset-9">
+                        <button type="button" class="add-item_service btn btn-success btn-xs"><i class="fa fa-plus"></i>
+                            Thêm dịch vụ
+                        </button>
+                    </div>
+                    <?php DynamicFormWidget::end(); ?>
+                    <div class="help-block"></div>
 
                     <?= $form->field($model, 'discount')->textInput() ?>
 
                     <?= $form->field($model, 'total_price')->textInput() ?>
+
+                    <input id="total_money_old" value="<?= $model->total_price?>" type="hidden"/>
 
                 </div>
                 <div class="clearfix"></div>

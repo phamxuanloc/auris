@@ -36,6 +36,8 @@ class Model extends ActiveRecord {
 
 	const ROLE_SALE     = 3;
 
+	const ROLE_ADVISORY     = 4;
+
 	const ROLE          = [];
 
 	public function getListEkip() {
@@ -45,6 +47,10 @@ class Model extends ActiveRecord {
 	public function getListDirectSale() {
 		return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_SALE])->all(), 'id', 'full_name');
 	}
+
+    public function getListAdvisory() {
+        return ArrayHelper::map(User::find()->where(['role_id' => $this::ROLE_ADVISORY])->all(), 'id', 'full_name');
+    }
 
 	public function getListService() {
 		return ArrayHelper::map(Service::find()->where(['status' => Model::STATUS_ACTIVE])->all(), 'id', 'name');

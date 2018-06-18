@@ -8,6 +8,7 @@ use app\models\KpiSale;
 use app\models\Models;
 use app\models\Customer;
 use app\models\OrderCheckout;
+use app\models\OrderService;
 use app\models\Product;
 use app\models\TreatmentHistory;
 use navatech\role\filters\RoleFilter;
@@ -97,6 +98,7 @@ class OrderController extends EditableController
     {
         $model = new Order;
         $modelCheckouts = [new OrderCheckout];
+        $modelServices = [new OrderService];
         if ($model->load(Yii::$app->request->post())) {
             $model->order_code = $this->genOrderCode();
             $customer = Customer::find()->where("customer_code = '$model->customer_code'")->one();
@@ -105,10 +107,14 @@ class OrderController extends EditableController
             }
             $modelCheckouts = Models::createMultiple(OrderCheckout::classname());
             Models::loadMultiple($modelCheckouts, Yii::$app->request->post());
+
+            $modelServices = Models::createMultiple(OrderService::classname());
+            Models::loadMultiple($modelServices, Yii::$app->request->post());
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 if ($flag = $model->save(false)) {
                     $totalPayment = 0;
+                    $totalPrice = 0;
                     $i = 0;
                     foreach ($modelCheckouts as $modelCheckout) {
 //                        print_r($_POST['OrderCheckout'][$i]['money']);exit;
@@ -129,6 +135,33 @@ class OrderController extends EditableController
                         }
                         $i++;
                     }
+
+                    $j = 0;
+                    foreach ($modelServices as $modelService) {
+                        if (isset($_POST['OrderService'][$j])) {
+                            $service_id = isset($_POST['OrderService'][$j]['service_id']) ? $_POST['OrderService'][$j]['service_id'] : "";
+                            $product_id = isset($_POST['OrderService'][$j]['product_id']) ? $_POST['OrderService'][$j]['product_id'] : "";
+                            $color_id = isset($_POST['OrderService'][$j]['color_id']) ? $_POST['OrderService'][$j]['color_id'] : "";
+                            $price = isset($_POST['OrderService'][$j]['price']) ? $_POST['OrderService'][$j]['price'] : "";
+                            $quantity = isset($_POST['OrderService'][$j]['quantity']) ? $_POST['OrderService'][$j]['quantity'] : "";
+
+                            $price = preg_replace('/\./', '', $price);
+                            $modelService->order_id = $model->id;
+                            $modelService->service_id = $service_id;
+                            $modelService->product_id = $product_id;
+                            $modelService->color_id = $color_id;
+                            $modelService->price = $price;
+                            $modelService->quantity = $quantity;
+                            $modelService->total_price = $price * $quantity;
+                            $totalPrice += $modelService->price * $modelService->quantity;
+                            if (!($flag = $modelService->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+
+                        }
+                        $j++;
+                    }
                     if ($model->sale_id) {
                         $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
                         if ($kpiSale) {
@@ -136,7 +169,7 @@ class OrderController extends EditableController
                             $kpiSale->real_revenue = $totalPayment;
                             $kpiSale->total_customer = $kpiSale->total_customer + 1;
                             $kpiSale->save();
-                        }else{
+                        } else {
                             $kpiSale = new KpiSale();
                             $kpiSale->sale_id = $model->sale_id;
                             $kpiSale->kpi = 0;
@@ -153,7 +186,7 @@ class OrderController extends EditableController
                         $kpiEkip->real_revenue = $totalPayment;
 //                        $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
                         $kpiEkip->save();
-                    }else{
+                    } else {
                         $kpiEkip = new KpiEkip();
                         $kpiEkip->ekip_id = $model->ekip_id;
                         $kpiEkip->kpi = 0;
@@ -161,8 +194,9 @@ class OrderController extends EditableController
                         $kpiEkip->estimate_revenue = $model->total_price;
                         $kpiEkip->real_revenue = $totalPayment;
                         $kpiEkip->total_customer = $kpiEkip->total_customer + 1;
-                        if(!$kpiEkip->save()){
-                            print_r($kpiEkip->getErrors());exit;
+                        if (!$kpiEkip->save()) {
+                            print_r($kpiEkip->getErrors());
+                            exit;
                         }
                     }
                 } else {
@@ -170,6 +204,7 @@ class OrderController extends EditableController
                 }
 
                 $model->total_payment = $model->total_payment + $totalPayment;
+                $model->total_price = $model->total_price + $totalPrice;
                 $model->update();
 
                 if ($flag) {
@@ -185,6 +220,7 @@ class OrderController extends EditableController
         return $this->render('create', [
             'model' => $model,
             'modelCheckouts' => (empty($modelCheckouts)) ? [new OrderCheckout] : $modelCheckouts,
+            'modelServices' => (empty($modelServices)) ? [new OrderService] : $modelServices,
         ]);
     }
 
@@ -216,12 +252,19 @@ class OrderController extends EditableController
         $model = $this->findModel($id);
         $oldModel = clone $model;
         $modelsCheckouts = $model->orderCheckout;
+        $modelsServices = $model->orderService;
 
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($modelsCheckouts, 'id', 'id');
             $modelsCheckouts = Models::createMultiple(OrderCheckout::classname(), $modelsCheckouts);
             Models::loadMultiple($modelsCheckouts, Yii::$app->request->post());
             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsCheckouts, 'id', 'id')));
+
+            $oldServiceIDs = ArrayHelper::map($modelsServices, 'id', 'id');
+            $modelsServices = Models::createMultiple(OrderService::classname(), $modelsServices);
+            Models::loadMultiple($modelsServices, Yii::$app->request->post());
+            $deletedServiceIDs = array_diff($oldServiceIDs, array_filter(ArrayHelper::map($modelsServices, 'id', 'id')));
+
             $transaction = \Yii::$app->db->beginTransaction();
             try {
                 if ($flag = $model->save(false)) {
@@ -246,6 +289,38 @@ class OrderController extends EditableController
                             }
                         }
                         $i++;
+                    }
+
+                    if (!empty($deletedServiceIDs)) {
+                        OrderService::deleteAll(['id' => $deletedServiceIDs]);
+                    }
+                    $total_price = 0;
+                    $model->total_price = 0;
+                    $j = 0;
+                    foreach ($modelsServices as $modelService) {
+                        if (isset($_POST['OrderService'][$j])) {
+                            $service_id = isset($_POST['OrderService'][$j]['service_id']) ? $_POST['OrderService'][$j]['service_id'] : "";
+                            $product_id = isset($_POST['OrderService'][$j]['product_id']) ? $_POST['OrderService'][$j]['product_id'] : "";
+                            $color_id = isset($_POST['OrderService'][$j]['color_id']) ? $_POST['OrderService'][$j]['color_id'] : "";
+                            $price = isset($_POST['OrderService'][$j]['price']) ? $_POST['OrderService'][$j]['price'] : "";
+                            $quantity = isset($_POST['OrderService'][$j]['quantity']) ? $_POST['OrderService'][$j]['quantity'] : "";
+
+                            $price = preg_replace('/\./', '', $price);
+                            $modelService->order_id = $model->id;
+                            $modelService->service_id = $service_id;
+                            $modelService->product_id = $product_id;
+                            $modelService->color_id = $color_id;
+                            $modelService->price = $price;
+                            $modelService->quantity = $quantity;
+                            $modelService->total_price = $price * $quantity;
+                            $total_price += $modelService->price * $modelService->quantity;
+                            if (!($flag = $modelService->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+
+                        }
+                        $j++;
                     }
 
                     $kpiSale = KpiSale::find()->where("sale_id = $model->sale_id and YEAR(`month`) = YEAR(NOW()) AND MONTH(`month`) = MONTH(NOW())")->one();
@@ -283,6 +358,7 @@ class OrderController extends EditableController
         return $this->render('update', [
             'model' => $model,
             'modelsCheckouts' => (empty($modelsCheckouts)) ? [new OrderCheckout] : $modelsCheckouts,
+            'modelsServices' => (empty($modelsServices)) ? [new OrderService] : $modelsServices,
         ]);
     }
 

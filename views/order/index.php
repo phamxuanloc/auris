@@ -59,27 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             [
-                'attribute' => 'service_id',
-                'value' => 'service.name',
+                'attribute' => 'advisory_id',
+                'value' => 'advisory.full_name',
                 'contentOptions' => [
-                    'style' => 'width:150px'
+                    'style' => 'width:160px'
                 ]
-            ],
-            [
-                'attribute' => 'product_id',
-                'value' => 'product.name',
-                'contentOptions' => [
-                    'style' => 'width:220px'
-                ]
-            ],
-            [
-                'attribute' => 'color_id',
-                'value' => 'color.name',
-            ],
-            'quantiy',
-            [
-                'attribute' => 'price',
-//                'format' => ['decimal', 0],
             ],
             [
                 'attribute' => 'type',

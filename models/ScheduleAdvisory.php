@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
  * @property int $status
  * @property string $note
  * @property int $customer_id
+ * @property int $advisory_id
  */
 class ScheduleAdvisory extends Model
 {
@@ -62,7 +63,7 @@ class ScheduleAdvisory extends Model
         return [
             [['full_name', 'ap_date'], 'required'],
             [['birthday', 'ap_date', 'start_date', 'end_date'], 'safe'],
-            [['sale_id', 'status', 'customer_id'], 'integer'],
+            [['sale_id', 'status', 'customer_id', 'advisory_id'], 'integer'],
             [['note', 'note_direct'], 'string'],
             [['customer_code', 'full_name', 'sex', 'phone'], 'string', 'max' => 255],
         ];
@@ -71,6 +72,11 @@ class ScheduleAdvisory extends Model
     public function getSale()
     {
         return $this->hasOne(User::className(), ['id' => 'sale_id']);
+    }
+
+    public function getAdvisory()
+    {
+        return $this->hasOne(User::className(), ['id' => 'advisory_id']);
     }
 
     /**
@@ -91,6 +97,7 @@ class ScheduleAdvisory extends Model
             'note' => 'Ghi Chú',
             'customer_id' => 'Customer ID',
             'note_direct' => 'Ghi chú Direct',
+            'advisory_id' => 'Tư vấn Online',
         ];
     }
 
@@ -105,5 +112,8 @@ class ScheduleAdvisory extends Model
 
     public function getListDirectSale(){
         return ArrayHelper::map(User::find()->where('role_id = 3')->all(), 'id', 'full_name');
+    }
+    public function getListAdvisory(){
+        return ArrayHelper::map(User::find()->where('role_id = 4')->all(), 'id', 'full_name');
     }
 }

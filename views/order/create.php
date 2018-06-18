@@ -12,11 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-create">
     <div class="help-block"></div>
-
     <?= $this->render('_form', [
         'model' => $model,
         'title' => $this->title,
-        'modelCheckouts' => $modelCheckouts
+        'modelCheckouts' => $modelCheckouts,
+        'modelServices' => $modelServices,
     ]) ?>
 
 </div>

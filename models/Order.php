@@ -27,6 +27,7 @@ use yii\helpers\ArrayHelper;
  * @property string $total_payment
  * @property string $debt
  * @property string $note
+ * @property string $advisory_id
  */
 class Order extends Model
 {
@@ -43,8 +44,8 @@ class Order extends Model
     {
         if (parent::beforeSave($insert)) {
             if(isset($_POST['Order'])) {
-                $this->price = preg_replace('/\./', '', $_POST['Order']['price']);
-                $this->quantiy = preg_replace('/\./', '', $_POST['Order']['quantiy']);
+//                $this->price = preg_replace('/\./', '', $_POST['Order']['price']);
+//                $this->quantiy = preg_replace('/\./', '', $_POST['Order']['quantiy']);
                 $this->total_price = preg_replace('/\./', '', $_POST['Order']['total_price']);
                 $this->discount = preg_replace('/\./', '', $_POST['Order']['discount']);
             }
@@ -57,7 +58,7 @@ class Order extends Model
     public function afterFind()
     {
         $this->total_price = number_format($this->total_price, 0,',', '.');
-        $this->price = number_format($this->price, 0,',', '.');
+//        $this->price = number_format($this->price, 0,',', '.');
         $this->discount = number_format($this->discount, 0,',', '.');
         parent::afterFind();
     }
@@ -69,7 +70,7 @@ class Order extends Model
     {
         return [
             [['customer_code', 'customer_name', 'service_id', 'product_id', 'ekip_id', 'sale_id'], 'required'],
-            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status'], 'integer'],
+            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
 //            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
             [['created_date', 'start_date', 'end_date'], 'safe'],
@@ -84,6 +85,10 @@ class Order extends Model
     public function getSale()
     {
         return $this->hasOne(User::className(), ['id' => 'sale_id']);
+    }
+    public function getAdvisory()
+    {
+        return $this->hasOne(User::className(), ['id' => 'advisory_id']);
     }
     public function getService()
     {
@@ -104,6 +109,10 @@ class Order extends Model
     public function getOrderCheckout()
     {
         return $this->hasMany(OrderCheckout::className(), ['order_id' => 'id']);
+    }
+    public function getOrderService()
+    {
+        return $this->hasMany(OrderService::className(), ['order_id' => 'id']);
     }
 
     public function getCustomerRegion(){
@@ -142,6 +151,7 @@ class Order extends Model
             'order_code' => 'Mã đơn hàng',
             'created_date' => 'Ngày tạo',
             'discount' => 'Chiết khấu',
+            'advisory_id' => 'Tư vấn Online',
         ];
     }
 

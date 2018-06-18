@@ -92,19 +92,19 @@ $(document).ready(function () {
         $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
     });
     $("#order-discount").change(function () {
-        var order_price = $('#order-price').val().replace(/\./g, '');
-        var order_quantiy = $('#order-quantiy').val().replace(/\./g, '');
+        var order_total_price = $('#order-total_price').val().replace(/\./g, '');
         var order_discount = $('#order-discount').val().replace(/\./g, '');
-        $("#order-total_price").val(addCommas(order_price * order_quantiy - order_discount));
+        $("#order-total_price").val(addCommas(order_total_price - order_discount));
     });
     // $("#kpisalesearch-sale_id").change(function () {
     //     $("#kpi-search-form").submit();
     // });
-    $("#order-discount").keyup(function(){
+    $("#order-discount").keyup(function () {
         var order_discount = $('#order-discount').val().replace(/\./g, '');
         $("#order-discount").val(addCommas(order_discount));
     });
 });
+
 function addCommas(x) {
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -136,6 +136,7 @@ function end(id) {
         }
     });
 }
+
 function vote(id) {
     var url = "index.php?r=treatment-schedule/vote";
     $.ajax({
@@ -146,14 +147,50 @@ function vote(id) {
         success: function (data) {
             $.pjax.reload({container: '#refresh-grid'});
         },
-        error: function() {
+        error: function () {
             alert('Bạn phải kết thúc mới có thể đánh giá')
-		}
+        }
     });
 }
 
 function changeValue(value, element) {
-    var order_check_out_money = $("#"+element.id).val().replace(/\./g, '');
-    $("#"+element.id).val(addCommas(order_check_out_money));
+    var order_check_out_money = $("#" + element.id).val().replace(/\./g, '');
+    $("#" + element.id).val(addCommas(order_check_out_money));
     console.log(addCommas(order_check_out_money));
+}
+
+var total_money = Number(0);
+
+function changeProduct(id) {
+    var order_id = id.substring(6, 7);
+    $.ajax({
+        type: 'POST',
+        url: "index.php?r=order/get-price",
+        data: {value: $("#" + id).val()},
+        dataType: "json",
+        success: function (resultData) {
+            if (resultData.status == 1) {
+                $('#orderservice-' + order_id + '-price').val(addCommas(resultData.data.price));
+            }
+        }
+    });
+}
+
+function changeQuantity(id) {
+    var id_number = id.substring(13, 14);
+    order_money = $("#orderservice-" + id_number + "-price").val().replace(/\./g, '');
+    order_quantity = $("#orderservice-" + id_number + "-quantity").val().replace(/\./g, '');
+    total_money = Number(total_money) + (Number(order_money) * Number(order_quantity));
+    $("#order-total_price").val(addCommas(total_money));
+}
+
+function changeQuantityUpdate(id) {
+    var total_money_old = $("#total_money_old").val();
+    total_money_old = total_money_old.replace(/\./g, '');
+    var id_number = id.substring(13, 14);
+
+    var order_money = $("#orderservice-" + id_number + "-price").val().replace(/\./g, '');
+    var order_quantity = $("#" + id).val().replace(/\./g, '');
+    total_money_old = Number(total_money_old) + (Number(order_money) * Number(order_quantity));
+    $("#order-total_price").val(addCommas(total_money_old));
 }

@@ -41,7 +41,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('d/m/Y', strtotime($data->birthday));
                 }
             ],
-            'phone',
+            [
+                'attribute' => 'phone',
+                'value' => function ($data) {
+                    0;
+                    $newtimestamp = strtotime($data->ap_date . ' - 10 minute');
+                    $date = date('Y-m-d H:i:s', $newtimestamp);
+                    $currentDate = date('Y-m-d H:i:s');
+                    if ($date <= $currentDate) {
+                        return $data->phone; // or return true;
+                    } else {
+                        return ''; // or return false;
+                    }
+                }
+            ],
             [
                 'attribute' => 'ap_date',
                 'value' => function ($data) {
@@ -61,6 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'attribute' => 'sale_id',
                 'value' => 'sale.full_name',
+            ],
+            [
+                'attribute' => 'advisory_id',
+                'value' => 'advisory.full_name'
             ],
             [
                 'class' => \yii2mod\editable\EditableColumn::class,
