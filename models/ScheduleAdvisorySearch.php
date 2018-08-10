@@ -20,7 +20,7 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
     public function rules()
     {
         return [
-            [['id', 'sale_id', 'status', 'customer_id', 'advisory_id'], 'integer'],
+            [['id', 'sale_id', 'status', 'customer_id', 'advisory_id', 'designer_id'], 'integer'],
             [['customer_code', 'full_name', 'sex', 'birthday', 'phone', 'ap_date', 'note', 'start_date', 'end_date', 'created_date'], 'safe'],
         ];
     }
@@ -70,8 +70,16 @@ class ScheduleAdvisorySearch extends ScheduleAdvisory
             'sale_id' => $this->sale_id,
             'status' => $this->status,
             'customer_id' => $this->customer_id,
-            'advisory_id' => $this->advisory_id,
+            'designer_id' => $this->designer_id,
         ]);
+
+        if(isset($this->advisory_id) && !empty($this->advisory_id)){
+            $query->andFilterWhere([
+                'advisory_id' => $this->advisory_id,
+            ]);
+            $query->andFilterWhere(['or', ['status' => 4], ['status' => 5]]);
+        }
+
         if (isset($_GET['type']) && $_GET['type'] == 1) {
             $date = date("d/m/Y", strtotime("-1 day"));
             $query->andFilterWhere(['=', 'DATE_FORMAT(ap_date,\'%d/%m/%Y\')', $date]);

@@ -60,7 +60,9 @@ $url = Yii::$app->urlManager->createUrl(['customer/get-info']);
 
                 <?= $form->field($model, 'advisory_id')->dropDownList($model->getListAdvisory(), ['prompt' => 'Chọn']) ?>
 
-                <?= $form->field($model, 'status')->dropDownList(['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý']) ?>
+                <?= $form->field($model, 'designer_id')->dropDownList($model->getListDesigner(), ['prompt' => 'Chọn']) ?>
+
+                <?= $form->field($model, 'status')->dropDownList(['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý', '6' => 'Vãng Lai']) ?>
             </div>
 
             <div class="col-md-6">

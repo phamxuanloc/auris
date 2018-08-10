@@ -25,6 +25,9 @@ use yii\bootstrap\ActiveForm;
                 <?= $form->field($model, 'sale_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListDirectSale(), ['prompt' => 'Tất cả'])->label("Lọc Theo DirectSale") ?>
             </div>
             <div class="col-md-4">
+                <?= $form->field($model, 'advisory_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListAdvisory(), ['prompt' => 'Tất cả'])->label("Lọc Theo Tư vấn Online") ?>
+            </div>
+            <div class="col-md-4">
                 <?= $form->field($model, 'full_name', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->textInput()->label("Họ tên") ?>
             </div>
             <div class="col-md-4">
@@ -50,13 +53,17 @@ use yii\bootstrap\ActiveForm;
                 ])->label("Đến ngày") ?>
             </div>
 
+            <div class="col-md-4">
+                <?= $form->field($model, 'designer_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListDesigner(), ['prompt' => 'Tất cả'])->label("Lọc Theo Designer") ?>
+            </div>
+            <div class="col-md-1"></div>
             <div class="col-md-1">
                 <a class="btn btn-danger" href="<?= Yii::$app->urlManager->createUrl(['schedule-advisory/index', 'type' => 1])?>">Hôm qua</a>
             </div>
             <div class="col-md-1">
                 <a class="btn btn-warning" href="<?= Yii::$app->urlManager->createUrl(['schedule-advisory/index', 'type' => 2])?>">Hôm nay</a>
             </div>
-
+            
             <div class="form-group">
                 <?= Html::submitButton('<i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm', ['class' => 'btn btn-primary']) ?>
             </div>

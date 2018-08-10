@@ -80,6 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'advisory.full_name'
             ],
             [
+                'attribute' => 'designer_id',
+                'value' => 'designer.full_name'
+            ],
+            [
                 'class' => \yii2mod\editable\EditableColumn::class,
                 'attribute' => 'status',
                 'url' => ['change-status'],
@@ -87,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'editableOptions' => function ($model) {
                     return [
                         'mode' => 'inline',
-                        'source' => ['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý'],
+                        'source' => ['1' => 'Chưa đến', '2' => 'Đã nhắc', '3' => 'Không đến', '4' => 'Không làm', '5' => 'Đồng ý', '6' => 'Vãng Lai đồng ý', '7' => 'Vãng Lai không làm'],
                         'value' => $model->status,
                     ];
                 },
@@ -102,6 +106,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         return '<span class="label label-danger">Không làm</span>';
                     } else if ($data->status == 5) {
                         return '<span class="label label-success">Đồng ý</span>';
+                    } else if ($data->status == 6) {
+                        return '<span class="label label-success">Vãng Lai đồng ý</span>';
+                    }else if ($data->status == 7) {
+                        return '<span class="label label-danger">Vãng Lai không làm</span>';
                     }
                 }
             ],
