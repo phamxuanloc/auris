@@ -121,7 +121,7 @@ class ScheduleAdvisory extends Model
         return ArrayHelper::map(User::find()->where('role_id = 3')->all(), 'id', 'full_name');
     }
     public function getListAdvisory(){
-        return ArrayHelper::map(User::find()->where('role_id = 4')->all(), 'id', 'full_name');
+        return ArrayHelper::map(User::find()->where('role_id = 9')->all(), 'id', 'full_name');
     }
     public function getListDesigner(){
         return ArrayHelper::map(User::find()->where('role_id = 10')->all(), 'id', 'full_name');
