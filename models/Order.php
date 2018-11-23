@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
  * @property int $product_id
  * @property int $color_id
  * @property string $price
- * @property int $quantiy
+ * @property int $quantity
  * @property string $total_price
  * @property int $status
  * @property int $type
@@ -70,7 +70,7 @@ class Order extends Model
     {
         return [
             [['customer_code', 'customer_name', 'service_id', 'product_id', 'sale_id'], 'required'],
-            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
+            [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantity', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
 //            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],
             [['created_date', 'start_date', 'end_date'], 'safe'],
@@ -141,7 +141,7 @@ class Order extends Model
             'product_id' => 'Sản phẩm',
             'color_id' => 'Màu sắc',
             'price' => 'Đơn giá',
-            'quantiy' => 'Số lượng',
+            'quantity' => 'Số lượng',
             'total_price' => 'Thành tiền',
             'status' => 'Trạng thái',
             'type' => 'Tình trạng',

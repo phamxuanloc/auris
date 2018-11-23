@@ -20,7 +20,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
+            [['id', 'customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantity', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
             [['customer_code', 'customer_name', 'customer_phone', 'note', 'order_code', 'start_date', 'created_date', 'end_date'], 'safe'],
             [['price', 'total_price', 'total_payment', 'debt'], 'number'],
         ];
@@ -73,7 +73,7 @@ class OrderSearch extends Order
             'product_id' => $this->product_id,
             'color_id' => $this->color_id,
             'price' => $this->price,
-            'quantiy' => $this->quantiy,
+            'quantity' => $this->quantity,
             'total_price' => $this->total_price,
             'status' => $this->status,
             'type' => $this->type,
