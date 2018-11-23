@@ -26,12 +26,12 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="app">
+<div class="app" id="app">
 
 	<!-- ############ LAYOUT START-->
 
 	<!-- aside -->
-	<div class="app-aside modal fade folded md nav-dropdown">
+	<div id="aside" class="app-aside modal fade folded md nav-dropdown">
 		<!-- fluid app aside -->
 		<div class="left navside dark dk indigo-900" layout="column">
 			<div class="navbar no-radius">

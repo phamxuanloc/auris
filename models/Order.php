@@ -69,7 +69,7 @@ class Order extends Model
     public function rules()
     {
         return [
-            [['customer_code', 'customer_name', 'service_id', 'product_id', 'ekip_id', 'sale_id'], 'required'],
+            [['customer_code', 'customer_name', 'service_id', 'product_id', 'sale_id'], 'required'],
             [['customer_id', 'ekip_id', 'sale_id', 'service_id', 'product_id', 'color_id', 'quantiy', 'status', 'type', 'payment_status', 'advisory_id'], 'integer'],
 //            [['price', 'total_price', 'total_payment', 'debt', 'discount'], 'number'],
             [['note'], 'string'],

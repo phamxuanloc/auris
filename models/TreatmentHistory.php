@@ -25,7 +25,7 @@ use Yii;
  */
 class TreatmentHistory extends Model {
 
-	public $start_date, $end_date;
+	public $start_date, $end_date, $treatment_direction;
 
 	const VOTE_TYPE   = [
 		1 => 'Thái độ phục vụ',
@@ -135,6 +135,7 @@ class TreatmentHistory extends Model {
 			'note'           => 'Ghi chú',
 			'is_vote'        => 'Trạng thái vote',
 			'is_finish'      => 'Đợt Điều Trị Cuối Cùng (Khi bạn chọn ô này, Khách Hàng có thể đánh giá Chuyên Môn, Tính Thẩm Mỹ)',
+            'treatment_direction' => 'Hướng điều trị'
 		];
 	}
 

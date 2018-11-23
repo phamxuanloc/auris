@@ -436,6 +436,8 @@ class OrderController extends EditableController
         $value = $_POST['value'];
         $order = Order::find()->where("order_code like '%$value%'")->one();
         if ($order) {
+            $customer = Customer::findOne($order->customer_id);
+            $phone = substr($order->customer_phone, 7, 3);
             $result = [
                 'status' => 1,
                 'data' => [
@@ -443,7 +445,8 @@ class OrderController extends EditableController
                     'customer_id' => $order->customer_id,
                     'customer_code' => $order->customer_code,
                     'customer_name' => $order->customer_name,
-                    'customer_phone' => $order->customer_phone,
+                    'customer_phone' => 'xxxxxxx'.$phone,
+                    'treatment_direction' => $customer->treatment_direction,
                 ],
             ];
             return json_encode($result);

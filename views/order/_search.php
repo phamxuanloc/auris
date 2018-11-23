@@ -30,6 +30,9 @@ use yii\bootstrap\ActiveForm;
             <div class="col-md-3">
                 <?= $form->field($model, 'customer_name') ?>
             </div>
+            <div class="col-md-3">
+                <?= $form->field($model, 'payment_status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['1'=>'Đã thanh toán đủ', '0'=>'Chưa thanh toán đủ'], ['prompt' => 'Tất cả'])->label("Thanh toán") ?>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -41,10 +44,10 @@ use yii\bootstrap\ActiveForm;
                 <?= $form->field($model, 'ekip_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListEkip(), ['prompt' => 'Tất cả'])->label("Ekip") ?>
             </div>
             <div class="col-md-3">
-                <?= $form->field($model, 'status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['0'=>'Đang làm', '1'=>'Hoàn tất'], ['prompt' => 'Tất cả'])->label("Tình trạng") ?>
+                <?= $form->field($model, 'advisory_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListAdvisory(), ['prompt' => 'Tất cả'])->label("Lọc Theo Tư vấn Online") ?>
             </div>
             <div class="col-md-3">
-                <?= $form->field($model, 'payment_status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['1'=>'Đã thanh toán đủ', '0'=>'Chưa thanh toán đủ'], ['prompt' => 'Tất cả'])->label("Thanh toán") ?>
+                <?= $form->field($model, 'status', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList(['0'=>'Đang làm', '1'=>'Hoàn tất'], ['prompt' => 'Tất cả'])->label("Tình trạng") ?>
             </div>
         </div>
     </div>

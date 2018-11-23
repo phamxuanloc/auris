@@ -22,7 +22,7 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
         ]); ?>
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <input id="url" value="<?= $url?>" type="hidden">
                 <input id="treatmenthistory-order_id" name="TreatmentHistory[order_id]" type="hidden">
                 <input id="treatmenthistory-customer_id" name="TreatmentHistory[customer_id]" type="hidden">
@@ -40,6 +40,8 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
 
                 <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
+                <?= $form->field($model, 'ekip_id', ['template' => '{label} <div class="col-sm-6">{input}</div>'])->dropDownList($model->getListEkip(), ['prompt' => 'Tất cả'])->label("Ekip") ?>
+
                 <?= $form->field($model, 'ap_date')->widget(DateTimePicker::className(),[
                     'name' => 'ap_date',
                     'type' => DateTimePicker::TYPE_INPUT,
@@ -55,6 +57,9 @@ $url = Yii::$app->urlManager->createUrl(['order/get-info'])
 
                 <?= $form->field($model, 'note')->textarea(['rows' => '5']) ?>
                 <?= $form->field($model, 'is_finish')->checkbox() ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'treatment_direction')->textarea(['rows' => '5', 'readonly' => true]) ?>
             </div>
         </div>
 

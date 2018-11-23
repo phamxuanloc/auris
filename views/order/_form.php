@@ -48,7 +48,6 @@ $this->registerJs($js);
                 <?= $form->field($model, 'customer_phone')->textInput(['maxlength' => true, 'readonly' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'ekip_id')->dropDownList($model->getListEkip(), ['prompt' => 'Vui Lòng Chọn']) ?>
 
                 <?= $form->field($model, 'sale_id')->dropDownList($model->getListDirectSale(), ['prompt' => 'Vui Lòng Chọn']) ?>
 

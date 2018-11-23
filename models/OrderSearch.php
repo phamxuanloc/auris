@@ -79,8 +79,14 @@ class OrderSearch extends Order
             'type' => $this->type,
             'total_payment' => $this->total_payment,
             'debt' => $this->debt,
-            'advisory_id' => $this->advisory_id,
         ]);
+
+        if(isset($this->advisory_id) && !empty($this->advisory_id)){
+            $query->andFilterWhere([
+                'advisory_id' => $this->advisory_id,
+            ]);
+            $query->andFilterWhere(['or', ['status' => 4], ['status' => 5]]);
+        }
 
         if(!$this->start_date){
             $this->start_date = date("d/m/Y");
