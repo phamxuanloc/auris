@@ -27,8 +27,8 @@
         "yii2mod/yii2-editable": "*",
         "wbraganca/yii2-dynamicform": "dev-master",
         "yiisoft/yii2-jui": "^2.0@dev",
-        "kartik-v/yii2-widget-depdrop": "@dev",
-        "miloschuman/yii2-highcharts-widget": "dev-master"
+        "miloschuman/yii2-highcharts-widget": "dev-master",
+        "kartik-v/yii2-widget-depdrop": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
