@@ -11,26 +11,33 @@ $this->title = 'Clinics';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="clinic-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="help-block"></div>
 
     <p>
-        <?= Html::a('Create Clinic', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm mới', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
             'prefix',
-            'status',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    if ($data->status == 1) {
+                        return 'Mở';
+                    } else {
+                        return 'Đóng';
+                    }
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 </div>

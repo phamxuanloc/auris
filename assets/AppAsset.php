@@ -28,7 +28,8 @@ class AppAsset extends AssetBundle
         'auris/styles/app.css',
         'auris/styles/font.css',
         'css/site.css',
-        'css/icon.css'
+        'css/icon.css',
+        'css/lightslider.css',
     ];
     public $js = [
 //        'auris/scripts/app.html.js',
@@ -52,6 +53,7 @@ class AppAsset extends AssetBundle
 //        'auris/libs/js/echarts/build/dist/echarts-all.js',
 //        'auris/libs/js/echarts/build/dist/jquery.echarts.js',
 //        'auris/libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
+        'js/lightslider.js',
         'js/main.js',
     ];
     public $depends = [

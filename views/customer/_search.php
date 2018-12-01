@@ -24,35 +24,8 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'name')->textInput(['placeholder' => 'Họ và tên đầy đủ'])->label(false) ?>
         </div>
 
-        <div class="col-md-2">
-            <?= $form->field($model, 'phone')->textInput(['placeholder' => 'Số điện thoại'])->label(false) ?>
-        </div>
-
-        <div class="col-md-2">
-            <?= $form->field($model, 'start_date', ['template' => '{input}'])->widget(\kartik\date\DatePicker::className(), [
-                'type' => \kartik\date\DatePicker::TYPE_INPUT,
-                'options' => ['placeholder' => 'Từ ngày'],
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd/mm/yyyy',
-                ]
-            ])->label(false) ?>
-        </div>
-
-        <div class="col-md-2">
-            <?= $form->field($model, 'end_date', ['template' => '{input}'])->widget(\kartik\date\DatePicker::className(), [
-                'type' => \kartik\date\DatePicker::TYPE_INPUT,
-                'options' => ['placeholder' => 'Đến ngày'],
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd/mm/yyyy',
-                ]
-            ])->label(false) ?>
-        </div>
-
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-2">
             <?= Html::submitButton('Tìm kiếm', ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm khách hàng', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 

@@ -13,6 +13,7 @@
         "source": "https://github.com/yiisoft/yii2"
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.13",
@@ -28,7 +29,9 @@
         "wbraganca/yii2-dynamicform": "dev-master",
         "yiisoft/yii2-jui": "^2.0@dev",
         "kartik-v/yii2-widget-depdrop": "@dev",
-        "miloschuman/yii2-highcharts-widget": "dev-master"
+        "miloschuman/yii2-highcharts-widget": "dev-master",
+        "yii2-starter-kit/yii2-file-kit": "dev-master",
+        "philippfrenzel/yii2fullcalendar": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    $('#lightSlider').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        thumbItem:9,
+        slideMargin:0,
+        enableDrag: false,
+        currentPagerPosition:'left',
+    });
+
     var timeout = null;
     $("#treatmenthistory-order_code").change(function () {
         var value = $('#treatmenthistory-order_code').val();

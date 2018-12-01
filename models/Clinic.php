@@ -40,9 +40,9 @@ class Clinic extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Tên phòng khám',
             'prefix' => 'Prefix',
-            'status' => 'Status',
+            'status' => 'Trạng thái',
         ];
     }
 }

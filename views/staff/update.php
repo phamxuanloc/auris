@@ -5,14 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DirectSale */
 
-$this->title = 'Update Direct Sale: ' . $model->id;
+$this->title = 'Cập nhật: ' . $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Direct Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="direct-sale-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use navatech\role\helpers\RoleChecker;
+use app\controllers\CustomerController;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CustomerSearch */
@@ -16,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
         'layout' => "{items}\n{pager}",
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
@@ -46,7 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Tỉnh/Thành phố',
                 'value' => 'region.region_name'
             ],
-            'phone',
+            [
+                'attribute' => 'phone',
+                'visible' => RoleChecker::isAuth(CustomerController::className(), 'view-phone', Yii::$app->user->identity->getRoleId()),
+            ],
             [
                 'header' => 'Đã thanh toán',
 //                'format' => ['decimal', '0'],
@@ -63,6 +67,19 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'created_date',
                 'format' => ['date', 'php:d-m-Y'],
+            ],
+            [
+                'header' => 'Thiết kế nụ cười',
+                'format' => 'raw',
+                'contentOptions' => ['style'=>'padding:0;vertical-align: middle;text-align: center;'],
+                'options' => [
+                    'style' => 'margin:auto'
+                ],
+                'value' => function ($data) {
+                    if (!empty($data->media)) {
+                        return '<a href="' . Yii::$app->urlManager->createUrl(["customer/view-uploads", "id" => $data->id]) . '"> <i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>';
+                    }
+                },
             ],
             'note',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],

@@ -283,6 +283,16 @@ select.form-control:not([size]):not([multiple]) {
 .navside .nav li a:hover .nav-icon i, .navside .nav li a:focus .nav-icon i {
     background-color: #CA27FB;
 }
-.navside .nav li.active > a span i{
+
+.navside .nav li.active > a span i {
     background-color: #CA27FB;
+}
+
+.lSSlideOuter .lSPager.lSGallery {
+    margin: auto !important;
+    padding-top: 10px !important;
+}
+.upload-kit .upload-kit-input, .upload-kit .upload-kit-item, .upload-kit .upload-kit-item.image > img{
+    width: 100px;
+    height: 100px;
 }

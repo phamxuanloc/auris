@@ -1,6 +1,7 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use app\components\Model;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\DirectSale */
@@ -17,6 +18,8 @@ use yii\helpers\Html;
 			'enableAjaxValidation'   => true,
 			'enableClientValidation' => true,
 		]); ?>
+
+        <?= $form->field($model, 'clinic_id')->dropDownList(Model::getListClinic())->label('Phòng khám') ?>
 
 		<?= $form->field($model, 'username')->textInput(['maxlength' => true])->label('Tên đăng nhập') ?>
 

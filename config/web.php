@@ -25,10 +25,10 @@ $config = [
 		'cache'        => [
 			'class' => 'yii\caching\FileCache',
 		],
-		'user'         => [
-			'identityClass'   => 'app\models\User',
-			'enableAutoLogin' => true,
-		],
+//		'user'         => [
+////			'identityClass'   => 'app\models\User',
+//			'enableAutoLogin' => true,
+//		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
@@ -80,9 +80,22 @@ $config = [
 			],
 		],
 		*/
+        'fileStorage' => [
+            'class' => '\trntv\filekit\Storage',
+            'baseUrl' => '@webroot/uploads',
+            'filesystem' => [
+                'class' => 'app\components\filesystem\LocalFlysystemBuilder',
+                'path' => '/Applications/MAMP/htdocs/auris/web/uploads'
+            ],
+            'as log' => [
+                'class' => 'app\components\behaviors\FileStorageLogBehavior',
+                'component' => 'fileStorage'
+            ]
+        ],
 	],
 	'modules'      => [
 		'user'     => [
+		    'adminPermission' => true,
 			'class'         => 'dektrium\user\Module',
 			'modelMap'      => [
 				'User'       => 'app\models\User',
@@ -113,12 +126,6 @@ $config = [
 ];
 if(YII_ENV_DEV) {
 	// configuration adjustments for 'dev' environment
-	$config['bootstrap'][]      = 'debug';
-	$config['modules']['debug'] = [
-		'class' => 'yii\debug\Module',
-		// uncomment the following to add your IP if you are not connecting from localhost.
-		//'allowedIPs' => ['127.0.0.1', '::1'],
-	];
 	$config['bootstrap'][]      = 'gii';
 	$config['modules']['gii']   = [
 		'class' => 'yii\gii\Module',

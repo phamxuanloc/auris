@@ -34,6 +34,10 @@ if(!Yii::$app->user->isGuest) {
                     </span>',
 				'url'     => '#',
 				'items'   => [
+                    [
+                        'label' => 'Quản lý phòng khám',
+                        'url'   => ['/clinic/index'],
+                    ],
 					[
 						'label' => 'Quản lý nhân viên',
 						'url'   => ['/staff/index'],
@@ -63,6 +67,11 @@ if(!Yii::$app->user->isGuest) {
 						'url'     => ['/customer/index'],
 						'visible' => RoleChecker::isAuth(CustomerController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 					],
+                    [
+                        'label'   => 'Thiết kế nụ cười',
+                        'url'     => ['/customer/design'],
+                        'visible' => RoleChecker::isAuth(CustomerController::className(), 'design', Yii::$app->user->identity->getRoleId()),
+                    ],
 					[
 						'label'   => 'Tạo khách hàng',
 						'url'     => ['/customer/create'],
@@ -94,6 +103,7 @@ if(!Yii::$app->user->isGuest) {
 						'visible' => RoleChecker::isAuth(ColorController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 					],
 				],
+                'visible' => RoleChecker::isAuth(DefaultController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 			],
 			//        [
 			//            'label' => '<span class="nav-icon">
@@ -146,7 +156,20 @@ if(!Yii::$app->user->isGuest) {
 						'visible' => RoleChecker::isAuth(TreatmentScheduleController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 					],
 				],
+                'visible' => RoleChecker::isAuth(DefaultController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 			],
+            [
+                'label' => '<i class="fa fa-calendar" aria-hidden="true"></i>',
+                'url'   => '#',
+                'items' => [
+                    [
+                        'label'   => 'Khung thời gian',
+                        'url'     => ['/calendar/index'],
+                        'visible' => RoleChecker::isAuth(ReportController::className(), 'index', Yii::$app->user->identity->getRoleId()),
+                    ],
+                ],
+                'visible' => RoleChecker::isAuth(DefaultController::className(), 'index', Yii::$app->user->identity->getRoleId()),
+            ],
 			[
 				'label' => '<span class="nav-icon">
                       <i class="material-icons">
@@ -161,6 +184,7 @@ if(!Yii::$app->user->isGuest) {
 						'visible' => RoleChecker::isAuth(ReportController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 					],
 				],
+                'visible' => RoleChecker::isAuth(DefaultController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 			],
 			[
 				'label' => '<span class="nav-icon">
@@ -181,6 +205,7 @@ if(!Yii::$app->user->isGuest) {
 						'visible' => RoleChecker::isAuth(KpiEkipController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 					],
 				],
+                'visible' => RoleChecker::isAuth(DefaultController::className(), 'index', Yii::$app->user->identity->getRoleId()),
 			],
 		],
 		'options'         => ['class' => 'nav'],
