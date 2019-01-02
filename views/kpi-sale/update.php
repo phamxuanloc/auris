@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Kpi Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="kpi-sale-update">
+<div class="kpi-sale-update normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

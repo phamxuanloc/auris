@@ -10,7 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Clinics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="clinic-view">
+<div class="clinic-view normal-table-list">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

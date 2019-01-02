@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\RegisterNotification;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -35,6 +36,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+
     public function actions()
     {
         return [
@@ -46,6 +48,14 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionRegisterNotification(){
+
+        $token = $_POST['token'];
+        $registerToken = new RegisterNotification();
+        $registerToken->token = $token;
+        $registerToken->save();
     }
 
     /**

@@ -25,6 +25,9 @@ use yii\bootstrap\ActiveForm;
                 <div class="box-header">
                     <h6>Thông tin khách hàng</h6>
                 </div>
+                <?php if(Yii::$app->user->identity->getRoleId() == 1){
+                    echo $form->field($model, 'clinic_id')->dropDownList($model->getListClinic());
+                }?>
 
                 <?= $form->field($model, 'customer_code')->textInput(['maxlength' => true]) ?>
 

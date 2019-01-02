@@ -74,7 +74,11 @@ class CustomerSearch extends Customer
             'sale_id' => $this->sale_id,
             'customer_status_id' => $this->customer_status_id,
         ]);
-
+        if (Yii::$app->user->identity->getRoleId() != 1) {
+            $query->andFilterWhere([
+                'clinic_id' => Yii::$app->user->identity->clinic_id,
+            ]);
+        }
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'customer_code', $this->customer_code])
             ->andFilterWhere(['like', 'phone', $this->phone])
@@ -98,6 +102,8 @@ class CustomerSearch extends Customer
             $end_date = \DateTime::createFromFormat('d/m/Y', $this->end_date);
             $query->andFilterWhere(['<=', 'created_date', $end_date->format('Y-m-d')]);
         }
+
+        $query->orderBy('id DESC');
 
         return $dataProvider;
     }

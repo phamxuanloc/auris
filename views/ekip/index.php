@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Ekips';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ekip-index">
+<div class="ekip-index normal-table-list">
     <div class="help-block"></div>
 
     <p>

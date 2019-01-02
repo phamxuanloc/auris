@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 $this->title = "Tạo lịch hẹn - điều trị";
 ?>
 <div class="help-block"></div>
-<div class="box">
+<div class="box normal-table-list">
     <div class="box-header b-b">
         <h3>Tạo lịch hẹn - điều trị</h3>
     </div>

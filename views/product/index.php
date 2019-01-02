@@ -12,8 +12,7 @@ use yii\grid\GridView;
 $this->title = 'Quản lý sản phẩm';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
-    <div class="help-block"></div>
+<div class="product-index normal-table-list">
 
     <div class="product-form">
         <?php $form = ActiveForm::begin(); ?>

@@ -10,7 +10,7 @@ $this->title = 'Thêm mới đơn hàng';
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-create">
+<div class="order-create normal-table-list">
     <div class="help-block"></div>
     <?= $this->render('_form', [
         'model' => $model,

@@ -114,6 +114,11 @@ class TreatmentScheduleController extends Controller
                 $model->ekip_id = $order->ekip_id;
             }
             if ($model->save()) {
+                $customer = Customer::findOne($order->customer_id);
+                if($customer){
+                    $customer->step = 5;
+                    $customer->save();
+                }
                 return $this->redirect(['index']);
             } else {
                 print_r($model->getErrors());

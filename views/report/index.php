@@ -58,7 +58,7 @@ foreach ($reportPayment as $item) {
     $i++;
 }
 ?>
-<div class="order-index">
+<div class="order-index normal-table-list">
     <div class="help-block"></div>
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

@@ -1,12 +1,12 @@
 $(document).ready(function () {
     $('#lightSlider').lightSlider({
-        gallery:true,
-        item:1,
-        loop:true,
-        thumbItem:9,
-        slideMargin:0,
+        gallery: true,
+        item: 1,
+        loop: true,
+        thumbItem: 9,
+        slideMargin: 0,
         enableDrag: false,
-        currentPagerPosition:'left',
+        currentPagerPosition: 'left',
     });
 
     var timeout = null;
@@ -113,6 +113,18 @@ $(document).ready(function () {
     $("#order-discount").keyup(function () {
         var order_discount = $('#order-discount').val().replace(/\./g, '');
         $("#order-discount").val(addCommas(order_discount));
+    });
+
+    $('#customer-clinic_id').change(function () {
+        $.ajax({
+            type: 'POST',
+            url: "index.php?r=customer/gen-customer-code",
+            data: {clinic_id: $("#customer-clinic_id").val()},
+            dataType: "json",
+            success: function (resultData) {
+                $('#customer-customer_code').val(resultData);
+            }
+        });
     });
 });
 

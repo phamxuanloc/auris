@@ -10,7 +10,7 @@ $this->title = 'Tạo lịch hẹn';
 $this->params['breadcrumbs'][] = ['label' => 'Schedule Advisories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="schedule-advisory-create">
+<div class="schedule-advisory-create normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

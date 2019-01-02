@@ -36,6 +36,8 @@ use yii\helpers\ArrayHelper;
  * @property string $disire
  * @property string $examination
  * @property string $treatment_direction
+ * @property string $step
+ * @property string $clinic_id
  */
 class Customer extends Model
 {
@@ -55,7 +57,7 @@ class Customer extends Model
     {
         return [
             [['name'], 'required'],
-            [['getfly_id', 'sex', 'customer_type', 'character_type', 'status', 'created_id', 'update_id', 'sale_id', 'region_id', 'clinic_id'], 'integer'],
+            [['getfly_id', 'sex', 'customer_type', 'character_type', 'status', 'created_id', 'update_id', 'sale_id', 'region_id', 'clinic_id', 'step', 'clinic_id'], 'integer'],
             [['birthday', 'created_date', 'getfly_date'], 'safe'],
             [['debt'], 'number'],
             [['customer_img'], 'file'],
@@ -71,7 +73,8 @@ class Customer extends Model
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->birthday = date('Y-m-d', strtotime($this->birthday));
+            $birthday = str_replace('/', '-', $this->birthday);
+            $this->birthday = date('Y-m-d', strtotime($birthday));
             return true;
         } else {
             return false;
@@ -219,5 +222,9 @@ class Customer extends Model
 
     public function getListRegion(){
         return ArrayHelper::map(Region::find()->orderBy("region_name")->all(), 'id', 'region_name');
+    }
+
+    public static function getListClinic(){
+        return ArrayHelper::map(Clinic::find()->all(), 'id', 'name');
     }
 }
