@@ -12,7 +12,7 @@ use app\controllers\CustomerController;
 $this->title = 'Customers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customer-index">
+<div class="customer-index normal-table-list">
     <div class="help-block"></div>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 

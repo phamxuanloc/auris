@@ -10,7 +10,7 @@ $this->title = 'Thêm mới Direct Sale';
 $this->params['breadcrumbs'][] = ['label' => 'Direct Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="direct-sale-create">
+<div class="direct-sale-create normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

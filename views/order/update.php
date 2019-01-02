@@ -23,8 +23,7 @@ jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
 
 $this->registerJs($js);
 ?>
-<div class="order-update">
-    <div class="help-block"></div>
+<div class="order-update normal-table-list">
 
     <div class="box">
         <div class="box-header b-b" style="display: flex;">
@@ -213,7 +212,7 @@ $this->registerJs($js);
                     <div class="box-header">
                         <h6>Lịch sử điều trị</h6>
                     </div>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                         <tr>
                             <th>Lịch Khám (ghi chú)</th>

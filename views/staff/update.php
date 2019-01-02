@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Direct Sales', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="direct-sale-update">
+<div class="direct-sale-update normal-table-list">
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="customer-update">
+<div class="customer-update normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

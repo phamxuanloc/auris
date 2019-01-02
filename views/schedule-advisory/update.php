@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Schedule Advisories', 'url' => ['i
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="schedule-advisory-update">
+<div class="schedule-advisory-update normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

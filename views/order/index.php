@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index">
+<div class="order-index normal-table-list">
     <div class="help-block"></div>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
@@ -69,9 +69,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'type',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    if ($data->type == 0) {
+                    if ($data->total_payment < $data->total_price) {
                         return "<span style='color: red;'>Đang làm</span>";
-                    } else if ($data->type == 1) {
+                    } else{
                         return "<span style='color: #0E7E12;'>Hoàn thành</span>";
                     }
                 }
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'style' => 'width:180px'
                 ],
                 'value' => function ($data) {
-                    if ($data->total_payment >= $data->total_price) {
+                    if ($data->total_price == $data->total_payment) {
                         return "<span style='color: #0E7E12;'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";
                     } else {
                         return "<span style='color: red'>" . number_format($data->total_payment, '0', ',', '.') . "</span>";

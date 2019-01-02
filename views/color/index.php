@@ -10,33 +10,30 @@ use yii\grid\GridView;
 $this->title = 'Colors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="color-index">
-    <div class="help-block"></div>
+<div class="color-index normal-table-list">
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm mới', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <div class="col-md-7">
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'layout' => "{items}\n{pager}",
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                'name',
-                [
-                    'attribute' => 'status',
-                    'value' => function ($data) {
-                        if ($data->status == 0) {
-                            return "Deactive";
-                        } else {
-                            return "Active";
-                        }
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => "{items}\n{pager}",
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    if ($data->status == 0) {
+                        return "Deactive";
+                    } else {
+                        return "Active";
                     }
-                ],
-
-                ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+                }
             ],
-        ]); ?>
-    </div>
+
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+        ],
+    ]); ?>
 </div>

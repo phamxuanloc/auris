@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Cập nhật phòng khám: ' . $model->name;
 $this->params['breadcrumbs'][] = 'Phòng khám';
 ?>
-<div class="clinic-update">
+<div class="clinic-update normal-table-list">
 
     <?= $this->render('_form', [
         'model' => $model,

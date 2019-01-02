@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Clinic;
 use app\models\CustomerMedia;
 use app\models\Order;
 use navatech\role\filters\RoleFilter;
@@ -29,7 +30,7 @@ class CustomerController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    ['allow' => true, 'actions' => ['index', 'create', 'update', 'get-info', 'delete', 'view-phone', 'design', 'uploads'], 'roles' => ['@']],
+                    ['allow' => true, 'actions' => ['gen-customer-code', 'index', 'create', 'update', 'get-info', 'delete', 'view-phone', 'design', 'uploads', 'view-uploads'], 'roles' => ['@']],
                 ],
             ],
             'verbs' => [
@@ -50,6 +51,7 @@ class CustomerController extends Controller
                     'view-phone' => 'Hiển thị số điện thoại',
                     'design' => 'Danh sách khách hàng',
                     'uploads' => 'Upload ảnh',
+                    'view-uploads' => 'Thiết kế nụ cười',
                 ],
             ],
         ];
@@ -84,9 +86,13 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function genCustomerCode()
+    public function actionGenCustomerCode($clinic_id = null)
     {
-        $customer = Customer::find()->select('max(customer_code) as customer_code')->one();
+        if (isset($_POST['clinic_id'])) {
+            $clinic_id = $_POST['clinic_id'];
+        }
+        $prefix = Clinic::findOne($clinic_id)->prefix;
+        $customer = Customer::find()->select('max(customer_code) as customer_code')->where(['clinic_id' => $clinic_id])->one();
         if (!empty($customer->customer_code)) {
             $customerCode = substr($customer->customer_code, 4, 5);
             $value = $customerCode;
@@ -98,37 +104,37 @@ class CustomerController extends Controller
 //			return $length;
             if (($length + 1) == 1) {
                 $a = (int)$customerCode + 1;
-                return "AU1-00000" . $a;
+                return json_encode($prefix . "-00000" . $a);
             } else if (($length + 1) == 2) {
                 $a = (int)$customerCode + 1;
                 if ($a >= 10) {
-                    return "AU1-000" . $a;
+                    return json_encode($prefix . "-000" . $a);
                 } else {
-                    return "AU1-0000" . $a;
+                    return json_encode($prefix . "-0000" . $a);
                 }
             } else if (($length + 1) == 3) {
                 $a = (int)$customerCode + 1;
                 if ($a >= 100) {
-                    return "AU1-00" . $a;
+                    return json_encode($prefix . "-00" . $a);
                 } else {
-                    return "AU1-000" . $a;
+                    return json_encode($prefix . "-000" . $a);
                 }
             } else if (($length + 1) == 4) {
                 $a = (int)$customerCode + 1;
                 if ($a >= 1000) {
-                    return "AU1-0" . $a;
+                    return json_encode($prefix . "-0" . $a);
                 } else {
-                    return "AU1-00" . $a;
+                    return json_encode($prefix . "-00" . $a);
                 }
             } else if (($length + 1) == 5) {
                 $a = (int)$customerCode + 1;
-                return "AU1-" . $a;
+                return json_encode($prefix . "-" . $a);
             } else {
-                $a = "AU1-" . $customerCode + 1;
-                return $a;
+                $a = $prefix . "-" . $customerCode + 1;
+                return json_encode($a);
             }
         } else {
-            return "AU1-00001";
+            return json_encode($prefix . "-00001");
         }
         //        print_r($orderCode);exit;
     }
@@ -141,11 +147,17 @@ class CustomerController extends Controller
     public function actionCreate()
     {
         $model = new Customer();
-        $model->customer_code = $this->genCustomerCode();
+        if (Yii::$app->user->identity->getRoleId() != 1) {
+            $model->customer_code = json_decode($this->actionGenCustomerCode(Yii::$app->user->identity->clinic_id));
+        }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->customer_status_id) {
                 $model->customer_status_id = implode(',', $model->customer_status_id);
             }
+            if (Yii::$app->user->identity->getRoleId() != 1) {
+                $model->clinic_id = Yii::$app->user->identity->clinic_id;
+            }
+            $model->step = 1;
             $model->customer_img = UploadedFile::getInstance($model, 'customer_img');
             $model->upload();
             if ($model->save()) {
@@ -237,14 +249,17 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $post = Yii::$app->request->post();
+            $model->step = 2;
+            $model->save();
             if (!empty($post['Customer']['listImage']) && $post['Customer']['listImage'] != null) {
                 $listImage = $post['Customer']['listImage'];
                 for ($i = 0; $i < count($listImage); $i++) {
                     $customerMedia = new CustomerMedia();
                     $customerMedia->customer_id = $id;
                     $customerMedia->url = 'uploads/' . $listImage[$i]['path'];
-                    if(!$customerMedia->save()){
-                        print_r($customerMedia->getErrors());exit;
+                    if (!$customerMedia->save()) {
+                        print_r($customerMedia->getErrors());
+                        exit;
                     }
                 }
             }
@@ -255,7 +270,8 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function actionViewUploads($id){
+    public function actionViewUploads($id)
+    {
         $model = $this->findModel($id);
 
         return $this->render('view-uploads', [

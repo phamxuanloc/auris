@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Kpi Ekips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="kpi-ekip-update">
+<div class="kpi-ekip-update normal-table-list">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

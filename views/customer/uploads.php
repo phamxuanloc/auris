@@ -11,7 +11,7 @@ $this->title = "Thiết kế nụ cười"
 
 ?>
 
-<div class="box">
+<div class="box normal-table-list">
     <div class="box-header b-b">
         <h3>Thiết kế nụ cười - <?= $model->clinic->name?></h3>
     </div>

@@ -10,7 +10,7 @@ $this->title = 'Thêm mới Color';
 $this->params['breadcrumbs'][] = ['label' => 'Colors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="color-create">
+<div class="color-create normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

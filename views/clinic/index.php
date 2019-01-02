@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Clinics';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="clinic-index">
+<div class="clinic-index normal-table-list">
     <div class="help-block"></div>
 
     <p>
@@ -20,6 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
+        'tableOptions' => [
+            'class'=>'table table-bordered'
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',

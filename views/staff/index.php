@@ -8,7 +8,7 @@ use yii\grid\GridView;
 $this->title                   = 'Direct Sales';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="direct-sale-index">
+<div class="direct-sale-index normal-table-list">
 	<div class="help-block"></div>
 
 	<p>

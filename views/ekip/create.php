@@ -10,7 +10,7 @@ $this->title = 'Thêm mới Ekip';
 $this->params['breadcrumbs'][] = ['label' => 'Ekips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ekip-create">
+<div class="ekip-create normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

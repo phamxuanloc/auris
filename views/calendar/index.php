@@ -8,7 +8,7 @@ use yii\web\JsExpression;
 $this->title = 'Lịch công việc';
 
 ?>
-<div class="site-index">
+<div class="site-index normal-table-list">
     <?php
 
     $JSEventClick = <<<EOF

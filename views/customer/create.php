@@ -10,7 +10,7 @@ $this->title = 'Thêm khách hàng';
 $this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customer-create">
+<div class="customer-create normal-table-list">
     <div class="help-block"></div>
     <?= $this->render('_form', [
         'model' => $model,

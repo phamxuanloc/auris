@@ -10,7 +10,7 @@ $this->title = 'Thêm Kpi Sale';
 $this->params['breadcrumbs'][] = ['label' => 'Kpi Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="kpi-sale-create">
+<div class="kpi-sale-create normal-table-list">
     <div class="help-block"></div>
 
     <?= $this->render('_form', [

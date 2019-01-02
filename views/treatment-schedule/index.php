@@ -9,9 +9,8 @@ $this->title                   = 'Treatment Schedules';
 $this->params['breadcrumbs'][] = $this->title;
 $url                           = Yii::$app->urlManager->createUrl(['treatment-schedule/start']);
 ?>
-<div class="treatment-schedule-index">
+<div class="treatment-schedule-index normal-table-list">
 
-	<div class="help-block"></div>
 	<?php echo $this->render('_search', ['model' => $searchModel]); ?>
 	<p style="text-align: right">
 		<?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Thêm đơn hàng', ['order/create'], ['class' => 'btn btn-success']) ?>
