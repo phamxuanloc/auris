@@ -129,7 +129,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 		$(".chat-box").scrollTop(99999999);
 
 		var socket = io.connect('http://quanly.auris.vn/socket.io/');
-
+console.log(socket);
 		socket.on('auris', function(data) {
             console.log('a');
 			var message = JSON.parse(data);
