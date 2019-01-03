@@ -129,8 +129,8 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 	$(document).ready(function() {
 		$(".chat-box").scrollTop(99999999);
 
-		var socket = io.connect('http://localhost:8890');
-		// var socket = io.connect('http://quanly.auris.vn/socket.io/');
+		// var socket = io.connect('http://localhost:8890');
+		var socket = io.connect('http://quanly.auris.vn/socket.io/');
 		socket.on('connect', function() {
 			console.log('connected');
 		});
