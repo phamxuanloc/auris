@@ -7,7 +7,7 @@ server.listen(8890);
 
 app.get('/', function (req, res) { res.send('Hello World!')});
 
-app.listen(3010, function() { console.log('Example app listening on port 3010!'); });
+app.listen(8890, function() { console.log('Example app listening on port 3010!'); });
 
 io.on('connection', function (socket) {
 
