@@ -152,7 +152,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 			} else {
 				$("#append").append(
 					'<div class="item">' +
-					'<img src="<?= Yii::$app->avatar->show($chat->username, 32); ?>" alt="user image" class="online"/>' +
+					'<img src="' + message.user_ava + '" alt="user image" class="online"/>' +
 					'<p class="message friend">' +
 					'<a href="#" class="name">' +
 					message.user +
@@ -161,7 +161,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 					'</p>' +
 					'</div>'
 				);
-				notifyMe();
+				notifyMe(message.user_ava);
 
 			}
 
@@ -169,17 +169,17 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 
 	});
 
-	function notifyMe() {
+	function notifyMe(ava) {
 		if(Notification.permission !== "granted") {
 			Notification.requestPermission();
 		} else {
 			var notification = new Notification('Notification title', {
-				icon: 'img/avatar.png',
+				icon: ava,
 				body: "Hey there! You've been notified!",
 			});
 
 			notification.onclick = function() {
-				window.open("http://localhost/yii2-realtime-chat-example/web/");
+				// window.open("http://localhost/yii2-realtime-chat-example/web/");
 			};
 
 		}

@@ -220,9 +220,10 @@ class TreatmentScheduleController extends Controller {
 			return Yii::$app->redis->executeCommand('PUBLISH', [
 				'channel' => 'auris',
 				'message' => Json::encode([
-					'message' => $message,
-					'session' => Yii::$app->user->id,
-					'user'    => $chat->username,
+					'message'  => $message,
+					'session'  => Yii::$app->user->id,
+					'user'     => $chat->username,
+					'user_ava' => Yii::$app->avatar->show($chat->username, 32),
 				]),
 			]);
 		}
