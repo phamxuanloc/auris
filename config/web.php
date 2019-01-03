@@ -1,4 +1,7 @@
 <?php
+
+use zertex\avatar_generator\AvatarGenerator;
+
 $params = require __DIR__ . '/params.php';
 $db     = require __DIR__ . '/db.php';
 $config = [
@@ -18,18 +21,35 @@ $config = [
 			'thousandSeparator' => '.',
 			'decimalSeparator'  => ',',
 		],
+		'avatar' => [
+			'class' => AvatarGenerator::class,
+			'images_folder' => 'avatar',
+			'images_url' => '/avatar',
+			'size_width' => 300,            // default: 300
+			'font_size' => 200,             // default: 200
+			'salt' => 'random_salt',        // salt for image file names
+			'texture' => ['sun', 'rain'],   // texture name
+			'text_over_image' => true,      // draw text over image (for avatar from file)
+			'texture_over_image' => true,   // draw texture over image (for avatar from file)
+		],
 		'request'      => [
             'enableCsrfValidation' => false,
 			// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 			'cookieValidationKey' => 'GwJQ_CUIp4sMq9S-EsmlX2HRLvnHv5Yq',
 		],
-//		'cache'        => [
-//			'class' => 'yii\caching\FileCache',
-//		],
+		'cache'        => [
+			'class' => 'yii\caching\FileCache',
+		],
 //		'user'         => [
 ////			'identityClass'   => 'app\models\User',
 //			'enableAutoLogin' => true,
 //		],
+		'redis' => [
+			'class' => 'yii\redis\Connection',
+			'hostname' => 'localhost',
+			'port' => 6379,
+			'database' => 0,
+		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
