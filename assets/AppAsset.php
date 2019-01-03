@@ -64,8 +64,8 @@ class AppAsset extends AssetBundle {
 		//        'auris/libs/js/echarts/build/dist/echarts-all.js',
 		//        'auris/libs/js/echarts/build/dist/jquery.echarts.js',
 		//        'auris/libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
-		'js/socket.io-1.3.5.js',
-		'js/chat.js',
+//		'js/socket.io-1.3.5.js',
+//		'js/chat.js',
 		'js/lightslider.js',
 		'js/main.js',
 	];
