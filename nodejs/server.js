@@ -1,6 +1,8 @@
 var app = require('express')();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = require('socket.io')(server,{
+    path:'/chat/socket.io'
+});
 var redis = require('redis');
 
 server.listen(8890);
