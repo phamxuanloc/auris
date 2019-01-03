@@ -133,6 +133,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 		socket.on('auris', function(data) {
 
 			var message = JSON.parse(data);
+			console.log(message);
 
 			session = <?php print Yii::$app->user->id; ?>
 
