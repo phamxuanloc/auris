@@ -132,7 +132,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 		// var socket = io.connect('http://localhost:8890');
 		// var socket = io.connect('http://quanly.auris.vn/socket.io/');
 		const socket = io('/',{
-			path:'/chat/socket.io'
+			path:'/chat/'
 		});
 		socket.on('connect', function() {
 			console.log('connected');
