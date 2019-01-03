@@ -131,9 +131,9 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 		var socket = io.connect('http://quanly.auris.vn/socket.io/');
 
 		socket.on('auris', function(data) {
+			console.log('aaaaaaa');
 
 			var message = JSON.parse(data);
-			console.log(message);
 
 			session = <?php print Yii::$app->user->id; ?>
 
