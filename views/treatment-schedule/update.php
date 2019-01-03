@@ -128,10 +128,13 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 	$(document).ready(function() {
 		$(".chat-box").scrollTop(99999999);
 
+		// var socket = io.connect('http://localhost:8890');
 		var socket = io.connect('http://quanly.auris.vn/socket.io/');
-console.log(socket);
+		socket.on('connect', function() {
+			console.log('connected');
+		});
+
 		socket.on('auris', function(data) {
-            console.log('a');
 			var message = JSON.parse(data);
 
 			session = <?php print Yii::$app->user->id; ?>
