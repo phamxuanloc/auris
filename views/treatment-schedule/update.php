@@ -125,7 +125,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 </div>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	// $(document).ready(function() {
 		$(".chat-box").scrollTop(99999999);
 
 		var socket = io.connect('http://quanly.auris.vn/socket.io/');
@@ -168,7 +168,7 @@ $this->registerJs($js, \yii\web\View::POS_READY)
 
 		});
 
-	});
+	// });
 
 	function notifyMe(ava) {
 		if(Notification.permission !== "granted") {
